@@ -7,7 +7,7 @@ import { RingLoader } from 'react-spinners';
 
 const Admin = () => {
   const context = useContext(productContext);
-  const { fetchProduct, products } = context;
+  const { fetchProduct } = context;
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 

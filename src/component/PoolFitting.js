@@ -29,7 +29,7 @@ const PoolFitting = () => {
 
   const poolLightsProducts = products.filter((product) => product.category.toLowerCase() === 'pool fitting');
   const backgroundStyle = {
-    backgroundImage: `url(${'/img/banner/out.jpg'})`,
+    // backgroundImage: `url(${'/img/banner/out.jpg'})`,
     backgroundSize: 'cover',
     backgroundRepeat: 'no-repeat',
     backgroundPosition: 'center',
@@ -68,7 +68,7 @@ const PoolFitting = () => {
         </div>
       ) : (
         <div className="container mt-5">
-        <h2 className="mb-4 text-center" style={{ color: 'red' }}>Pool Fitting</h2>
+        <h2 className="mb-4 text-center" style={{ color: '#FF5733' }}>Pool Fitting</h2>
           <div className="row">
             {poolLightsProducts.map((product) => (
               <div key={product._id} className="col-md-3 mb-3">

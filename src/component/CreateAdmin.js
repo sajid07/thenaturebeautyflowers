@@ -17,7 +17,7 @@ const CreateAdmin = (props) => {
                 // eslint-disable-next-line
 
 
-    }, [])
+    }, [navigate])
   const handleSubmit=async (e)=>
   { 
       e.preventDefault();

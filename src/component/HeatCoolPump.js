@@ -28,7 +28,7 @@ const HeatCoolPump = () => {
 
   const poolLightsProducts = products.filter((product) => product.category.toLowerCase() === 'heat cool pump');
   const backgroundStyle = {
-    backgroundImage: `url(${'/img/banner/out.jpg'})`,
+    // backgroundImage: `url(${'/img/banner/out.jpg'})`,
     backgroundSize: 'cover',
     backgroundRepeat: 'no-repeat',
     backgroundPosition: 'center',

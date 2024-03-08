@@ -1,3 +1,4 @@
+
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import "./App.css";
@@ -39,6 +40,7 @@ import Waterfalls from "./component/Waterfall";
 import IntexPool from "./component/IntexPool";
 import BoosterPump from "./component/BoosterPump";
 import Irregation from "./component/Irregation";
+
 function App() {
   const [alert, setAlert] = useState(null);
   const showAlert = (message, type) => {

@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import Footer from './Footer';
 import { Link } from 'react-router-dom';
+
 const List = () => {
-  
   const [projects, setProjects] = useState([]);
   const host = "http://localhost:5000";
   const api = axios.create({
@@ -35,21 +34,20 @@ const List = () => {
 
           .gallery-item {
             border: 1px solid #ddd;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
             overflow: hidden;
             transition: transform 0.2s;
             cursor: pointer;
-            border-radius: 8px;
             background-color: #fff;
           }
 
           .gallery-item:hover {
-            transform: scale(2.05);
+            transform: scale(1.05);
           }
 
           .gallery-image {
             width: 100%;
-            height: 300px;
+            height: 200px;
             object-fit: cover;
             border-bottom: 1px solid #ddd;
           }
@@ -70,44 +68,43 @@ const List = () => {
             color: #666;
           }
 
-          h2 {
+          .see-more-link {
+            display: block;
             text-align: center;
-            margin: 50px;
-            color: red ;
+            margin-top: 20px;
+            text-decoration: none;
+            color: #FF5733;
+            font-size: 20px;
           }
         `}
       </style>
 
-      <hr></hr><h2>Projects Gallery</h2>
+      <hr />
+      <h2 style={{ textAlign: 'center', color: '#007bff', marginBottom: '30px' }}>Projects Gallery</h2>
       <div className='container'>
-      <div className="image-gallery">
-        {projects.map(project => (
-          <div key={project._id} className="gallery-item">
-            {project.picture && (
-              <img
-                src={project.picture}
-                alt={project.name}
-                className="gallery-image"
-              />
-            )}
-            <div className="gallery-content">
-              <h3>{project.name}</h3>
-              <p>{project.description}</p>
+        <div className="image-gallery">
+          {projects.map(project => (
+            <div key={project._id} className="gallery-item">
+              {project.picture && (
+                <img
+                  src={project.picture}
+                  alt={project.name}
+                  className="gallery-image"
+                />
+              )}
+              <div className="gallery-content">
+                <h3>{project.name}</h3>
+                <p>{project.description}</p>
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
+        <Link to="/showProject" className="see-more-link">
+          See More
+        </Link>
       </div>
-      <div className="text-center mt-4">
-          <Link to="/showProject">
-            <h2>See More</h2>
-          </Link>
-        </div>    </div>
-        <hr></hr>
-
-
+      <hr />
     </div>
-    
-
   );
 };
 

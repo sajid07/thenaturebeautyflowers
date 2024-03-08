@@ -172,6 +172,7 @@ router.delete('/:productId', async (req, res) => {
 // Update a product by ID
 router.put('/:productId', authmiddleware, async (req, res) => {
   try {
+    console.log("hi from product update")
     const { productId } = req.params;
     const { name, description, category } = req.body;
 

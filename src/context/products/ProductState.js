@@ -6,11 +6,13 @@ const aws = require("aws-sdk");
 
 const ProductState = (props) => {
   const host = "http://localhost:5000";
-  const accessKeyId = "AKIA3TKWYLERS7CQ3OKM";
-  const secretAccessKey = "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";
-  const region = "ap-south-1";
+  const accessKeyId = process.env.REACT_APP_AWS_ACCESS_KEY_ID;
+  const secretAccessKey = process.env.REACT_APP_AWS_SECRET_ACCESS_KEY;
+  const region = process.env.REACT_APP_AWS_REGION;
   const productInitial = []; // or fetch it from the server
+  const [projects, setProjects] = useState([]);
   const [products, setProducts] = useState(productInitial);
+
   const [product, setProduct] = useState(null); // Add this line
   console.log(product);
   const uploadToS3 = async (fileKey, fileData, contentType) => {
@@ -48,10 +50,10 @@ const ProductState = (props) => {
   
   // add product
   const addProduct = async (product) => {
-    const pictureKey = `pool/images/${product.name}-${Date.now()}-${
+    const pictureKey = `pool/images/${
       product.picture.name
     }`;
-    const pdfKey = `pool/pdf/${product.name}-${Date.now()}-${
+    const pdfKey = `pool/pdf/${
       product.pdfFile.name
     }`;
 
@@ -100,7 +102,7 @@ const ProductState = (props) => {
   };
   //add Project
   const addProject = async (product) => {
-    const pictureKey = `pool/projects/${product.name}-${Date.now()}-${
+    const pictureKey = `pool/projects/${
       product.picture.name
     }`;
     
@@ -217,48 +219,104 @@ const ProductState = (props) => {
     }
   };
 
+
+
+  // DELETE PROJECT
+  const deleteProject = async (projectId, projects) => {
+    try {
+      const projectToDelete = projects.find((project) => project._id === projectId);
+      if (!projectToDelete) {
+        throw new Error('Project not found');
+      }
+      // Implement the actual deleteProject functionality
+      await fetch(`${host}/api/project/projects/${projectId}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          "auth-token": localStorage.getItem("token"),
+        },
+      });
+      const s3FileKeys = [projectToDelete.picture];
+      await deleteFilesFromS3(s3FileKeys);
+      console.log("Project deleted successfully");
+    } catch (error) {
+      console.error("Error deleting project:", error);
+    }
+  };
+  
   // Add this function to your ProductState.js
-  const deleteFilesFromS3 = async (fileKeys) => {
-    // Creating an S3 client with AWS credentials
-    const s3 = new aws.S3({
+//   const deleteFilesFromS3 = async (fileKeys) => {
+//     // Creating an S3 client with AWS credentials
+//     const s3 = new aws.S3({
+//         accessKeyId: accessKeyId,
+//         secretAccessKey: secretAccessKey,
+//         region: region,
+//     });
+
+//     // Specify the common prefix to be removed
+//     const prefixToRemove = "https://thenaturebeautyflower.s3.ap-south-1.amazonaws.com/";
+
+//     // Iterate through fileKeys and delete each file from S3
+//     for (const fileKey of fileKeys) {
+//         // Remove the specified prefix from the file key
+//         const keyWithoutPrefix = fileKey.replace(prefixToRemove, "");
+
+//         // Specify the parameters for deleting an object from S3
+//         const deleteParams = {
+//             Bucket: "thenaturebeautyflower",
+//             Key: keyWithoutPrefix,
+//         };
+
+//         console.log("File Key:");
+//         console.log(keyWithoutPrefix); // Check if the prefix is removed correctly
+
+//         try {
+//             // Attempt to delete the object from S3
+//             console.log("File is going to be deleted:", keyWithoutPrefix);
+//             s3.deleteObject(deleteParams, (error, data) => {
+//               console.log(`File deleted successfully: ${keyWithoutPrefix}`, data);
+
+//           })            
+//         } catch (error) {
+//             console.error(`Error deleting file from S3: ${keyWithoutPrefix}`, error);
+//         }
+//     }
+// };
+const deleteFilesFromS3 = async (fileKeys) => {
+  // Creating an S3 client with AWS credentials
+  const s3 = new aws.S3({
       accessKeyId: accessKeyId,
       secretAccessKey: secretAccessKey,
       region: region,
-    });
+  });
 
-    // Specify the common prefix to be removed
-    const prefixToRemove =
-      "https://thenaturebeautyflower.s3.ap-south-1.amazonaws.com/";
+  // Specify the common prefix to be removed
+  const prefixToRemove = "https://thenaturebeautyflower.s3.ap-south-1.amazonaws.com/";
 
-    // Iterate through fileKeys and delete each file from S3
-    for (const fileKey of fileKeys) {
-      // Remove the specified prefix from the file key
+  // Create an array to hold objects to delete
+  const objectsToDelete = fileKeys.map(fileKey => {
       const keyWithoutPrefix = fileKey.replace(prefixToRemove, "");
+      return { Key: keyWithoutPrefix };
+  });
 
-      // Determine the appropriate prefix based on the file type
-      const fileTypePrefix = fileKey.includes("images/") ? "images/" : "pdf/";
-
-      // Add the fileTypePrefix to the filename
-      const fileName = `${fileTypePrefix}${keyWithoutPrefix.split("/").pop()}`;
-
-      // Specify the parameters for deleting an object from S3
-      const params = {
-        Bucket: "thenaturebeautyflower",
-        Key: keyWithoutPrefix,
-        VersionId: "null",
-      };
-
-      console.log(fileName);
-
-      try {
-        // Attempt to delete the object from S3
-        await s3.deleteObject(params).promise();
-        console.log(`File deleted successfully: ${fileKey}`);
-      } catch (error) {
-        console.error(`Error deleting file from S3: ${fileKey}`, error);
+  // Specify the parameters for deleting multiple objects from S3
+  const deleteParams = {
+      Bucket: "thenaturebeautyflower",
+      Delete: {
+          Objects: objectsToDelete,
+          Quiet: true // Set to true to suppress errors if some objects cannot be deleted
       }
-    }
   };
+
+  try {
+      // Attempt to delete multiple objects from S3
+      const data = await s3.deleteObjects(deleteParams).promise();
+      console.log("Files deleted successfully:", data);
+  } catch (error) {
+      console.error("Error deleting files from S3:", error);
+  }
+};
+
 
   // edit product
   // Inside your ProductState.js or wherever your context logic is
@@ -344,6 +402,7 @@ const ProductState = (props) => {
         addProduct,
         fetchUserName,
         deleteProduct,
+        deleteProject,
         editProduct,
         fetchProduct,
         setProduct,

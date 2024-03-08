@@ -20,7 +20,7 @@ const ShowProjects = () => {
     };
 
     fetchData();
-  }, []);
+  }, [api]);
 
   return (
     <div>

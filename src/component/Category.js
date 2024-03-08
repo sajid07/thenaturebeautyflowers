@@ -2,7 +2,7 @@ import React from 'react';
 
 const Category = () => {
   const containerStyle = {
-    backgroundImage: `url(${'/img/banner/out.jpg'})`,
+    // backgroundImage: `url(${'/img/banner/outk.jpg'})`,
     backgroundSize: 'cover',
     backgroundRepeat: 'no-repeat',
     backgroundPosition: 'center',
@@ -152,3 +152,7 @@ const Category = () => {
 };
 
 export default Category;
+
+
+
+

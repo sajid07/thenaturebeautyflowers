@@ -82,7 +82,7 @@ const AddProject = () => {
                       <div class="container-fluid px-4">
                           <h1 class="mt-4">Dashboard</h1>
                           <div className="container my-3">
-        <h2>Add  Product</h2>
+        <h2>Add  Project</h2>
         <form className="my-3" encType="multipart/form-data">
           <div className="mb-3">
             <label htmlFor="name" className="form-label">
@@ -95,7 +95,7 @@ const AddProject = () => {
               name="name"
               value={product.name}
               onChange={onChange}
-              minLength={5}
+              minLength={1}
               required
             />
           </div>
@@ -110,7 +110,7 @@ const AddProject = () => {
               name="description"
               value={product.description}
               onChange={onChange}
-              minLength={5}
+              minLength={1}
               required
             />
           </div>
@@ -124,7 +124,7 @@ const AddProject = () => {
           
   
           <button
-            disabled={product.name.length < 5 || product.description.length < 5}
+            disabled={product.name.length < 1 || product.description.length < 1}
             type="submit"
             className="btn btn-primary"
             onClick={handleClick}

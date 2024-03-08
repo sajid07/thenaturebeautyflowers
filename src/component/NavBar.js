@@ -18,16 +18,17 @@ const NavBar = () => {
               style={{ width: "50px", height: "50px" }}
             />
           </div>
-          <h1 className="m-0 text-success">The Nature Beauty Flower</h1>
-          <img
-              src="/img/banner/logo.jpeg"
-              alt="Icon"
-              style={{ width: "100px", height: "60px",marginLeft:'420px' }}
-            />
+          <h1 className="m-0 text-success">The Nature Beauty Flowers</h1>
+       
+
         </Navbar.Brand>
+  
         <Navbar.Toggle aria-controls="navbarCollapse" />
+   
         <Navbar.Collapse id="navbarCollapse">
+       
           <Nav className="ms-auto">
+     
             <Nav.Link as={Link} to="/" className="">
               Home
             </Nav.Link>

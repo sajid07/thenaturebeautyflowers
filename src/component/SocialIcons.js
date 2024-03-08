@@ -27,9 +27,9 @@ const SocialIcons = () => {
         console.error('Error fetching social links:', error);
       }
     };
-
     fetchData();
-  }, []);
+  }, [api]);
+  // eslint-disable-next-line
 {console.log(socialLinks)}
   return (
     <div

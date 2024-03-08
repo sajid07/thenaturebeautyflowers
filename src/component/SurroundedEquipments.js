@@ -28,7 +28,7 @@ const SurroundedEquipments = () => {
 
   const poolLightsProducts = products.filter((product) => product.category.toLowerCase() === 'surrounded equipment');
   const backgroundStyle = {
-    backgroundImage: `url(${'/img/banner/out.jpg'})`,
+    // backgroundImage: `url(${'/img/banner/out.jpg'})`,
     backgroundSize: 'cover',
     backgroundRepeat: 'no-repeat',
     backgroundPosition: 'center',
@@ -67,7 +67,7 @@ const SurroundedEquipments = () => {
         </div>
       ) : (
         <div className="container mt-5">
-        <h2 className="mb-4 text-center" style={{ color: 'red' }}>Surrounded Equipments</h2>
+        <h2 className="mb-4 text-center" style={{ color: '#FF5733' }}>Surrounded Equipments</h2>
           <div className="row">
             {poolLightsProducts.map((product) => (
               <div key={product._id} className="col-md-3 mb-3">

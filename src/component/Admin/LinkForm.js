@@ -29,6 +29,8 @@ const LinkForm = () => {
           googleMap: socialLinks.googleMap,
         },
       });
+      console.log(response);
+
       alert('Links updated successfully');
     } catch (error) {
       console.error('Error updating social links:', error);

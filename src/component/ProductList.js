@@ -252,7 +252,6 @@ const ProductList = () => {
           onChange={handleCategoryChange}
         >
           <option value="All">All</option>
-          {/* Assuming categories are strings */}
           <option value="filtration">Filtration</option>
         <option value="pool pump">Pool Pump</option>
         <option value="pool light">Pool Light</option>
@@ -272,23 +271,6 @@ const ProductList = () => {
         <option value="booster pump">Booster Pumps</option>
         <option value="pool tiles">Pool Tiles</option>
         <option value="irregation">Irregation</option>
-
-
-
-
-
-
-
-
-          
-          
-
-
-
-
-
-
-          {/* Add more options as needed */}
         </select>
         </div>
       </div>

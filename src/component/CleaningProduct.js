@@ -28,7 +28,7 @@ const CleaningProduct = () => {
 
   const poolLightsProducts = products.filter((product) => product.category.toLowerCase() === 'cleaning product');
   const backgroundStyle = {
-    backgroundImage: `url(${'/img/banner/out.jpg'})`,
+    // backgroundImage: `url(${'/img/banner/out.jpg'})`,
     backgroundSize: 'cover',
     backgroundRepeat: 'no-repeat',
     backgroundPosition: 'center',

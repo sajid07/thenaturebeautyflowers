@@ -27,7 +27,6 @@ router.post('/', authmiddleware, async (req, res) => {
 
 // Fetch all Projects
 router.get('/fetchallprojects', async (req, res) => {
-  console.log("hi from backend");
 
     try {
       // Assuming Project is your Mongoose model for projects
@@ -67,7 +66,7 @@ router.delete('/:projectId', async (req, res) => {
       return res.status(404).json({ message: 'project not found' });
     }
 
-    await product.deleteOne({ _id: projectId });
+    await projects.deleteOne({ _id: projectId });
 
     console.log('Project deleted successfully');
 

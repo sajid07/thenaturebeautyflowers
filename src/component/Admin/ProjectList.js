@@ -1,9 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect,useContext } from 'react';
 import axios from 'axios';
+import productContext from '../../context/products/productContext';
 
 const host = "http://localhost:5000";
 
 const ProjectList = () => {
+  const context = useContext(productContext);
+  const { deleteProject } = context;
+
   const [projects, setProjects] = useState([]);
   const api = axios.create({
     baseURL: host,
@@ -20,12 +24,11 @@ const ProjectList = () => {
     };
 
     fetchProjects();
-  }, []);
+  }, [api]);
 
   const handleDelete = async (projectId) => {
     try {
-      await api.delete(`/api/projects/${projectId}`);
-      setProjects(projects.filter((project) => project._id !== projectId));
+      await deleteProject(projectId, projects);
     } catch (error) {
       console.error('Error deleting project:', error);
     }

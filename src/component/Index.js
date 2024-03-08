@@ -12,6 +12,7 @@ const Index = () => {
   
   return (
 <>
+<div className=''>
   <PoolBanner></PoolBanner>
   <Category></Category>
   <About></About>
@@ -20,7 +21,7 @@ const Index = () => {
   {/* <Testimonials></Testimonials> */}
    <Footer></Footer>
    
-
+   </div>
 </>  )
 }
 

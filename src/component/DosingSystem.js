@@ -28,7 +28,7 @@ const DosingSystem = () => {
 
   const poolLightsProducts = products.filter((product) => product.category.toLowerCase() === 'dosing system');
   const backgroundStyle = {
-    backgroundImage: `url(${'/img/banner/out.jpg'})`,
+    // backgroundImage: `url(${'/img/banner/out.jpg'})`,
     backgroundSize: 'cover',
     backgroundRepeat: 'no-repeat',
     backgroundPosition: 'center',
@@ -67,7 +67,7 @@ const DosingSystem = () => {
         </div>
       ) : (
         <div className="container mt-5">
-        <h2 className="mb-4 text-center" style={{ color: 'red' }}>Dosing System</h2>
+        <h2 className="mb-4 text-center" style={{ color: '#FF5733' }}>Dosing System</h2>
           <div className="row">
             {poolLightsProducts.map((product) => (
               <div key={product._id} className="col-md-3 mb-3">

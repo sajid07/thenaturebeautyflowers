@@ -6,6 +6,7 @@ const Project = require('../backend/models/Projects'); // Assuming you have a Pr
 
 const contactsRoutes = require('./routes/contacts');
 const linkRoutes = require('./routes/socialLink');
+require('dotenv').config();
 
 connectToMongo();
 

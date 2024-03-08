@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import { Link } from "react-router-dom";
 
 const List = () => {
   const [projects, setProjects] = useState([]);
-  const host = "http://localhost:5000";
+  const host = env.process.BASE_URI;
   const api = axios.create({
     baseURL: host,
   });
@@ -12,10 +12,10 @@ const List = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const projectsResponse = await api.get('/api/project/fetchallprojects');
+        const projectsResponse = await api.get("/api/project/fetchallprojects");
         setProjects(projectsResponse.data.slice(0, 4));
       } catch (error) {
-        console.error('Error fetching data:', error);
+        console.error("Error fetching data:", error);
       }
     };
 
@@ -80,10 +80,14 @@ const List = () => {
       </style>
 
       <hr />
-      <h2 style={{ textAlign: 'center', color: '#007bff', marginBottom: '30px' }}>Projects Gallery</h2>
-      <div className='container'>
+      <h2
+        style={{ textAlign: "center", color: "#007bff", marginBottom: "30px" }}
+      >
+        Projects Gallery
+      </h2>
+      <div className="container">
         <div className="image-gallery">
-          {projects.map(project => (
+          {projects.map((project) => (
             <div key={project._id} className="gallery-item">
               {project.picture && (
                 <img

@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import Footer from './Footer';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import Footer from "./Footer";
 
 const ShowProjects = () => {
   const [projects, setProjects] = useState([]);
-  const host = "http://localhost:5000";
+  const host = env.process.BASE_URI;
   const api = axios.create({
     baseURL: host,
   });
@@ -12,10 +12,10 @@ const ShowProjects = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const projectsResponse = await api.get('/api/project/fetchallprojects');
+        const projectsResponse = await api.get("/api/project/fetchallprojects");
         setProjects(projectsResponse.data);
       } catch (error) {
-        console.error('Error fetching data:', error);
+        console.error("Error fetching data:", error);
       }
     };
 
@@ -78,31 +78,27 @@ const ShowProjects = () => {
       </style>
 
       <h2>Projects Gallery</h2>
-      <div className='container'>
-      <div className="image-gallery">
-        {projects.map(project => (
-          <div key={project._id} className="gallery-item">
-            {project.picture && (
-              <img
-                src={project.picture}
-                alt={project.name}
-                className="gallery-image"
-              />
-            )}
-            <div className="gallery-content">
-              <h3>{project.name}</h3>
-              <p>{project.description}</p>
+      <div className="container">
+        <div className="image-gallery">
+          {projects.map((project) => (
+            <div key={project._id} className="gallery-item">
+              {project.picture && (
+                <img
+                  src={project.picture}
+                  alt={project.name}
+                  className="gallery-image"
+                />
+              )}
+              <div className="gallery-content">
+                <h3>{project.name}</h3>
+                <p>{project.description}</p>
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
-
+      <Footer></Footer>
     </div>
-          <Footer></Footer>
-
-    </div>
-    
-
   );
 };
 

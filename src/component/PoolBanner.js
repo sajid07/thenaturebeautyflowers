@@ -7,7 +7,7 @@ import axios from "axios";
 
 const PoolBanner = () => {
   const [contacts, setContacts] = useState({});
-  const host = "http://localhost:5000";
+  const host = env.process.BASE_URI;
   const api = axios.create({
     baseURL: host,
   });

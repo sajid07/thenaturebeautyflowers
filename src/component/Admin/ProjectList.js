@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import productContext from "../../context/products/productContext";
 
-const host = env.process.BASE_URI;
+const host = env.process.REACT_APP_BASE_URI;
 
 const ProjectList = () => {
   const context = useContext(productContext);

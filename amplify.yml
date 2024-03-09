@@ -12,12 +12,7 @@ frontend:
         - npm ci
     build:
       commands:
-        - echo "AUTH_TOKEN=$AUTH_TOKEN" >> .env
-        - echo "BASE_URI=$BASE_URI" >> .env
-        - echo "MONGO_DB_URI=$MONGO_DB_URI" >> .env
-        - echo "REACT_APP_AWS_ACCESS_KEY_ID=$REACT_APP_AWS_ACCESS_KEY_ID" >> .env
-        - echo "REACT_APP_AWS_REGION=$REACT_APP_AWS_REGION" >> .env
-        - echo "REACT_APP_AWS_SECRET_ACCESS_KEY=$REACT_APP_AWS_SECRET_ACCESS_KEY" >> .env
+        - env | grep -e REACT_APP_ >> .env.production
         - npm run build
   artifacts:
     baseDirectory: build

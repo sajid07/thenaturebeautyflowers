@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 const WhatsAppUpdateButton = ({ onUpdate }) => {
   const [newWhatsAppContact, setNewWhatsAppContact] = useState("");
   const [newCallContact, setNewCallContact] = useState("");
-  const host = env.process.BASE_URI;
+  const host = env.process.REACT_APP_BASE_URI;
   const context = useContext(productContext);
 
   const { updateContacts } = context || {};

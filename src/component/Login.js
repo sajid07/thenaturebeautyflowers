@@ -8,18 +8,21 @@ export const Login = (props) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const response = await fetch(`${env.process.BASE_URI}/api/auth/login`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "auth-token": process.env.AUTH_TOKEN,
-      },
+    const response = await fetch(
+      `${env.process.REACT_APP_BASE_URI}/api/auth/login`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "auth-token": process.env.REACT_APP_AUTH_TOKEN,
+        },
 
-      body: JSON.stringify({
-        email: credential.email,
-        password: credential.password,
-      }),
-    });
+        body: JSON.stringify({
+          email: credential.email,
+          password: credential.password,
+        }),
+      }
+    );
 
     const json = await response.json();
     console.log(json);

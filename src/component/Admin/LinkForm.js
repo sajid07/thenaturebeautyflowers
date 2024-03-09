@@ -12,7 +12,7 @@ const LinkForm = () => {
     googleMap: "",
   });
 
-  const host = env.process.BASE_URI;
+  const host = env.process.REACT_APP_BASE_URI;
 
   const api = axios.create({
     baseURL: host,

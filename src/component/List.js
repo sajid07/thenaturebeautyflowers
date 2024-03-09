@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 const List = () => {
   const [projects, setProjects] = useState([]);
-  const host = env.process.BASE_URI;
+  const host = env.process.REACT_APP_BASE_URI;
   const api = axios.create({
     baseURL: host,
   });

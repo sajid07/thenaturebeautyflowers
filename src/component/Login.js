@@ -9,7 +9,7 @@ export const Login = (props) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const response = await fetch(
-      `${env.process.REACT_APP_BASE_URI}/api/auth/login`,
+      `${process.env.REACT_APP_BASE_URI}/api/auth/login`,
       {
         method: "POST",
         headers: {

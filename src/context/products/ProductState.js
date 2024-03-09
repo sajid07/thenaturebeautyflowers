@@ -5,7 +5,7 @@ import ProductContext from "./productContext";
 const aws = require("aws-sdk");
 
 const ProductState = (props) => {
-  const host = env.process.REACT_APP_BASE_URI;
+  const host = process.env.REACT_APP_BASE_URI;
   const accessKeyId = process.env.REACT_APP_AWS_ACCESS_KEY_ID;
   const secretAccessKey = process.env.REACT_APP_AWS_SECRET_ACCESS_KEY;
   const region = process.env.REACT_APP_AWS_REGION;

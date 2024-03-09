@@ -18,7 +18,7 @@ const CreateAdmin = (props) => {
     // TODO: API Call
     // API Call
     const response = await fetch(
-      `${env.process.REACT_APP_BASE_URI}/api/auth/createuser`,
+      `${process.env.REACT_APP_BASE_URI}/api/auth/createuser`,
       {
         method: "POST",
         headers: {

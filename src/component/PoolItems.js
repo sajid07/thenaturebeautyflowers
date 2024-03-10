@@ -107,7 +107,7 @@ const PoolItems = () => {
               <div className="rounded p-4">
                 <div className="icon mb-3">
                   <img
-                    src="img/poolItemImg/heat.jpeg"
+                    src="img/poolItemImg/heat.jpg"
                     alt="Icon"
                     style={{ height: '200px', width: 'auto' }} // Set a fixed height and adjust width for aspect ratio
                   />
@@ -122,7 +122,7 @@ const PoolItems = () => {
               <div className="rounded p-4">
                 <div className="icon mb-3">
                   <img
-                    src="img/poolItemImg/dosing.jpeg"
+                    src="img/poolItemImg/dosing.jpg"
                     alt="Icon"
                     style={{ height: '200px', width: '200px' }} // Set a fixed height and adjust width for aspect ratio
                   />
@@ -137,7 +137,7 @@ const PoolItems = () => {
               <div className="rounded p-4">
                 <div className="icon mb-3">
                   <img
-                   src="img/poolItemImg/stairs.jpeg"
+                   src="img/poolItemImg/stairs.jpg"
                     alt="Icon"
                     style={{ height: '178px', width: '200px' }} // Set a fixed height and adjust width for aspect ratio
                   />
@@ -152,7 +152,7 @@ const PoolItems = () => {
               <div className="rounded p-4">
                 <div className="icon mb-3">
                   <img
-                    src="img/category/pool-safety.jpeg"
+                    src="img/category/pool-safety.jpg"
                     alt="Icon"
                     style={{ height: '200px', width: '200px' }} // Set a fixed height and adjust width for aspect ratio
                   />
@@ -182,7 +182,7 @@ const PoolItems = () => {
               <div className="rounded p-4">
                 <div className="icon mb-3">
                   <img
-                    src="img/category/equipment.jpeg"
+                    src="img/category/equipment.jpg"
                     alt="Icon"
                     style={{ height: '176px', width: '200px' }} // Set a fixed height and adjust width for aspect ratio
                   />

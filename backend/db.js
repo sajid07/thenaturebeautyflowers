@@ -4,8 +4,7 @@ const mongoURI = process.env.REACT_APP_MONGO_DB_URI;
 const connectToMongo = async () => {
   try {
     await mongoose.connect(mongoURI, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
+      dbName: "pool",
     });
     console.log("Connected to MongoDB successfully");
   } catch (error) {

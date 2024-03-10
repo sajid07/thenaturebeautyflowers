@@ -43,7 +43,7 @@ const Category = () => {
               <div className="rounded p-4">
                 <div className="icon mb-3">
                   <img
-                    src="img/fountain.jpg"
+                    src="img/category/fountain.jpg"
                     alt="Icon"
                     style={{ height: '200px', width: 'auto' }} // Set a fixed height and adjust width for aspect ratio
                   />
@@ -73,7 +73,7 @@ const Category = () => {
               <div className="rounded p-4">
                 <div className="icon mb-3">
                   <img
-                    src="img/pool-chemical.jpeg"
+                    src="img/category/pool-chemical.jpeg"
                     alt="Icon"
                     style={{ height: '200px', width: 'auto' }} // Set a fixed height and adjust width for aspect ratio
                   />

@@ -13,7 +13,7 @@ const NavBar = () => {
         <Navbar.Brand href="/" className="d-flex align-items-center text-center">
           <div className="icon p-2 me-2">
             <img
-              src="/img/banner/logo.jpeg"
+              src="img/banner/logo.jpg"
               alt="Icon"
               style={{ width: "50px", height: "50px" }}
             />

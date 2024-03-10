@@ -1,33 +1,38 @@
-require('dotenv').config({ override: true, path: `.env.${process.env.REACT_APP_ENV || 'local'}` });
-const connectToMongo = require('./db');
-const express = require('express');
-const cors = require('cors');
-const Product = require('../backend/models/Product'); // Assuming you have a Product model
-const Project = require('../backend/models/Projects'); // Assuming you have a Product model
+require("dotenv").config({
+  override: true,
+  path: `.env.${process.env.REACT_APP_ENV || "local"}`,
+});
+const connectToMongo = require("./db");
+const express = require("express");
+const cors = require("cors");
+const Product = require("../backend/models/Product"); // Assuming you have a Product model
+const Project = require("../backend/models/Projects"); // Assuming you have a Product model
 
-const contactsRoutes = require('./routes/contacts');
-const linkRoutes = require('./routes/socialLink');
+const contactsRoutes = require("./routes/contacts");
+const linkRoutes = require("./routes/socialLink");
 
 connectToMongo();
 
 const app = express();
 const port = 5000;
 
-app.use(cors());
+app.use(
+  cors({ allowedHeaders: "Origin, X-Requested-With, Content-Type, Accept" })
+);
 app.use(express.json());
 
 // Available Routes
-app.use('/api/auth', require('./routes/auth'));
-app.use('/api/contacts', require('./routes/contacts'));
+app.use("/api/auth", require("./routes/auth"));
+app.use("/api/contacts", require("./routes/contacts"));
 
-app.use('/api/product', require('./routes/product'));
-app.use('/api/project', require('./routes/project'));
+app.use("/api/product", require("./routes/product"));
+app.use("/api/project", require("./routes/project"));
 
-app.use('/api/user', require('./routes/user')); // Add this line for the new user route
-app.use('/api/socialLink', require('./routes/socialLink'));
+app.use("/api/user", require("./routes/user")); // Add this line for the new user route
+app.use("/api/socialLink", require("./routes/socialLink"));
 
 // Fetch all products route
-app.get('/api/product/fetchallproducts', async (req, res) => {
+app.get("/api/product/fetchallproducts", async (req, res) => {
   try {
     // Fetch all products from the database
     const products = await Product.find();
@@ -36,10 +41,9 @@ app.get('/api/product/fetchallproducts', async (req, res) => {
     res.json(products);
   } catch (error) {
     console.error(error);
-    res.status(500).send('Server Error');
+    res.status(500).send("Server Error");
   }
 });
-
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);

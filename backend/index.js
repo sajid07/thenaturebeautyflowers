@@ -1,4 +1,4 @@
-require('dotenv').config({ override: true, path: `.env.${process.env.NODE_ENV || 'local'}` });
+require('dotenv').config({ override: true, path: `.env.${process.env.REACT_APP_ENV || 'local'}` });
 const connectToMongo = require('./db');
 const express = require('express');
 const cors = require('cors');

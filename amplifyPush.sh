@@ -4,6 +4,7 @@
 # Copyright (c) thenaturebeautyflowers.com
 
 # Install Backend Packages
+node -v
 npm run build-backend
 
 # Run Express Server as a Background Service
@@ -15,7 +16,7 @@ Description=thenaturebeautyflowers
 
 [Service]
 Type=exec
-ExecStart=/usr/local/bin/node $PWD/backend/index.js
+ExecStart=node $PWD/backend/index.js
 WorkingDirectory=$PWD
 
 User=nobody

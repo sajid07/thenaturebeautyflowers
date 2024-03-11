@@ -3,7 +3,7 @@ backend:
   phases:
     build:
       commands:
-        - sh amplifyPush.sh
+        - sudo -E sh amplifyPush.sh
 frontend:
   phases:
     preBuild:

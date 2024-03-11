@@ -39,7 +39,7 @@ Restart=always
 WantedBy=multi-user.target
 EOF
 
-sudo service start thenaturebeautyflowers
+sudo service thenaturebeautyflowers start
 echo "Express Backend Service Started"
 
 exit 0

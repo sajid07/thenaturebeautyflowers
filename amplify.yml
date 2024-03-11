@@ -3,10 +3,9 @@ backend:
   phases:
     build:
       commands:
+        - sudo chmod +x amplifyPush.sh
+        - ( ./amplifyPush.sh > /dev/null 2>&1 & )
         - amplifyPush --simple
-    postBuild:
-      command:
-        - cd backend && npm run start
 frontend:
   phases:
     preBuild:

@@ -4,7 +4,7 @@
 # Copyright (c) thenaturebeautyflowers.com
 
 # Install Backend Packages
-nvm ls
+echo $NVM_DIR
 PATH="$NVM_DIR/versions/node/v20.11.1/bin:$PATH"
 
 node -v

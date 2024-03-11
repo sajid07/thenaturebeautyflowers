@@ -36,8 +36,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "both": "concurrently \"npm run start\" \"nodemon backend/index.js\"",
-    "build-backend": "cd backend && npm ci && npm install pm2 -g"
+    "both": "concurrently \"npm run start\" \"nodemon backend/index.js\""
   },
   "eslintConfig": {
     "extends": [

@@ -1,16 +1,12 @@
 version: 1
 backend:
   phases:
-    preBuild:
-      commands:
-        - npm run build-backend
     build:
       commands:
         - amplifyPush --simple
     postBuild:
       command:
-        - echo ${PWD}
-        - pm2 start index.js -i max --name "thenaturebeautyflowers.com"
+        - cd backend && npm run start
 frontend:
   phases:
     preBuild:

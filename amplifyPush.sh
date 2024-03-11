@@ -4,6 +4,8 @@
 # Copyright (c) thenaturebeautyflowers.com
 
 # Install Backend Packages
+PATH="/root/.nvm/versions/node/v20.11.1/bin:$PATH"
+
 node -v
 npm run build-backend
 

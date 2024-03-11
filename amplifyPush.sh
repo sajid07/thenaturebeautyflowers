@@ -39,10 +39,11 @@ Restart=always
 WantedBy=multi-user.target
 EOF
 
+sudo systemctl status
 echo "Reloading daemon and enabling service"
 sudo systemctl daemon-reload 
-sudo systemctl enable thenaturebeautyflowers
-sudo systemctl start thenaturebeautyflowers
+sudo systemctl enable thenaturebeautyflowers.service
+sudo systemctl start thenaturebeautyflowers.service
 echo "Service Started"
 
 exit 0

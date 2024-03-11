@@ -2,7 +2,7 @@
 
 # Author : Sajid Ishaq
 # Copyright (c) thenaturebeautyflowers.com
-
+ps -p 1 -o comm=
 # Install Backend Packages
 npm run build-backend
 
@@ -39,7 +39,10 @@ Restart=always
 WantedBy=multi-user.target
 EOF
 
-sudo service thenaturebeautyflowers start
-echo "Express Backend Service Started"
+echo "Reloading daemon and enabling service"
+sudo systemctl daemon-reload 
+sudo systemctl enable thenaturebeautyflowers.service
+sudo systemctl start thenaturebeautyflowers.service
+echo "Service Started"
 
 exit 0

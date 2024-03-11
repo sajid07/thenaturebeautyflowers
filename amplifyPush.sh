@@ -8,13 +8,13 @@ npm run build-backend
 
 # Run Express Server as a Background Service
 echo "Creating service file"
-sudo cat > /etc/systemd/system/thenaturebeautyflowers.service << EOF
+sudo cat > /etc/init.d/thenaturebeautyflowers.service << EOF
 
 [Unit]
 Description=thenaturebeautyflowers
 
 [Service]
-Type=simple
+Type=exec
 ExecStart=/usr/local/bin/node $PWD/backend/index.js
 WorkingDirectory=$PWD
 

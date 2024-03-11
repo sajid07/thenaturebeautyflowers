@@ -10,4 +10,4 @@ npm install pm2 -g
 npm run build-backend
 
 # Run Express Server as a Background Service
-pm2 start $PWD/backend/index.js -i max
+pm2 start $PWD/backend/index.js -i max --attach --name "thenaturebeautyflowers.com"

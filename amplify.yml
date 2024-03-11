@@ -4,9 +4,9 @@ backend:
     build:
       commands:
         - npm run build-backend
-      postBuild:
-        commands:
-          - cd ..
+    postBuild:
+      commands:
+        - cd ..
 frontend:
   phases:
     preBuild:

@@ -7,7 +7,7 @@ backend:
         - npm ci
     build:
       commands:
-        - nodemon index.js
+        - node index.js
     postBuild:
       commands:
         - cd ..

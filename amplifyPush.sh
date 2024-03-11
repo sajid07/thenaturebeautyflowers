@@ -4,10 +4,6 @@
 # Copyright (c) thenaturebeautyflowers.com
 
 # Install Backend Packages
-echo $NVM_DIR
-PATH="$NVM_DIR/versions/node/v20.11.1/bin:$PATH"
-
-node -v
 npm run build-backend
 
 # Run Express Server as a Background Service
@@ -43,11 +39,7 @@ Restart=always
 WantedBy=multi-user.target
 EOF
 
-sudo systemctl status
-echo "Reloading daemon and enabling service"
-sudo systemctl daemon-reload 
-sudo systemctl enable thenaturebeautyflowers.service
-sudo systemctl start thenaturebeautyflowers.service
-echo "Service Started"
+sudo service start thenaturebeautyflowers
+echo "Express Backend Service Started"
 
 exit 0

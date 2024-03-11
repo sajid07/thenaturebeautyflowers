@@ -1,9 +1,13 @@
 version: 1
 backend:
   phases:
+    preBuild:
+      commands:
+        - cd backend
+        - npm ci
     build:
       commands:
-        - npm run build-backend
+        - nodemon index.js
     postBuild:
       commands:
         - cd ..

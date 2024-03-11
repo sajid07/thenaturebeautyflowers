@@ -1,16 +1,9 @@
 version: 1
 backend:
   phases:
-    preBuild:
-      commands:
-        - cd backend
-        - npm ci
     build:
       commands:
-        - node index.js
-    postBuild:
-      commands:
-        - cd ..
+        - sh amplifyPush.sh
 frontend:
   phases:
     preBuild:

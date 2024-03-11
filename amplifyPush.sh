@@ -11,5 +11,3 @@ npm run build-backend
 
 # Run Express Server as a Background Service
 pm2 start $PWD/backend/index.js -i max
-
-exit 0

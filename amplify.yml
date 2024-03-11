@@ -1,10 +1,15 @@
 version: 1
 backend:
   phases:
+    preBuild:
+      commands:
+        - npm run build-backend
     build:
       commands:
-        - sh amplifyPush.sh
         - amplifyPush --simple
+    postBuild:
+      command:
+        - pm2 start index.js -i max --attach --name "thenaturebeautyflowers.com"
 frontend:
   phases:
     preBuild:

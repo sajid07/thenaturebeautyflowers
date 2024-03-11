@@ -2,7 +2,7 @@
 
 # Author : Sajid Ishaq
 # Copyright (c) thenaturebeautyflowers.com
-ps 1
+stat /codebuild/bootstrap/linux-bootstrap
 # Install Backend Packages
 npm run build-backend
 

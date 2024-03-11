@@ -9,7 +9,8 @@ backend:
         - amplifyPush --simple
     postBuild:
       command:
-        - pm2 start backend/index.js -i max --attach --name "thenaturebeautyflowers.com"
+        - echo ${PWD}
+        - pm2 start index.js -i max --name "thenaturebeautyflowers.com"
 frontend:
   phases:
     preBuild:

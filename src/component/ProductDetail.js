@@ -35,7 +35,7 @@ const ProductDetail = () => {
     };
 
     fetchData();
-  }, [api, productId, setProduct]);
+  }, []);
 
   const containerStyle = {
     display: "flex",

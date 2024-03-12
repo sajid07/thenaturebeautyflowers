@@ -24,7 +24,7 @@ const ProjectList = () => {
     };
 
     fetchProjects();
-  }, [api]);
+  }, []);
 
   const handleDelete = async (projectId) => {
     try {

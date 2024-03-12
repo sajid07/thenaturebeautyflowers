@@ -50,7 +50,7 @@ const LinkForm = () => {
     };
 
     fetchData();
-  }, [api]);
+  }, []);
 
   return (
     <>

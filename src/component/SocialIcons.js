@@ -28,7 +28,7 @@ const SocialIcons = () => {
       }
     };
     fetchData();
-  }, [api]);
+  }, []);
   // eslint-disable-next-line
   {
     console.log(socialLinks);

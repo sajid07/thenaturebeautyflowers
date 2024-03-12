@@ -16,9 +16,7 @@ connectToMongo();
 const app = express();
 const port = 5000;
 
-app.use(
-  cors({ allowedHeaders: "Origin, X-Requested-With, Content-Type, Accept" })
-);
+app.use(cors());
 app.use(express.json());
 
 // Available Routes

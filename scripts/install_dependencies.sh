@@ -1,4 +1,4 @@
-#!/bin/bash
+source /home/ubuntu/.bash_profile
 echo 'Install NPM Dependencies: ' >> /home/ubuntu/thenaturebeautyflowers/deploy.log
 
 echo 'Navigate to Project Directory: ' >> /home/ubuntu/thenaturebeautyflowers/deploy.log

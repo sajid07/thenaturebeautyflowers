@@ -1,7 +1,8 @@
+#!/bin/bash
 source /home/ubuntu/.bashrc
 echo 'Start ExpressJS Server: ' >> /home/ubuntu/thenaturebeautyflowers/deploy.log
 
-echo 'Navigate to Project's Backend Directory: ' >> /home/ubuntu/thenaturebeautyflowers/deploy.log
+echo 'Navigate to Project\'s Backend Directory: ' >> /home/ubuntu/thenaturebeautyflowers/deploy.log
 cd /home/ubuntu/thenaturebeautyflowers/backend >> /home/ubuntu/thenaturebeautyflowers/deploy.log
 
 echo 'Stop Already Running Servers if any: ' >> /home/ubuntu/thenaturebeautyflowers/deploy.log

@@ -1,4 +1,4 @@
-source /home/ubuntu/.bash_profile
+source /home/ubuntu/.bashrc
 echo 'Start ExpressJS Server: ' >> /home/ubuntu/thenaturebeautyflowers/deploy.log
 
 echo 'Navigate to Project's Backend Directory: ' >> /home/ubuntu/thenaturebeautyflowers/deploy.log

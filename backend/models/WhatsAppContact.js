@@ -1,5 +1,5 @@
 // WhatsAppContact.js (Mongoose model)
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const WhatsAppContactSchema = new mongoose.Schema({
   callContact: {
@@ -12,6 +12,9 @@ const WhatsAppContactSchema = new mongoose.Schema({
   },
 });
 
-const WhatsAppContact = mongoose.model('WhatsAppContact', WhatsAppContactSchema);
+const WhatsAppContact = mongoose.model(
+  "WhatsAppContact",
+  WhatsAppContactSchema,
+);
 
 module.exports = WhatsAppContact;

@@ -1,6 +1,6 @@
 // linkModel.js
 
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const linkSchema = new mongoose.Schema({
   facebook: String,
@@ -10,6 +10,6 @@ const linkSchema = new mongoose.Schema({
   googleMap: String,
 });
 
-const Link = mongoose.model('Link', linkSchema);
+const Link = mongoose.model("Link", linkSchema);
 
 module.exports = Link;

@@ -21,7 +21,7 @@ export const Login = (props) => {
           email: credential.email,
           password: credential.password,
         }),
-      }
+      },
     );
 
     const json = await response.json();

@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import { useProduct } from '../context/products/ProductState';
-import Footer from './Footer';
-import { RingLoader } from 'react-spinners'; // Import the RingLoader component
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { useProduct } from "../context/products/ProductState";
+import Footer from "./Footer";
+import { RingLoader } from "react-spinners"; // Import the RingLoader component
 
 const PoolPumpProducts = () => {
   const productInitial = [];
@@ -16,7 +16,7 @@ const PoolPumpProducts = () => {
         await fetchProduct();
         setLoading(false); // Set loading to false when data is fetched
       } catch (error) {
-        console.error('Error fetching data:', error);
+        console.error("Error fetching data:", error);
         setLoading(false); // Set loading to false on error
       }
     };
@@ -25,40 +25,42 @@ const PoolPumpProducts = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []); // Removed dependency array to fetch data only on component mount
 
-  const poolPumpProducts = products.filter((product) => product.category.toLowerCase() === 'pool pump');
+  const poolPumpProducts = products.filter(
+    (product) => product.category.toLowerCase() === "pool pump",
+  );
 
   const backgroundStyle = {
     // backgroundImage: `url(${'/img/banner/out.jpg'})`,
-    backgroundSize: 'cover',
-    backgroundRepeat: 'no-repeat',
-    backgroundPosition: 'center',
-    minHeight: '100vh',
-    position: 'fixed',
+    backgroundSize: "cover",
+    backgroundRepeat: "no-repeat",
+    backgroundPosition: "center",
+    minHeight: "100vh",
+    position: "fixed",
     top: 0,
     left: 0,
-    width: '100%',
-    height: '100%',
+    width: "100%",
+    height: "100%",
     zIndex: -1,
-    filter: 'blur(0px)',
+    filter: "blur(0px)",
   };
 
   const containerStyle = {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    minHeight: '100vh',
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    minHeight: "100vh",
   };
 
   const boxStyle = {
-    border: '1px solid #ccc',
-    borderRadius: '10px',
-    padding: '10px',
-    marginBottom: '20px',
-    overflow: 'hidden',
+    border: "1px solid #ccc",
+    borderRadius: "10px",
+    padding: "10px",
+    marginBottom: "20px",
+    overflow: "hidden",
   };
 
   const cardBodyStyle = {
-    height: '120px', // Set a fixed height for the card body
+    height: "120px", // Set a fixed height for the card body
   };
 
   return (
@@ -71,7 +73,9 @@ const PoolPumpProducts = () => {
         </div>
       ) : (
         <div className="container mt-5">
-          <h2 className="mb-4" style={{ color: '#FF5733' }}>Pool Pump Products</h2>
+          <h2 className="mb-4" style={{ color: "#FF5733" }}>
+            Pool Pump Products
+          </h2>
           <div className="row">
             {poolPumpProducts.map((product) => (
               <div key={product._id} className="col-md-3 mb-3">
@@ -81,12 +85,15 @@ const PoolPumpProducts = () => {
                       src={product.picture}
                       className="card-img-top"
                       alt={product.name}
-                      style={{ height: '250px', width: '302px' }}
+                      style={{ height: "250px", width: "302px" }}
                     />
                   </Link>
                   <div className="card-body" style={cardBodyStyle}>
                     <h5 className="card-title">
-                      <Link to={`/product/${product._id}`} className="card-link">
+                      <Link
+                        to={`/product/${product._id}`}
+                        className="card-link"
+                      >
                         {product.name}
                       </Link>
                     </h5>

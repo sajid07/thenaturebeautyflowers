@@ -1,17 +1,15 @@
-import React from 'react'
-import List from './List'
-import Footer from './Footer';
+import React from "react";
+import List from "./List";
+import Footer from "./Footer";
 
 const Projects = () => {
   return (
     <>
-    <List></List>
+      <List></List>
 
-  
-   <Footer></Footer>
-   
-    
-    </>  )
-}
+      <Footer></Footer>
+    </>
+  );
+};
 
-export default Projects
+export default Projects;

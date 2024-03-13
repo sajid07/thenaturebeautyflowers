@@ -29,7 +29,7 @@ const CreateAdmin = (props) => {
           email: credential.email,
           password: credential.password,
         }),
-      }
+      },
     );
     const json = await response.json();
     if (response.status === 400) {

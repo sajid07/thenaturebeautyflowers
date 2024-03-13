@@ -245,33 +245,33 @@ const ProductList = () => {
           Filter by Category:
         </h3>
         <div className="container mt-5">
-        <select
-          className="form-select"
-          id="categoryFilter"
-          value={selectedCategory}
-          onChange={handleCategoryChange}
-        >
-          <option value="All">All</option>
-          <option value="filtration">Filtration</option>
-        <option value="pool pump">Pool Pump</option>
-        <option value="pool light">Pool Light</option>
-        <option value="pool fitting">Pool Fitting</option>
-        <option value="cleaning product">Cleaning Product</option>
-        <option value="heat cool pump">Heat & Cool Pump</option>
-        <option value="dosing system">Dosing System</option>
-        <option value="surrounded equipment">Surrounded Equipments</option>
-        <option value="safety product">Safety Product</option>
-        <option value="commercial equipments">Commercial Equipments</option>
-        <option value="control panel">Control Panel</option>
-        <option value="water fountain">Water Fountain</option>
-        <option value="wellness">Wellness</option>
-        <option value="pool chemical">Pool Chemical</option>
-        <option value="waterfall">Waterfall</option>
-        <option value="intex pool">Intex pool</option>
-        <option value="booster pump">Booster Pumps</option>
-        <option value="pool tiles">Pool Tiles</option>
-        <option value="irregation">Irregation</option>
-        </select>
+          <select
+            className="form-select"
+            id="categoryFilter"
+            value={selectedCategory}
+            onChange={handleCategoryChange}
+          >
+            <option value="All">All</option>
+            <option value="filtration">Filtration</option>
+            <option value="pool pump">Pool Pump</option>
+            <option value="pool light">Pool Light</option>
+            <option value="pool fitting">Pool Fitting</option>
+            <option value="cleaning product">Cleaning Product</option>
+            <option value="heat cool pump">Heat & Cool Pump</option>
+            <option value="dosing system">Dosing System</option>
+            <option value="surrounded equipment">Surrounded Equipments</option>
+            <option value="safety product">Safety Product</option>
+            <option value="commercial equipments">Commercial Equipments</option>
+            <option value="control panel">Control Panel</option>
+            <option value="water fountain">Water Fountain</option>
+            <option value="wellness">Wellness</option>
+            <option value="pool chemical">Pool Chemical</option>
+            <option value="waterfall">Waterfall</option>
+            <option value="intex pool">Intex pool</option>
+            <option value="booster pump">Booster Pumps</option>
+            <option value="pool tiles">Pool Tiles</option>
+            <option value="irregation">Irregation</option>
+          </select>
         </div>
       </div>
 

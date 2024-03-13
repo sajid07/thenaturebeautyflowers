@@ -16,7 +16,7 @@ const Filtration = () => {
         await fetchProduct({ category: "filtration" }); // Include category filter
         setLoading(false); // Set loading to false when data is fetched
       } catch (error) {
-        console.error('Error fetching data:', error);
+        console.error("Error fetching data:", error);
         setLoading(false); // Set loading to false on error
       }
     };
@@ -27,36 +27,36 @@ const Filtration = () => {
 
   const backgroundStyle = {
     // backgroundImage: `url(${'/img/banner/out.jpg'})`,
-    backgroundSize: 'cover',
-    backgroundRepeat: 'no-repeat',
-    backgroundPosition: 'center',
-    minHeight: '100vh',
-    position: 'fixed',
+    backgroundSize: "cover",
+    backgroundRepeat: "no-repeat",
+    backgroundPosition: "center",
+    minHeight: "100vh",
+    position: "fixed",
     top: 0,
     left: 0,
-    width: '100%',
-    height: '100%',
+    width: "100%",
+    height: "100%",
     zIndex: -1,
-    filter: 'blur(0px)',
+    filter: "blur(0px)",
   };
 
   const containerStyle = {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    minHeight: '100vh',
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    minHeight: "100vh",
   };
 
   const boxStyle = {
-    border: '1px solid #ccc',
-    borderRadius: '10px',
-    padding: '10px',
-    marginBottom: '20px',
-    overflow: 'hidden',
+    border: "1px solid #ccc",
+    borderRadius: "10px",
+    padding: "10px",
+    marginBottom: "20px",
+    overflow: "hidden",
   };
 
   const cardBodyStyle = {
-    height: '120px', // Set a fixed height for the card body
+    height: "120px", // Set a fixed height for the card body
   };
 
   return (
@@ -73,15 +73,12 @@ const Filtration = () => {
           <div className="row">
             {products
               .filter(
-                (product) => product.category.toLowerCase() === "filtration"
+                (product) => product.category.toLowerCase() === "filtration",
               )
               .map((product) => (
                 <div key={product._id} className="col-md-3 mb-3">
                   <div className="card" style={boxStyle}>
-                    <Link
-                      to={`/product/${product._id}`}
-                      className="card-link"
-                    >
+                    <Link to={`/product/${product._id}`} className="card-link">
                       <img
                         src={product.picture}
                         className="card-img-top"

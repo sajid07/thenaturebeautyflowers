@@ -1,8 +1,8 @@
-import React from 'react';
-import Slider from 'react-slick';
+import React from "react";
+import Slider from "react-slick";
 
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 const AutoplaySlider = () => {
   const settings = {
@@ -18,35 +18,48 @@ const AutoplaySlider = () => {
       {
         breakpoint: 1200,
         settings: {
-          slidesToShow: 4
-        }
+          slidesToShow: 4,
+        },
       },
       {
         breakpoint: 992,
         settings: {
-          slidesToShow: 3
-        }
+          slidesToShow: 3,
+        },
       },
       {
         breakpoint: 768,
         settings: {
-          slidesToShow: 2
-        }
+          slidesToShow: 2,
+        },
       },
       {
         breakpoint: 576,
         settings: {
-          slidesToShow: 1
-        }
-      }
-    ]
+          slidesToShow: 1,
+        },
+      },
+    ],
   };
 
   return (
-    <div className='container'>
-      <h1 style={{ textAlign: 'center', color: '#007bff', marginTop: '50px' }}>Our Brands</h1>
-      <p style={{ textAlign: 'center', color: '#03bafc', marginTop: '20px', marginBottom: '50px', fontSize: '18px' }}>
-        Explore our curated selection of top-tier brands that exemplify quality, innovation, and style. Each brand we represent is carefully chosen to deliver exceptional products and services, aligning with our commitment to excellence.
+    <div className="container">
+      <h1 style={{ textAlign: "center", color: "#007bff", marginTop: "50px" }}>
+        Our Brands
+      </h1>
+      <p
+        style={{
+          textAlign: "center",
+          color: "#03bafc",
+          marginTop: "20px",
+          marginBottom: "50px",
+          fontSize: "18px",
+        }}
+      >
+        Explore our curated selection of top-tier brands that exemplify quality,
+        innovation, and style. Each brand we represent is carefully chosen to
+        deliver exceptional products and services, aligning with our commitment
+        to excellence.
       </p>
       <Slider {...settings}>
         <div>

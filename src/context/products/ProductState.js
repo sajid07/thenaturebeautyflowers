@@ -34,7 +34,7 @@ const ProductState = (props) => {
 
       upload.on("httpUploadProgress", (progress) => {
         console.log(
-          `Uploaded ${progress.loaded} out of ${progress.total} bytes`
+          `Uploaded ${progress.loaded} out of ${progress.total} bytes`,
         );
       });
 
@@ -59,12 +59,12 @@ const ProductState = (props) => {
     const pictureUrl = await uploadToS3(
       pictureKey,
       product.picture,
-      product.picture.type
+      product.picture.type,
     );
     const pdfUrl = await uploadToS3(
       pdfKey,
       product.pdfFile,
-      product.pdfFile.type
+      product.pdfFile.type,
     );
 
     //   // Now, add the product with both URLs to your database
@@ -106,7 +106,7 @@ const ProductState = (props) => {
     const pictureUrl = await uploadToS3(
       pictureKey,
       product.picture,
-      product.picture.type
+      product.picture.type,
     );
 
     //   // Now, add the product with both URLs to your database
@@ -187,7 +187,7 @@ const ProductState = (props) => {
     try {
       // Fetch the product details before deleting
       const productToDelete = products.find(
-        (product) => product._id === productId
+        (product) => product._id === productId,
       );
 
       // Implement the actual deleteProduct functionality
@@ -216,7 +216,7 @@ const ProductState = (props) => {
   const deleteProject = async (projectId, projects) => {
     try {
       const projectToDelete = projects.find(
-        (project) => project._id === projectId
+        (project) => project._id === projectId,
       );
       if (!projectToDelete) {
         throw new Error("Project not found");
@@ -326,7 +326,7 @@ const ProductState = (props) => {
             "auth-token": localStorage.getItem("token"),
           },
           body: JSON.stringify(updatedProductData),
-        }
+        },
       );
 
       if (response.ok) {
@@ -339,8 +339,8 @@ const ProductState = (props) => {
           prevProducts.map((product) =>
             product._id === updatedProductData._id
               ? { ...product, ...updatedProductData }
-              : product
-          )
+              : product,
+          ),
         );
       } else {
         console.error("Failed to update product:", response.statusText);

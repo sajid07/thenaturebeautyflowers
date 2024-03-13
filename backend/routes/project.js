@@ -1,13 +1,12 @@
-
-const express = require('express');
+const express = require("express");
 const router = express.Router();
 const Project = require("../models/Projects");
-const authmiddleware = require('../middleware/authMiddleware');
+const authmiddleware = require("../middleware/authMiddleware");
 
 router.use(express.json());
 
 // Add new product using: POST "/api/product" Auth required
-router.post('/', authmiddleware, async (req, res) => {
+router.post("/", authmiddleware, async (req, res) => {
   try {
     console.log(req.body);
 
@@ -20,76 +19,74 @@ router.post('/', authmiddleware, async (req, res) => {
     // Respond with the saved product
     res.json(savedProject);
   } catch (error) {
-    console.error('Error creating Project:', error);
-    res.status(500).json({ error: 'Internal Server Error' });
+    console.error("Error creating Project:", error);
+    res.status(500).json({ error: "Internal Server Error" });
   }
 });
 
 // Fetch all Projects
-router.get('/fetchallprojects', async (req, res) => {
-
-    try {
-      // Assuming Project is your Mongoose model for projects
-      const projects = await Project.find();
-      res.json(projects);
-    } catch (error) {
-      console.error(error);
-      res.status(500).send('Server Error');
-    }
-  });
-  
+router.get("/fetchallprojects", async (req, res) => {
+  try {
+    // Assuming Project is your Mongoose model for projects
+    const projects = await Project.find();
+    res.json(projects);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Server Error");
+  }
+});
 
 // Fetch a product by ID
-router.get('/:projectId', async (req, res) => {
+router.get("/:projectId", async (req, res) => {
   try {
     const { projectId } = req.params;
     const project = await projects.findById(projectId);
 
     if (!project) {
-      return res.status(404).json({ message: 'project not found' });
+      return res.status(404).json({ message: "project not found" });
     }
 
     res.json(project);
   } catch (error) {
-    console.error('Error fetching project:', error);
-    res.status(500).json({ message: 'Internal Server Error' });
+    console.error("Error fetching project:", error);
+    res.status(500).json({ message: "Internal Server Error" });
   }
 });
 
 // Delete a product by ID
-router.delete('/:projectId', async (req, res) => {
+router.delete("/:projectId", async (req, res) => {
   try {
     const { projectId } = req.params;
     const project = await Product.findById(projectId);
 
     if (!project) {
-      return res.status(404).json({ message: 'project not found' });
+      return res.status(404).json({ message: "project not found" });
     }
 
     await projects.deleteOne({ _id: projectId });
 
-    console.log('Project deleted successfully');
+    console.log("Project deleted successfully");
 
-    res.json({ message: 'Project deleted successfully' });
+    res.json({ message: "Project deleted successfully" });
   } catch (error) {
-    console.error('Error deleting product:', error);
-    res.status(500).json({ message: 'Internal Server Error' });
+    console.error("Error deleting product:", error);
+    res.status(500).json({ message: "Internal Server Error" });
   }
 });
-router.delete('/projects/:projectId', async (req, res) => {
+router.delete("/projects/:projectId", async (req, res) => {
   const { projectId } = req.params;
-console.log("hi from delete section")
+  console.log("hi from delete section");
   try {
     const deletedProject = await Project.findByIdAndDelete(projectId);
 
     if (!deletedProject) {
-      return res.status(404).json({ error: 'Project not found' });
+      return res.status(404).json({ error: "Project not found" });
     }
 
-    res.json({ message: 'Project deleted successfully' });
+    res.json({ message: "Project deleted successfully" });
   } catch (error) {
-    console.error('Error deleting project:', error);
-    res.status(500).json({ error: 'Internal Server Error' });
+    console.error("Error deleting project:", error);
+    res.status(500).json({ error: "Internal Server Error" });
   }
 });
 

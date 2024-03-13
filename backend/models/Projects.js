@@ -1,6 +1,6 @@
 // Product.js
-const mongoose = require('mongoose');
-const {schema}=require('mongoose')
+const mongoose = require("mongoose");
+const { schema } = require("mongoose");
 
 const ProjectSchema = new mongoose.Schema({
   name: {
@@ -11,14 +11,13 @@ const ProjectSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  
+
   picture: {
     type: String, // Assuming you store the picture as a URL or file path
     required: true,
   },
-  
 });
 
-const Product = mongoose.model('Project', ProjectSchema);
+const Product = mongoose.model("Project", ProjectSchema);
 
 module.exports = Product;

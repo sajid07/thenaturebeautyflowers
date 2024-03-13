@@ -1,4 +1,3 @@
-
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import "./App.css";
@@ -83,7 +82,6 @@ function App() {
               <Route exact path="/socialLinks" element={<LinkForm />} />
               <Route exact path="/showProject" element={<ShowProjects />} />
 
-
               <Route exact path="ProductForm" element={<ProductForm />} />
               <Route
                 path="/category/pool-pump"
@@ -122,11 +120,6 @@ function App() {
               <Route exact path="/intexpool" element={<IntexPool />} />
               <Route exact path="/boosterpump" element={<BoosterPump />} />
               <Route exact path="/irregation" element={<Irregation />} />
-
-
-
-
-
             </Routes>
           </div>
         </Router>

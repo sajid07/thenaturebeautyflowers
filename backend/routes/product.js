@@ -94,15 +94,15 @@
 
 // module.exports = router;
 //updated code
-const express = require('express');
+const express = require("express");
 const router = express.Router();
 const Product = require("../models/Product");
-const authmiddleware = require('../middleware/authMiddleware');
+const authmiddleware = require("../middleware/authMiddleware");
 
 router.use(express.json());
 
 // Add new product using: POST "/api/product" Auth required
-router.post('/', authmiddleware, async (req, res) => {
+router.post("/", authmiddleware, async (req, res) => {
   try {
     console.log(req.body);
 
@@ -115,71 +115,71 @@ router.post('/', authmiddleware, async (req, res) => {
     // Respond with the saved product
     res.json(savedProduct);
   } catch (error) {
-    console.error('Error creating Product:', error);
-    res.status(500).json({ error: 'Internal Server Error' });
+    console.error("Error creating Product:", error);
+    res.status(500).json({ error: "Internal Server Error" });
   }
 });
 
 // Fetch all products
-router.get('/fetchallproducts', async (req, res) => {
+router.get("/fetchallproducts", async (req, res) => {
   try {
     const products = await Product.find();
     res.json(products);
   } catch (error) {
     console.error(error);
-    res.status(500).send('Server Error');
+    res.status(500).send("Server Error");
   }
 });
 
 // Fetch a product by ID
-router.get('/:productId', async (req, res) => {
+router.get("/:productId", async (req, res) => {
   try {
     const { productId } = req.params;
     const product = await Product.findById(productId);
 
     if (!product) {
-      return res.status(404).json({ message: 'Product not found' });
+      return res.status(404).json({ message: "Product not found" });
     }
 
     res.json(product);
   } catch (error) {
-    console.error('Error fetching product:', error);
-    res.status(500).json({ message: 'Internal Server Error' });
+    console.error("Error fetching product:", error);
+    res.status(500).json({ message: "Internal Server Error" });
   }
 });
 
 // Delete a product by ID
-router.delete('/:productId', async (req, res) => {
+router.delete("/:productId", async (req, res) => {
   try {
     const { productId } = req.params;
     const product = await Product.findById(productId);
 
     if (!product) {
-      return res.status(404).json({ message: 'Product not found' });
+      return res.status(404).json({ message: "Product not found" });
     }
 
     await product.deleteOne({ _id: productId });
 
-    console.log('Product deleted successfully');
+    console.log("Product deleted successfully");
 
-    res.json({ message: 'Product deleted successfully' });
+    res.json({ message: "Product deleted successfully" });
   } catch (error) {
-    console.error('Error deleting product:', error);
-    res.status(500).json({ message: 'Internal Server Error' });
+    console.error("Error deleting product:", error);
+    res.status(500).json({ message: "Internal Server Error" });
   }
 });
 
 // Update a product by ID
-router.put('/:productId', authmiddleware, async (req, res) => {
+router.put("/:productId", authmiddleware, async (req, res) => {
   try {
-    console.log("hi from product update")
+    console.log("hi from product update");
     const { productId } = req.params;
     const { name, description, category } = req.body;
 
     const product = await Product.findById(productId);
 
     if (!product) {
-      return res.status(404).json({ message: 'Product not found' });
+      return res.status(404).json({ message: "Product not found" });
     }
 
     product.name = name;
@@ -188,12 +188,12 @@ router.put('/:productId', authmiddleware, async (req, res) => {
 
     await product.save();
 
-    console.log('Product updated successfully');
+    console.log("Product updated successfully");
 
-    res.json({ message: 'Product updated successfully' });
+    res.json({ message: "Product updated successfully" });
   } catch (error) {
-    console.error('Error updating product:', error);
-    res.status(500).json({ message: 'Internal Server Error' });
+    console.error("Error updating product:", error);
+    res.status(500).json({ message: "Internal Server Error" });
   }
 });
 

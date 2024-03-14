@@ -1,14 +1,16 @@
 #!/bin/bash
-echo 'Install NPM Dependencies: ' >> /home/ubuntu/thenaturebeautyflowers/deploy.log
+source /home/ubuntu/.bashrc
 
-echo 'Navigate to Project Directory: ' >> /home/ubuntu/thenaturebeautyflowers/deploy.log
-cd /home/ubuntu/thenaturebeautyflowers >> /home/ubuntu/thenaturebeautyflowers/deploy.log
+echo 'Fetch SSM Parameters: ' >> /home/ubuntu/thenaturebeautyflowers/deploy.log
+SSMParams=$(aws ssm describe-parameters)
 
-echo 'Install Front-end Dependencies: ' >> /home/ubuntu/thenaturebeautyflowers/deploy.log 
-npm ci >> /home/ubuntu/thenaturebeautyflowers/deploy.log
+echo 'Fetch and Store Values of each SSM Parameter: ' >> /home/ubuntu/thenaturebeautyflowers/deploy.log
+for param in ${SSMParams.Parameters} do
+    echo "Getting parameter ${param.Name} from SSM parameter store if it exists and setting into the variable ${param.Name}"
+    SSM_VALUE=`aws ssm get-parameters --with-decryption --names "${param.Name}"  --query 'Parameters[*].Value' --output text`
+    COMMAND="export $ENV_VAR_NAME=$SSM_VALUE"
+    eval ${COMMAND}
+done
 
-echo 'Navigate to Project's Backend Directory: ' >> /home/ubuntu/thenaturebeautyflowers/deploy.log
-cd /home/ubuntu/thenaturebeautyflowers/backend >> /home/ubuntu/thenaturebeautyflowers/deploy.log
-
-echo 'Install Back-end Dependencies: ' >> /home/ubuntu/thenaturebeautyflowers/deploy.log 
-npm ci >> /home/ubuntu/thenaturebeautyflowers/deploy.log
+echo 'Store Newly created environment variables to an .env file for production build: ' >> /home/ubuntu/thenaturebeautyflowers/deploy.log 
+env | grep -e REACT_APP_ >> .env.production >> /home/ubuntu/thenaturebeautyflowers/deploy.log

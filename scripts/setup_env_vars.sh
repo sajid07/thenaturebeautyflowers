@@ -1,6 +1,6 @@
 #!/bin/bash
 source /home/ubuntu/.bashrc
-echo "$USER"
+whoami
 
 echo 'Fetch SSM Parameters: ' >> /home/ubuntu/thenaturebeautyflowers/deploy.log
 SSMParams=$(aws ssm describe-parameters --profile default)

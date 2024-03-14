@@ -1,10 +1,8 @@
 #!/bin/bash
 source /home/ubuntu/.bashrc
-export NVM_DIR="$HOME/.nvm"
+export NVM_DIR="/home/ubuntu/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
-echo $NVM_DIR
 
 echo 'Install NPM Dependencies: ' >> /home/ubuntu/thenaturebeautyflowers/deploy.log
 

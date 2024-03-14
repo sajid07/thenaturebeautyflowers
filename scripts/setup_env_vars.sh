@@ -6,6 +6,7 @@ SSMParams=$(aws ssm describe-parameters)
 
 echo 'Fetch and Store Values of each SSM Parameter: ' >> /home/ubuntu/thenaturebeautyflowers/deploy.log
 for param in $SSMParams['Parameters'] do
+    echo $param
     ENV_VAR_NAME=$param['Name']
     echo "Getting parameter $ENV_VAR_NAME from SSM parameter store if it exists and setting into the variable $ENV_VAR_NAME"
     SSM_VALUE=`aws ssm get-parameters --with-decryption --names "${$ENV_VAR_NAME}" --query 'Parameters[*].Value' --output text`

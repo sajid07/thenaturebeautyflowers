@@ -2,10 +2,10 @@
 source /home/ubuntu/.bashrc
 
 echo 'Fetch SSM Parameters: ' >> /home/ubuntu/thenaturebeautyflowers/deploy.log
-SSMParams=$(aws ssm describe-parameters --query 'Parameters[*].Name')
+SSMParams=$(aws ssm describe-parameters --query 'Parameters[*].Name' | jq '.[]')
 
 echo 'Fetch and Store Values of each SSM Parameter: ' >> /home/ubuntu/thenaturebeautyflowers/deploy.log
-for param in $($SSMParams | jq '.[]'); do
+for param in $SSMParams; do
     echo "Getting parameter $param from SSM parameter store if it exists and setting into the variable $param" >> /home/ubuntu/thenaturebeautyflowers/deploy.log
     SSM_VALUE=$(aws ssm get-parameters --with-decryption --names "$param" --query 'Parameters[*].Value' --output text)
     COMMAND="export $param=$SSM_VALUE"

@@ -8,7 +8,7 @@ echo 'Fetch and Store Values of each SSM Parameter: ' >> /home/ubuntu/thenatureb
 for param in $SSMParams; do
     ENV_VAR_NAME=$(echo $param | jq '.Name')
     echo "Getting parameter $ENV_VAR_NAME from SSM parameter store if it exists and setting into the variable $ENV_VAR_NAME"
-    SSM_VALUE=$(aws ssm get-parameters --with-decryption --names "${$ENV_VAR_NAME}" --query 'Parameters[*].Value' --output text)
+    SSM_VALUE=$(aws ssm get-parameters --with-decryption --names "$ENV_VAR_NAME" --query 'Parameters[*].Value' --output text)
     COMMAND="export $ENV_VAR_NAME=$SSM_VALUE"
     eval ${COMMAND}
 done

@@ -1,9 +1,8 @@
 #!/bin/bash
 source /home/ubuntu/.bashrc
-whoami
 
 echo 'Fetch SSM Parameters: ' >> /home/ubuntu/thenaturebeautyflowers/deploy.log
-SSMParams=$(aws ssm describe-parameters --profile default)
+SSMParams=$(aws ssm describe-parameters)
 
 echo 'Fetch and Store Values of each SSM Parameter: ' >> /home/ubuntu/thenaturebeautyflowers/deploy.log
 for param in ${SSMParams.Parameters} do

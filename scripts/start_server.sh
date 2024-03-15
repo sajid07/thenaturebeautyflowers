@@ -21,6 +21,13 @@ echo 'Build ReactJS Frontend: ' >> /home/ubuntu/thenaturebeautyflowers/deploy.lo
 echo 'Navigate to Project Directory: ' >> /home/ubuntu/thenaturebeautyflowers/deploy.log
 cd /home/ubuntu/thenaturebeautyflowers >> /home/ubuntu/thenaturebeautyflowers/deploy.log
 
+echo 'Set Environment variables to optimize ReactJS build: ' >> /home/ubuntu/thenaturebeautyflowers/deploy.log
+export NODE_OPTIONS=--max-old-space-size=$(expr $(echo "$(free -m)" | awk '/^Mem:/ {print $2}') - 512)
+export GENERATE_SOURCEMAP=false
+
+echo 'Store Newly created environment variables to an .env file for production build: ' >> /home/ubuntu/thenaturebeautyflowers/deploy.log 
+env | grep -e NODE_OPTIONS -e GENERATE_SOURCEMAP >> /home/ubuntu/thenaturebeautyflowers/.env.production
+
 echo 'Run a Production Build: ' >> /home/ubuntu/thenaturebeautyflowers/deploy.log
 npm run build >> /home/ubuntu/thenaturebeautyflowers/deploy.log
 

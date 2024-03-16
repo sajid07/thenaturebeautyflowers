@@ -32,8 +32,15 @@ jobs:
         run: |
           aws sts get-caller-identity
 
+      # Start Production Build
+      - name: "AWS CodeBuild run build"
+        uses: aws-actions/aws-codebuild-run-build@v1.0.16
+        with:
+          project-name: thenaturebeautyflowers-ProductionBuild
+          disable-source-override: true
+
       # Step 3 - check the application-name and deployment group name
       - name: Create CodeDeploy Deployment
         id: deploy
         run: |
-          aws deploy create-deployment --application-name thenaturebeautyflowers --deployment-group-name thenaturebeautyflowers-staging --deployment-config-name CodeDeployDefault.AllAtOnce --github-location repository=${{ github.repository }},commitId=${{ github.sha }} --ignore-application-stop-failures
+          aws deploy create-deployment --application-name thenaturebeautyflowers --deployment-group-name thenaturebeautyflowers-staging --deployment-config-name CodeDeployDefault.AllAtOnce --s3-location bucket=thenaturebeautyflowers-build-artifacts,key=thenaturebeautyflowers-ProductionBuild.zip,bundleType=zip --ignore-application-stop-failures

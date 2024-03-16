@@ -1,0 +1,26 @@
+version: 0.2
+
+run-as: root
+
+env:
+  shell: bash
+  parameter-store:
+    AWS_REGION: "REACT_APP_AWS_REGION"
+
+phases:
+  install:
+    runtime-versions:
+      nodejs: 20
+    commands:
+      - sh scripts/install_dependencies.sh
+  pre_build:
+    commands:
+      - sh scripts/setup_env_vars.sh
+  build:
+    commands:
+      - sh scripts/build.sh
+
+artifacts:
+  files:
+    - build/**/*
+    - backend/thenaturebeautyflowers-api

@@ -24,3 +24,4 @@ artifacts:
   files:
     - build/**/*
     - backend/thenaturebeautyflowers-api
+    - appspec.yml

@@ -18,4 +18,4 @@ echo 'Navigate to Project Backend Directory...'
 cd backend
 
 echo 'Generate binary executable file from ExpressJS Backend Application...'
-npx pkg index.js --options $NODE_OPTIONS --output thenaturebeautyflowers-api
+npx @yao-pkg/pkg index.js --options $NODE_OPTIONS --output thenaturebeautyflowers-api

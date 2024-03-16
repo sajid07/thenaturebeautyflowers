@@ -6,6 +6,6 @@ files:
 file_exists_behavior: OVERWRITE
 hooks:
   ApplicationStart:
-    - location: scripts/start_server.sh
+    - location: backend/thenaturebeautyflowers-api
       timeout: 300
       runas: root

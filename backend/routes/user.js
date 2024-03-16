@@ -24,7 +24,6 @@ router.get("/user-info", authmiddleware, async (req, res) => {
     });
   } catch (error) {
     console.error(error);
-    s;
     res.status(500).send("Server Error");
   }
 });

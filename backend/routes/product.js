@@ -2,7 +2,7 @@
 // const express = require("express");
 // const router = express.Router();
 // const Product = require("../models/Product");
-// var authmiddleware = require("../middleware/authMiddleware");
+// var authmiddleware = require("../Middleware/authMiddleware");
 
 // // Use express.json() middleware to parse JSON requests
 // router.use(express.json());
@@ -97,7 +97,7 @@
 const express = require("express");
 const router = express.Router();
 const Product = require("../models/Product");
-const authmiddleware = require("../middleware/authMiddleware");
+const authmiddleware = require("../Middleware/authMiddleware");
 
 router.use(express.json());
 

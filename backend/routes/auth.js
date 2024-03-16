@@ -4,7 +4,7 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken"); // Import JWT
 const User = require("../models/User"); // Import your User model
 const { body, validationResult } = require("express-validator");
-var authmiddleware = require("../middleware/authMiddleware");
+var authmiddleware = require("../Middleware/authMiddleware");
 
 // Secret key for JWT (you should store this securely and not hardcode it)
 const JWT_SECRET = "your-secret-key";
@@ -50,13 +50,13 @@ router.post(
       };
       const authtoken = jwt.sign(data, JWT_SECRET);
 
-      success = true;
+      const success = true;
       res.json({ success, authtoken });
     } catch (error) {
       console.error(error.message);
       res.status(500).send("Internal Server Error");
     }
-  },
+  }
 );
 
 // ROUTE 2: Authenticate a User using: POST "/api/auth/login". No login required
@@ -85,12 +85,10 @@ router.post(
 
       const passwordCompare = await bcrypt.compare(password, user.password);
       if (!passwordCompare) {
-        return res
-          .status(400)
-          .json({
-            success,
-            error: "Please try to login with correct credentials",
-          });
+        return res.status(400).json({
+          success,
+          error: "Please try to login with correct credentials",
+        });
       }
 
       const data = {
@@ -110,7 +108,7 @@ router.post(
       console.error(error.message);
       res.status(500).send("Internal Server Error");
     }
-  },
+  }
 );
 router.post("/api/auth/createuser", (req, res) => {
   // Access request data from req.body
@@ -123,7 +121,7 @@ router.post("/api/auth/createuser", (req, res) => {
 // ROUTE 3: Get logged-in User Details using: POST "/api/auth/getuser". Login required
 router.post("/getuser", authmiddleware, async (req, res) => {
   try {
-    userId = req.user.id;
+    const userId = req.user.id;
     const user = await User.findById(userId).select("-password");
     res.send(user);
   } catch (error) {

@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const Project = require("../models/Projects");
-const authmiddleware = require("../middleware/authMiddleware");
+const authmiddleware = require("../Middleware/authMiddleware");
 
 router.use(express.json());
 
@@ -40,7 +40,7 @@ router.get("/fetchallprojects", async (req, res) => {
 router.get("/:projectId", async (req, res) => {
   try {
     const { projectId } = req.params;
-    const project = await projects.findById(projectId);
+    const project = await Project.findById(projectId);
 
     if (!project) {
       return res.status(404).json({ message: "project not found" });
@@ -57,13 +57,13 @@ router.get("/:projectId", async (req, res) => {
 router.delete("/:projectId", async (req, res) => {
   try {
     const { projectId } = req.params;
-    const project = await Product.findById(projectId);
+    const project = await Project.findById(projectId);
 
     if (!project) {
       return res.status(404).json({ message: "project not found" });
     }
 
-    await projects.deleteOne({ _id: projectId });
+    await Project.deleteOne({ _id: projectId });
 
     console.log("Project deleted successfully");
 

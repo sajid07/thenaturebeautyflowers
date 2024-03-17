@@ -1,8 +1,6 @@
 #!/bin/bash
-source /home/ubuntu/.bashrc
-
 echo 'Remove old Application Build artifacts...'
-rm -rf /home/ubuntu/thenaturebeautyflowers/{*,.*}
+rm -rf ~/thenaturebeautyflowers/{*,.*}
 
 echo 'Stop Running ExpressJS Backend Server Applications if any...'
 pm2 stop all

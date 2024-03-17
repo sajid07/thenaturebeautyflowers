@@ -17,5 +17,8 @@ echo 'Build and Package ExpressJS Backend...'
 echo 'Navigate to Project Backend Directory...'
 cd backend
 
+echo 'Output CommonJS bundle...'
+npx esbuild index.js --bundle --minify --outfile=build.cjs --format=cjs --platform=node
+
 echo 'Generate binary executable file from ExpressJS Backend Application...'
-npx @yao-pkg/pkg index.js --options $NODE_OPTIONS --output thenaturebeautyflowers-api
+npx @yao-pkg/pkg build.cjs --options $NODE_OPTIONS --output thenaturebeautyflowers-api

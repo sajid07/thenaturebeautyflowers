@@ -24,4 +24,6 @@ artifacts:
   files:
     - build/**/*
     - backend/thenaturebeautyflowers-api
+    - scripts/start_server.sh
+    - scripts/stop_server.sh
     - appspec.yml

@@ -7,8 +7,8 @@ export NVM_DIR="$HOME_DIR/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-# echo 'Remove old Application Build artifacts...' >> $LOG_FILE
-# rm -rf $SOURCE_DIR/* >> $LOG_FILE
+echo 'Remove old Application Build artifacts...' >> $LOG_FILE
+find $SOURCE_DIR -mindepth 1 -delete >> $LOG_FILE
 
 echo 'Stop Running ExpressJS Backend Server Applications if any...' >> $LOG_FILE
 pm2 stop --silent all >> $LOG_FILE

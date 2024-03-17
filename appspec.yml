@@ -5,7 +5,7 @@ files:
     destination: /home/ubuntu/thenaturebeautyflowers
 file_exists_behavior: OVERWRITE
 hooks:
-  ApplicationStop:
+  BeforeInstall:
     - location: scripts/stop_server.sh
       timeout: 300
       runas: root

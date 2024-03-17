@@ -1,3 +1,4 @@
 #!/bin/bash
 echo 'Start and Keep Running ExpressJS Backend Server Application in the Background...'
-nohup backend/thenaturebeautyflowers-api &
+cd backend
+pm2 start thenaturebeautyflowers-api -i max --watch

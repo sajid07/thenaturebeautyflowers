@@ -21,4 +21,4 @@ echo 'Output CommonJS bundle...'
 npm run build
 
 echo 'Generate binary executable file from ExpressJS Backend Application...'
-npx @yao-pkg/pkg build.cjs --options $NODE_OPTIONS --output thenaturebeautyflowers-api
+npx @yao-pkg/pkg --output thenaturebeautyflowers-api build.cjs

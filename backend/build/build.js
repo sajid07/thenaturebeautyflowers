@@ -7,7 +7,7 @@ function getNormalizedEnvVars() {
   var processEnv = process.env;
   const dotenvConfig = require("dotenv").config({
     override: true,
-    path: `../../.env.${process.env.REACT_APP_ENV || "local"}`,
+    path: `../.env.${process.env.REACT_APP_ENV || "local"}`,
   });
 
   if (dotenvConfig && dotenvConfig.parsed) {
@@ -24,18 +24,6 @@ function getNormalizedEnvVars() {
 
     envVars[`process.env.${k}`] = JSON.stringify(process.env[k]);
   }
-  console.log(
-    envVars,
-    dotenvConfig,
-    require("dotenv").config({
-      override: true,
-      path: `../../.env.${process.env.REACT_APP_ENV}`,
-    }),
-    require("dotenv").config({
-      override: true,
-      path: "../../.env.production",
-    })
-  );
 
   return envVars;
 }

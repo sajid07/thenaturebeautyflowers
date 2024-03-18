@@ -1,4 +1,5 @@
 const esbuild = require("esbuild");
+const findConfig = require("find-config");
 const createBuildSettings = require("./settings.js");
 
 function getNormalizedEnvVars() {
@@ -7,7 +8,7 @@ function getNormalizedEnvVars() {
   const processEnv = process.env;
   require("dotenv").config({
     override: true,
-    path: `../.env.${process.env.REACT_APP_ENV || "local"}`,
+    path: findConfig(`.env.${process.env.REACT_APP_ENV || "local"}`),
     processEnv: processEnv,
   });
 
@@ -23,6 +24,7 @@ function getNormalizedEnvVars() {
   }
 
   console.log(
+    findConfig(`.env.${process.env.REACT_APP_ENV || "local"}`),
     envVars,
     require("dotenv").config({
       override: true,

@@ -8,7 +8,7 @@ function getNormalizedEnvVars() {
   const processEnv = process.env;
   require("dotenv").config({
     override: true,
-    path: findConfig(`.env.${process.env.REACT_APP_ENV || "local"}`),
+    path: findConfig(".env.production"),
     processEnv: processEnv,
   });
 

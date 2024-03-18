@@ -15,4 +15,4 @@ find $SOURCE_DIR -mindepth 1 -delete
 echo 'Stop Running ExpressJS Backend Server Applications and remove logs if any...'
 pm2 stop all
 pm2 delete all
-pm2 flush thenaturebeautyflowers-api
+> /opt/thenaturebeautyflowers-api.log

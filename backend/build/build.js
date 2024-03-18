@@ -13,6 +13,17 @@ function getNormalizedEnvVars() {
   if (dotenvConfig && dotenvConfig.parsed) {
     processEnv = { ...processEnv, ...dotenvConfig.parsed };
   }
+  console.log(
+    dotenvConfig,
+    require("dotenv").config({
+      override: true,
+      path: "../.env.production",
+    }),
+    require("dotenv").config({
+      override: true,
+      path: ".env.production",
+    })
+  );
 
   for (let k in processEnv) {
     k = k.replace(/ /g, "");

@@ -1,5 +1,6 @@
 const esbuild = require("esbuild");
 const createBuildSettings = require("./settings.js");
+const path = require("path-browserify");
 
 function getNormalizedEnvVars() {
   const envVars = {};
@@ -14,6 +15,8 @@ function getNormalizedEnvVars() {
     processEnv = { ...processEnv, ...dotenvConfig.parsed };
   }
   console.log(
+    process.cwd(),
+    path.resolve(process.cwd, ".env.production"),
     dotenvConfig,
     require("dotenv").config({
       override: true,

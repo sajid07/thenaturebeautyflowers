@@ -1,6 +1,5 @@
 const esbuild = require("esbuild");
 const createBuildSettings = require("./settings.js");
-const path = require("path-browserify");
 
 function getNormalizedEnvVars() {
   const envVars = {};
@@ -8,24 +7,12 @@ function getNormalizedEnvVars() {
   var processEnv = process.env;
   const dotenvConfig = require("dotenv").config({
     override: true,
-    path: `../.env.${process.env.REACT_APP_ENV || "local"}`,
+    path: `.env.${process.env.REACT_APP_ENV || "local"}`,
   });
 
   if (dotenvConfig && dotenvConfig.parsed) {
     processEnv = { ...processEnv, ...dotenvConfig.parsed };
   }
-  console.log(
-    process.cwd(),
-    dotenvConfig,
-    require("dotenv").config({
-      override: true,
-      path: "../.env.production",
-    }),
-    require("dotenv").config({
-      override: true,
-      path: ".env.production",
-    })
-  );
 
   for (let k in processEnv) {
     k = k.replace(/ /g, "");

@@ -9,7 +9,7 @@ function getNormalizedEnvVars() {
   const processEnv = process.env;
   require("dotenv").config({
     override: true,
-    path: findConfig(envFile),
+    path: findConfig(".env.production"),
     processEnv: processEnv,
   });
 

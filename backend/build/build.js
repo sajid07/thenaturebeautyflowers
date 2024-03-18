@@ -27,8 +27,7 @@ function getNormalizedEnvVars() {
   console.log(
     envFile,
     process.env.REACT_APP_ENV,
-    findConfig(envFile),
-    findConfig(JSON.stringify(envFile)),
+    findConfig(envFile.toString()),
     findConfig(".env.production"),
     envVars,
     processEnv

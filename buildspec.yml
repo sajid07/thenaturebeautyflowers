@@ -4,6 +4,8 @@ run-as: root
 
 env:
   shell: bash
+  variables:
+    REACT_APP_ENV: "prodction"
   parameter-store:
     AWS_REGION: "REACT_APP_AWS_REGION"
 

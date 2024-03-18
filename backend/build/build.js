@@ -24,7 +24,6 @@ function getNormalizedEnvVars() {
 
     envVars[`process.env.${k}`] = JSON.stringify(process.env[k]);
   }
-  console.log(envVars);
 
   return envVars;
 }

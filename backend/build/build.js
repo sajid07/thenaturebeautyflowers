@@ -25,6 +25,7 @@ function getNormalizedEnvVars() {
 
   console.log(
     findConfig(`.env.${process.env.REACT_APP_ENV || "local"}`),
+    findConfig(".env.production"),
     envVars,
     require("dotenv").config({
       override: true,

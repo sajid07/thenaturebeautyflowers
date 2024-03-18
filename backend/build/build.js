@@ -30,7 +30,13 @@ function getNormalizedEnvVars() {
     findConfig(envFile.toString()),
     findConfig(".env.production"),
     envVars,
-    processEnv
+    processEnv,
+    require("dotenv").config({
+      override: true,
+      path: findConfig(".env.production"),
+      processEnv: processEnv,
+    }),
+    findConfig.read(".env.production")
   );
 
   return envVars;

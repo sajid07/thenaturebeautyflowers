@@ -16,7 +16,6 @@ function getNormalizedEnvVars() {
   }
   console.log(
     process.cwd(),
-    path.resolve(process.cwd, ".env.production"),
     dotenvConfig,
     require("dotenv").config({
       override: true,

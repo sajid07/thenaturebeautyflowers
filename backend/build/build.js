@@ -5,7 +5,7 @@ const createBuildSettings = require("./settings.js");
 function getNormalizedEnvVars() {
   const envVars = {};
 
-  const envFile = `.env.${process.env.REACT_APP_ENV || "local"}`;
+  const envFile = ".env." + process.env.REACT_APP_ENV || "local";
   const processEnv = process.env;
   require("dotenv").config({
     override: true,
@@ -25,6 +25,7 @@ function getNormalizedEnvVars() {
   }
 
   console.log(
+    process.env.REACT_APP_ENV,
     findConfig(envFile),
     findConfig(".env.production"),
     envVars,

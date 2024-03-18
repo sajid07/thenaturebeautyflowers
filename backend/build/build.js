@@ -4,28 +4,12 @@ const createBuildSettings = require("./settings.js");
 function getNormalizedEnvVars() {
   const envVars = {};
 
-  var processEnv = process.env;
-  const dotenvConfig = require("dotenv").config({
-    silent: true,
+  const processEnv = process.env;
+  require("dotenv").config({
     override: true,
     path: `../.env.${process.env.REACT_APP_ENV || "local"}`,
+    processEnv: processEnv,
   });
-
-  if (dotenvConfig && dotenvConfig.parsed) {
-    processEnv = { ...processEnv, ...dotenvConfig.parsed };
-  }
-  console.log(
-    process.cwd(),
-    dotenvConfig,
-    require("dotenv").config({
-      override: true,
-      path: "../.env.production",
-    }),
-    require("dotenv").config({
-      override: true,
-      path: __dirname + ".env.production",
-    })
-  );
 
   for (let k in processEnv) {
     k = k.replace(/ /g, "");

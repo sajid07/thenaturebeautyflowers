@@ -1,7 +1,6 @@
 import React, { useContext, useState } from "react";
 import productContext from "../../context/products/productContext";
 import NavBar from "../Admin/Navbar";
-import { Link } from "react-router-dom";
 import SideNavbar from "./SideNavbar";
 
 const ProductForm = (props) => {

@@ -98,14 +98,16 @@ const express = require("express");
 const router = express.Router();
 const Product = require("../models/Product");
 const authmiddleware = require("../Middleware/authMiddleware");
+const {
+  awsS3UploadMiddleware,
+  awsS3DeleteMiddleware,
+} = require("../Middleware/awsS3Middleware");
 
 router.use(express.json());
 
 // Add new product using: POST "/api/product" Auth required
-router.post("/", authmiddleware, async (req, res) => {
+router.post("/", authmiddleware, awsS3UploadMiddleware, async (req, res) => {
   try {
-    console.log(req.body);
-
     // Create a new instance of the Product model
     const newProduct = new Product(req.body);
 
@@ -149,25 +151,30 @@ router.get("/:productId", async (req, res) => {
 });
 
 // Delete a product by ID
-router.delete("/:productId", authmiddleware, async (req, res) => {
-  try {
-    const { productId } = req.params;
-    const product = await Product.findById(productId);
+router.delete(
+  "/:productId",
+  authmiddleware,
+  awsS3DeleteMiddleware,
+  async (req, res) => {
+    try {
+      const { productId } = req.params;
+      const product = await Product.findById(productId);
 
-    if (!product) {
-      return res.status(404).json({ message: "Product not found" });
+      if (!product) {
+        return res.status(404).json({ message: "Product not found" });
+      }
+
+      await product.deleteOne({ _id: productId });
+
+      console.log("Product deleted successfully");
+
+      res.json({ message: "Product deleted successfully" });
+    } catch (error) {
+      console.error("Error deleting product:", error);
+      res.status(500).json({ message: "Internal Server Error" });
     }
-
-    await product.deleteOne({ _id: productId });
-
-    console.log("Product deleted successfully");
-
-    res.json({ message: "Product deleted successfully" });
-  } catch (error) {
-    console.error("Error deleting product:", error);
-    res.status(500).json({ message: "Internal Server Error" });
   }
-});
+);
 
 // Update a product by ID
 router.put("/:productId", authmiddleware, async (req, res) => {

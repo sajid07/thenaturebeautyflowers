@@ -1,12 +1,16 @@
 const express = require("express");
 const router = express.Router();
-const Project = require("../models/Projects");
+const Project = require("../models/Project");
 const authmiddleware = require("../Middleware/authMiddleware");
+const {
+  awsS3UploadMiddleware,
+  awsS3DeleteMiddleware,
+} = require("../Middleware/awsS3Middleware");
 
 router.use(express.json());
 
 // Add new product using: POST "/api/product" Auth required
-router.post("/", authmiddleware, async (req, res) => {
+router.post("/", authmiddleware, awsS3UploadMiddleware, async (req, res) => {
   try {
     console.log(req.body);
 
@@ -54,42 +58,52 @@ router.get("/:projectId", async (req, res) => {
 });
 
 // Delete a product by ID
-router.delete("/:projectId", authmiddleware, async (req, res) => {
-  try {
+router.delete(
+  "/:projectId",
+  authmiddleware,
+  awsS3DeleteMiddleware,
+  async (req, res) => {
+    try {
+      const { projectId } = req.params;
+      const project = await Project.findById(projectId);
+
+      if (!project) {
+        return res.status(404).json({ message: "project not found" });
+      }
+
+      await Project.deleteOne({ _id: projectId });
+
+      console.log("Project deleted successfully");
+
+      res.json({ message: "Project deleted successfully" });
+    } catch (error) {
+      console.error("Error deleting product:", error);
+      res.status(500).json({ message: "Internal Server Error" });
+    }
+  }
+);
+
+router.delete(
+  "/projects/:projectId",
+  authmiddleware,
+  awsS3DeleteMiddleware,
+  async (req, res) => {
     const { projectId } = req.params;
-    const project = await Project.findById(projectId);
 
-    if (!project) {
-      return res.status(404).json({ message: "project not found" });
+    try {
+      const deletedProject = await Project.findByIdAndDelete(projectId);
+
+      if (!deletedProject) {
+        return res.status(404).json({ error: "Project not found" });
+      }
+
+      res.json({ message: "Project deleted successfully" });
+    } catch (error) {
+      console.error("Error deleting project:", error);
+      res.status(500).json({ error: "Internal Server Error" });
     }
-
-    await Project.deleteOne({ _id: projectId });
-
-    console.log("Project deleted successfully");
-
-    res.json({ message: "Project deleted successfully" });
-  } catch (error) {
-    console.error("Error deleting product:", error);
-    res.status(500).json({ message: "Internal Server Error" });
   }
-});
-
-router.delete("/projects/:projectId", authmiddleware, async (req, res) => {
-  const { projectId } = req.params;
-  console.log("hi from delete section");
-  try {
-    const deletedProject = await Project.findByIdAndDelete(projectId);
-
-    if (!deletedProject) {
-      return res.status(404).json({ error: "Project not found" });
-    }
-
-    res.json({ message: "Project deleted successfully" });
-  } catch (error) {
-    console.error("Error deleting project:", error);
-    res.status(500).json({ error: "Internal Server Error" });
-  }
-});
+);
 
 // Update a product by ID
 // router.put('/:productId', authmiddleware, async (req, res) => {

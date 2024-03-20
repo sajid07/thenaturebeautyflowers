@@ -17,11 +17,12 @@ const ProductForm = (props) => {
   });
   const [loading, setLoading] = useState(false); // Add loading state
 
-  const handleClick = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true); // Set loading to true when submitting form
     try {
       // Pass the entire product object to the addProduct function
+      const product = new FormData(e.currentTarget);
       await addProduct(product);
       setProduct({
         name: "",
@@ -55,7 +56,12 @@ const ProductForm = (props) => {
           <h2 style={{ color: "#3498db" }} className="mt-5">
             Add a Product
           </h2>
-          <form className=" my-3" encType="multipart/form-data">
+          <form
+            className=" my-3"
+            encType="multipart/form-data"
+            method="post"
+            onSubmit={handleSubmit}
+          >
             <div className="mb-3">
               <h5
                 htmlFor="name"
@@ -169,7 +175,6 @@ const ProductForm = (props) => {
               }
               type="submit"
               className="btn btn-primary"
-              onClick={handleClick}
             >
               {loading ? "Adding Product..." : "Add Product"}
             </button>

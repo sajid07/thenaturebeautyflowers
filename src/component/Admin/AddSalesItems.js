@@ -16,10 +16,10 @@ const AddSalesItems = () => {
     pdfFile: "",
   });
 
-  const handleClick = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     // Pass the entire product object to the addProduct function
-    addProduct(product);
+    addProduct(new FormData(e.currentTarget));
     setProduct({
       name: "",
       description: "",
@@ -45,7 +45,12 @@ const AddSalesItems = () => {
         <h1 class="mt-4">Dashboard</h1>
         <div className="container my-3">
           <h2>Add Sales Product</h2>
-          <form className="my-3" encType="multipart/form-data">
+          <form
+            className="my-3"
+            encType="multipart/form-data"
+            method="post"
+            onSubmit={handleSubmit}
+          >
             <div className="mb-3">
               <label htmlFor="name" className="form-label">
                 Name
@@ -110,7 +115,6 @@ const AddSalesItems = () => {
               }
               type="submit"
               className="btn btn-primary"
-              onClick={handleClick}
             >
               Add Product
             </button>

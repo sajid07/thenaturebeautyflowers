@@ -1,5 +1,5 @@
 var jwt = require("jsonwebtoken");
-const JWT_SECRET = "your-secret-key";
+const JWT_SECRET = process.env.REACT_APP_AWS_SECRET_ACCESS_KEY;
 
 const authmiddleware = (req, res, next) => {
   // Get the user from the jwt token and add id to req object

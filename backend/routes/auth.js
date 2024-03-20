@@ -7,7 +7,7 @@ const { body, validationResult } = require("express-validator");
 var authmiddleware = require("../Middleware/authMiddleware");
 
 // Secret key for JWT (you should store this securely and not hardcode it)
-const JWT_SECRET = "your-secret-key";
+const JWT_SECRET = process.env.REACT_APP_AWS_SECRET_ACCESS_KEY;
 
 // Route to create a new user with hashed password
 // ROUTE 1: Create a User using: POST "/api/auth/createuser". No login required
@@ -110,14 +110,7 @@ router.post(
     }
   }
 );
-router.post("/api/auth/createuser", (req, res) => {
-  // Access request data from req.body
-  const { name, email, password } = req.body;
 
-  // Perform registration logic (e.g., saving the user to a database)
-  // Return a response to the client
-  res.status(200).json({ message: "Registration successful" });
-});
 // ROUTE 3: Get logged-in User Details using: POST "/api/auth/getuser". Login required
 router.post("/getuser", authmiddleware, async (req, res) => {
   try {

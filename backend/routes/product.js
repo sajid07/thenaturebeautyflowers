@@ -149,7 +149,7 @@ router.get("/:productId", async (req, res) => {
 });
 
 // Delete a product by ID
-router.delete("/:productId", async (req, res) => {
+router.delete("/:productId", authmiddleware, async (req, res) => {
   try {
     const { productId } = req.params;
     const product = await Product.findById(productId);

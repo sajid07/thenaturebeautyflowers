@@ -3,6 +3,7 @@
 const express = require("express");
 const router = express.Router();
 const Link = require("../models/linkModel");
+var authmiddleware = require("../Middleware/authMiddleware");
 
 // Fetch links
 router.get("/links", async (req, res) => {
@@ -15,8 +16,7 @@ router.get("/links", async (req, res) => {
 });
 
 // Update links
-// Update links
-router.put("/Update-links", async (req, res) => {
+router.put("/Update-links", authmiddleware, async (req, res) => {
   console.log("PUT request received at /api/socialLink/Update-links");
 
   try {

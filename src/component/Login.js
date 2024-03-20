@@ -1,3 +1,4 @@
+import axios from "axios";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Footer from "./Footer";
@@ -5,26 +6,22 @@ import Footer from "./Footer";
 export const Login = (props) => {
   const [credential, setCredential] = useState({ email: "", password: "" });
   const navigate = useNavigate();
+  const host = process.env.REACT_APP_BASE_URI;
+  const api = axios.create({
+    baseURL: host,
+  });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const response = await fetch(
+    const response = await api.post(
       `${process.env.REACT_APP_BASE_URI}/api/auth/login`,
       {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "auth-token": process.env.REACT_APP_AUTH_TOKEN,
-        },
-
-        body: JSON.stringify({
-          email: credential.email,
-          password: credential.password,
-        }),
-      },
+        email: credential.email,
+        password: credential.password,
+      }
     );
 
-    const json = await response.json();
+    const json = await response.data;
     console.log(json);
 
     if (json.success) {

@@ -1,14 +1,7 @@
 import React from "react";
-import { Link, useLocation } from "react-router-dom";
-import ProductList from "../ProductList";
-import WhatsAppUpdateButton from "../WhatsAppUpdateButton";
+import { Link } from "react-router-dom";
 
-const SideNavbar = () => {
-  const location = useLocation();
-
-  // Check if the current route is "/UpdateContact"
-  const isUpdateContactPage = location.pathname === "/UpdateContact";
-
+const SideNavbar = ({ children }) => {
   return (
     <>
       <div id="layoutSidenav">
@@ -20,7 +13,7 @@ const SideNavbar = () => {
             <div class="sb-sidenav-menu">
               <div class="nav">
                 <div class="sb-sidenav-menu-heading">Core</div>
-                <Link class="nav-link" to="/Dashboard">
+                <Link className="nav-link" to="/Dashboard">
                   <div class="sb-nav-link-icon">
                     <i class="fas fa-tachometer-alt"></i>
                   </div>
@@ -28,7 +21,7 @@ const SideNavbar = () => {
                 </Link>
                 <div class="sb-sidenav-menu-heading">Products</div>
                 <Link
-                  class="nav-link collapsed"
+                  className="nav-link collapsed"
                   to="/ProductForm"
                   data-bs-toggle="collapse"
                   data-bs-target="#collapseLayouts"
@@ -36,16 +29,13 @@ const SideNavbar = () => {
                   aria-controls="collapseLayouts"
                 >
                   <div class="sb-nav-link-icon">
-                    <i class="fas fa-columns"></i>
+                    <i class="fas fa-plus"></i>
                   </div>
                   Add Products
-                  <div class="sb-sidenav-collapse-arrow">
-                    <i class="fas fa-angle-down"></i>
-                  </div>
                 </Link>
 
                 <Link
-                  class="nav-link collapsed"
+                  className="nav-link collapsed"
                   to="/UpdateContact"
                   data-bs-toggle="collapse"
                   data-bs-target="#collapsePages"
@@ -56,21 +46,18 @@ const SideNavbar = () => {
                     <i class="fas fa-book-open"></i>
                   </div>
                   Update Contacts
-                  <div class="sb-sidenav-collapse-arrow">
-                    <i class="fas fa-angle-down"></i>
-                  </div>
                 </Link>
 
                 <div class="sb-sidenav-menu-heading">Projects</div>
                 <Link class="nav-link" to="/socialLinks">
                   <div class="sb-nav-link-icon">
-                    <i class="fas fa-chart-area"></i>
+                    <i class="fas fa-users"></i>
                   </div>
                   Add New Social Link
                 </Link>
                 <Link class="nav-link" to="/addProject">
                   <div class="sb-nav-link-icon">
-                    <i class="fas fa-chart-area"></i>
+                    <i class="fas fa-briefcase"></i>
                   </div>
                   Add New Project
                 </Link>
@@ -80,11 +67,7 @@ const SideNavbar = () => {
         </div>
         <div id="layoutSidenav_content">
           <main>
-            <div class="container-fluid px-4">
-              {/* <ProductList/> */}
-
-              {isUpdateContactPage ? <WhatsAppUpdateButton /> : <ProductList />}
-            </div>
+            <div class="container-fluid px-4">{children}</div>
           </main>
         </div>
       </div>

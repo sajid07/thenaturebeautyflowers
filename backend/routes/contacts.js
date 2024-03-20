@@ -2,6 +2,7 @@
 const express = require("express");
 const router = express.Router();
 const WhatsAppContact = require("../models/WhatsAppContact");
+var authmiddleware = require("../Middleware/authMiddleware");
 
 // Get both call and WhatsApp contacts
 router.get("/contacts", async (req, res) => {
@@ -14,12 +15,12 @@ router.get("/contacts", async (req, res) => {
 });
 
 // Update both call and WhatsApp contacts
-router.put("/update-contacts", async (req, res) => {
+router.put("/update-contacts", authmiddleware, async (req, res) => {
   try {
     const updatedContacts = await WhatsAppContact.findOneAndUpdate(
       {},
       req.body,
-      { new: true, upsert: true },
+      { new: true, upsert: true }
     );
     res.json(updatedContacts);
   } catch (error) {

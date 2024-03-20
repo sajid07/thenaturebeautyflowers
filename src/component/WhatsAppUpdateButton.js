@@ -1,8 +1,8 @@
 import React, { useState, useContext } from "react";
 import axios from "axios";
 import productContext from "../context/products/productContext";
+import SideNavbar from "./Admin/SideNavbar";
 
-import { Link } from "react-router-dom";
 const WhatsAppUpdateButton = ({ onUpdate }) => {
   const [newWhatsAppContact, setNewWhatsAppContact] = useState("");
   const [newCallContact, setNewCallContact] = useState("");
@@ -12,6 +12,10 @@ const WhatsAppUpdateButton = ({ onUpdate }) => {
   const { updateContacts } = context || {};
   const api = axios.create({
     baseURL: host,
+    headers: {
+      "Content-Type": "application/json",
+      "auth-token": localStorage.getItem("token"),
+    },
   });
 
   const handleUpdateContacts = async (e) => {
@@ -48,101 +52,29 @@ const WhatsAppUpdateButton = ({ onUpdate }) => {
 
   return (
     <>
-      <div id="layoutSidenav">
-        <div id="layoutSidenav_nav">
-          <nav
-            class="sb-sidenav accordion sb-sidenav-dark"
-            id="sidenavAccordion"
-          >
-            <div class="sb-sidenav-menu">
-              <div class="nav">
-                <div class="sb-sidenav-menu-heading">Core</div>
-                <Link class="nav-link" to="/Dashboard">
-                  <div class="sb-nav-link-icon">
-                    <i class="fas fa-tachometer-alt"></i>
-                  </div>
-                  Dashboard
-                </Link>
-                <div class="sb-sidenav-menu-heading">Products</div>
-                <Link
-                  class="nav-link collapsed"
-                  to="/ProductForm"
-                  data-bs-toggle="collapse"
-                  data-bs-target="#collapseLayouts"
-                  aria-expanded="false"
-                  aria-controls="collapseLayouts"
-                >
-                  <div class="sb-nav-link-icon">
-                    <i class="fas fa-columns"></i>
-                  </div>
-                  Add Products
-                  <div class="sb-sidenav-collapse-arrow">
-                    <i class="fas fa-angle-down"></i>
-                  </div>
-                </Link>
+      <SideNavbar>
+        <div style={formContainerStyle}>
+          <label style={labelStyle}>New WhatsApp Contact:</label>
+          <input
+            type="text"
+            value={newWhatsAppContact}
+            onChange={(e) => setNewWhatsAppContact(e.target.value)}
+            style={inputStyle}
+          />
 
-                <Link
-                  class="nav-link collapsed"
-                  to="/UpdateContact"
-                  data-bs-toggle="collapse"
-                  data-bs-target="#collapsePages"
-                  aria-expanded="false"
-                  aria-controls="collapsePages"
-                >
-                  <div class="sb-nav-link-icon">
-                    <i class="fas fa-book-open"></i>
-                  </div>
-                  Update Contacts
-                  <div class="sb-sidenav-collapse-arrow">
-                    <i class="fas fa-angle-down"></i>
-                  </div>
-                </Link>
+          <label style={labelStyle}>New Call Contact:</label>
+          <input
+            type="text"
+            value={newCallContact}
+            onChange={(e) => setNewCallContact(e.target.value)}
+            style={inputStyle}
+          />
 
-                <div class="sb-sidenav-menu-heading">Projects</div>
-                <Link class="nav-link" to="/socialLinks">
-                  <div class="sb-nav-link-icon">
-                    <i class="fas fa-chart-area"></i>
-                  </div>
-                  Add New Social Link
-                </Link>
-                <Link class="nav-link" to="/addProject">
-                  <div class="sb-nav-link-icon">
-                    <i class="fas fa-chart-area"></i>
-                  </div>
-                  Add New Project
-                </Link>
-              </div>
-            </div>
-          </nav>
+          <button onClick={handleUpdateContacts} style={buttonStyle}>
+            Update Contacts
+          </button>
         </div>
-        <div id="layoutSidenav_content">
-          <main>
-            <div class="container-fluid px-4">
-              <div style={formContainerStyle}>
-                <label style={labelStyle}>New WhatsApp Contact:</label>
-                <input
-                  type="text"
-                  value={newWhatsAppContact}
-                  onChange={(e) => setNewWhatsAppContact(e.target.value)}
-                  style={inputStyle}
-                />
-
-                <label style={labelStyle}>New Call Contact:</label>
-                <input
-                  type="text"
-                  value={newCallContact}
-                  onChange={(e) => setNewCallContact(e.target.value)}
-                  style={inputStyle}
-                />
-
-                <button onClick={handleUpdateContacts} style={buttonStyle}>
-                  Update Contacts
-                </button>
-              </div>
-            </div>
-          </main>
-        </div>
-      </div>
+      </SideNavbar>
     </>
   );
 };

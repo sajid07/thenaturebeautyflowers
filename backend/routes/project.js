@@ -54,7 +54,7 @@ router.get("/:projectId", async (req, res) => {
 });
 
 // Delete a product by ID
-router.delete("/:projectId", async (req, res) => {
+router.delete("/:projectId", authmiddleware, async (req, res) => {
   try {
     const { projectId } = req.params;
     const project = await Project.findById(projectId);
@@ -73,7 +73,8 @@ router.delete("/:projectId", async (req, res) => {
     res.status(500).json({ message: "Internal Server Error" });
   }
 });
-router.delete("/projects/:projectId", async (req, res) => {
+
+router.delete("/projects/:projectId", authmiddleware, async (req, res) => {
   const { projectId } = req.params;
   console.log("hi from delete section");
   try {

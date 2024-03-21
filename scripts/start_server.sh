@@ -1,7 +1,9 @@
 #!/bin/bash
+source ~/.profile
+
 # Redirect all output to log file
-exec 1>>/opt/thenaturebeautyflowers-deploy.log
-exec 2>&1
+sudo exec 1>>/opt/thenaturebeautyflowers-deploy.log
+sudo exec 2>&1
 
 SOURCE_DIR=~/thenaturebeautyflowers
 export NVM_DIR="~/.nvm"

@@ -19,7 +19,7 @@ const AddSalesItems = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     // Pass the entire product object to the addProduct function
-    addProduct(new FormData(e.currentTarget));
+    await addProduct(new FormData(e.currentTarget));
     setProduct({
       name: "",
       description: "",

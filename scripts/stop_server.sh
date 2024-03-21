@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Redirect all output to log file
-exec 1>>~/thenaturebeautyflowers-deploy.log
+exec 1>~/thenaturebeautyflowers-deploy.log
 exec 2>&1
 
 SOURCE_DIR=~/thenaturebeautyflowers

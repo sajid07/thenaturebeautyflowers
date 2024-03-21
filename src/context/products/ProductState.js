@@ -7,7 +7,7 @@ const ProductState = (props) => {
   const productInitial = []; // or fetch it from the server
   const [products, setProducts] = useState(productInitial);
 
-  const [__, setProduct] = useState(null); // Add this line
+  const [_, setProduct] = useState(null); // Add this line
 
   // add product
   const addProduct = async (product) => {

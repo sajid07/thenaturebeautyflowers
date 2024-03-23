@@ -96,14 +96,14 @@ const awsS3UploadMiddleware = async (req, res, next) => {
   // handle files
   busboy.on("file", async (fieldname, file, info) => {
     const isPic = fieldname === "picture";
+    const timestamp = Date.now();
     const fileKey = `pool/${
-      isPic 
-      // && req.url.includes("project")
+      isPic && req.originalUrl.includes("project")
         ? "projects"
         : isPic
         ? "images"
         : "pdf"
-    }/${info.filename}`;
+    }/${timestamp}_${info.filename}`;
 
     try {
       pendingUploads.push(
@@ -139,7 +139,7 @@ const awsS3DeleteMiddleware = async (req, res, next) => {
     var itemToDelete = null;
     const s3FileKeysToDelete = [];
 
-    if (req.url.includes("project")) {
+    if (req.originalUrl.includes("project")) {
       itemToDelete = await Projects.findById(req.params.projectId);
     } else {
       itemToDelete = await Products.findById(req.params.productId);

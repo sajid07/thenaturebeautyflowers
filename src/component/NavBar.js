@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 
 const NavBar = () => {
   return (
-    <div className="container-fluid nav-bar bg-transparent">
+    <div className="container-fluid nav-bar bg-transparent top-header">
       <Navbar expand="lg" bg="white" variant="light" className="py-0 px-4">
         <Navbar.Brand
           href="/"

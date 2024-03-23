@@ -97,7 +97,8 @@ const awsS3UploadMiddleware = async (req, res, next) => {
   busboy.on("file", async (fieldname, file, info) => {
     const isPic = fieldname === "picture";
     const fileKey = `pool/${
-      isPic && req.url.includes("project")
+      isPic 
+      // && req.url.includes("project")
         ? "projects"
         : isPic
         ? "images"

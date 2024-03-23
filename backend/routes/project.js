@@ -105,31 +105,4 @@ router.delete(
   }
 );
 
-// Update a product by ID
-// router.put('/:productId', authmiddleware, async (req, res) => {
-//   try {
-//     const { productId } = req.params;
-//     const { name, description, category } = req.body;
-
-//     const product = await Product.findById(productId);
-
-//     if (!product) {
-//       return res.status(404).json({ message: 'Product not found' });
-//     }
-
-//     product.name = name;
-//     product.description = description;
-//     product.category = category;
-
-//     await product.save();
-
-//     console.log('Product updated successfully');
-
-//     res.json({ message: 'Product updated successfully' });
-//   } catch (error) {
-//     console.error('Error updating product:', error);
-//     res.status(500).json({ message: 'Internal Server Error' });
-//   }
-// });
-
 module.exports = router;

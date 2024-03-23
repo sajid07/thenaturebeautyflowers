@@ -125,6 +125,7 @@ const ProductState = (props) => {
           "auth-token": localStorage.getItem("token"),
         },
       });
+      alert("Project deleted successfully");
 
       console.log("Project deleted successfully");
     } catch (error) {

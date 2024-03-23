@@ -29,6 +29,8 @@ const ProjectList = () => {
   const handleDelete = async (projectId) => {
     try {
       await deleteProject(projectId);
+      // Remove the deleted project from the projects state
+      setProjects(projects.filter(project => project._id !== projectId));
     } catch (error) {
       console.error("Error deleting project:", error);
     }

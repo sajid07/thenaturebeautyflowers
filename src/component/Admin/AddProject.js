@@ -84,7 +84,7 @@ const AddProject = () => {
               <label htmlFor="picture" className="form-label">
                 Picture
               </label>
-              <input type="file" name="picture" onChange={onChange} />
+              <input type="file" name="picture" onChange={onChange} required/>
             </div>
 
             <button

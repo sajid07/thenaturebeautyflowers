@@ -2,6 +2,7 @@ import React, { useState, useContext } from "react";
 import axios from "axios";
 import productContext from "../context/products/productContext";
 import SideNavbar from "./Admin/SideNavbar";
+import NavBar from "./Admin/Navbar";
 
 const WhatsAppUpdateButton = ({ onUpdate }) => {
   const [newWhatsAppContact, setNewWhatsAppContact] = useState("");
@@ -52,6 +53,7 @@ const WhatsAppUpdateButton = ({ onUpdate }) => {
 
   return (
     <>
+     <NavBar></NavBar>
       <SideNavbar>
         <div style={formContainerStyle}>
           <label style={labelStyle}>New WhatsApp Contact:</label>

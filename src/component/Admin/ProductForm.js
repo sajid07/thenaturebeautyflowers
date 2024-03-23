@@ -41,12 +41,25 @@ const ProductForm = (props) => {
   const onChange = (e) => {
     if (e.target.name === "picture" || e.target.name === "pdfFile") {
       // Handle file inputs
-      setProduct({ ...product, [e.target.name]: e.target.files[0] });
+      const file = e.target.files[0];
+      if (file) {
+        // Check if file size exceeds 100 MB
+        if (file.size > 100 * 1024 * 1024) {
+          // File size exceeds the maximum allowed size (100 MB)
+          alert("Maximum file size allowed is 100 MB");
+          // Clear the input field
+          e.target.value = "";
+        } else {
+          // File size is within the allowed limit, update the state
+          setProduct({ ...product, [e.target.name]: file });
+        }
+      }
     } else {
       // Handle text inputs
       setProduct({ ...product, [e.target.name]: e.target.value });
     }
   };
+  
   return (
     <>
       <NavBar />
@@ -120,7 +133,6 @@ const ProductForm = (props) => {
                   Select a Category
                 </option>
                 <option value="filtration">Filtration</option>
-                <option value="filtration">Filtration</option>
                 <option value="pool pump">Pool Pump</option>
                 <option value="pool light">Pool Light</option>
                 <option value="pool fitting">Pool Fitting</option>
@@ -164,7 +176,7 @@ const ProductForm = (props) => {
               >
                 PDF File
               </h5>
-              <input type="file" name="pdfFile" onChange={onChange} />
+              <input type="file" name="pdfFile" accept=".pdf" onChange={onChange} />
             </div>
             <button
               disabled={

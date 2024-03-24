@@ -1,8 +1,9 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import productContext from "../../context/products/productContext";
 import NavBar from "../Admin/Navbar";
 import ProjectList from "./ProjectList";
 import SideNavbar from "./SideNavbar";
+import { useNavigate } from "react-router-dom";
 
 const AddProject = () => {
   const context = useContext(productContext);
@@ -14,6 +15,26 @@ const AddProject = () => {
     description: "",
     picture: "",
   });
+  const navigate = useNavigate();
+  const [loggedIn, setLoggedIn] = useState(true); // Assume the user is logged in initially
+
+  useEffect(() => {
+    // Check if user is logged in
+    const checkLoggedIn = () => {
+      const token = localStorage.getItem("token");
+      if (!token) {
+        // If token doesn't exist, user is not logged in
+        setLoggedIn(false);
+      }
+    };
+
+    checkLoggedIn();
+  }, []);
+
+  if (!loggedIn) {
+    // If user is not logged in, redirect to login page
+    navigate("/login");
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -84,7 +105,7 @@ const AddProject = () => {
               <label htmlFor="picture" className="form-label">
                 Picture
               </label>
-              <input type="file" name="picture" onChange={onChange} required/>
+              <input type="file" name="picture" onChange={onChange} required />
             </div>
 
             <button

@@ -1,7 +1,8 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import productContext from "../../context/products/productContext";
 import NavBar from "../Admin/Navbar";
 import SideNavbar from "./SideNavbar";
+import { useNavigate } from "react-router-dom";
 
 const ProductForm = (props) => {
   const context = useContext(productContext);
@@ -15,6 +16,26 @@ const ProductForm = (props) => {
     pdfFile: "",
   });
   const [loading, setLoading] = useState(false); // Add loading state
+  const [loggedIn, setLoggedIn] = useState(true); // Assume the user is logged in initially
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    // Check if user is logged in
+    const checkLoggedIn = () => {
+      const token = localStorage.getItem("token");
+      if (!token) {
+        // If token doesn't exist, user is not logged in
+        setLoggedIn(false);
+      }
+    };
+
+    checkLoggedIn();
+  }, []);
+
+  if (!loggedIn) {
+    // If user is not logged in, redirect to login page
+    navigate("/login");
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -59,7 +80,7 @@ const ProductForm = (props) => {
       setProduct({ ...product, [e.target.name]: e.target.value });
     }
   };
-  
+
   return (
     <>
       <NavBar />
@@ -176,7 +197,12 @@ const ProductForm = (props) => {
               >
                 PDF File
               </h5>
-              <input type="file" name="pdfFile" accept=".pdf" onChange={onChange} />
+              <input
+                type="file"
+                name="pdfFile"
+                accept=".pdf"
+                onChange={onChange}
+              />
             </div>
             <button
               disabled={

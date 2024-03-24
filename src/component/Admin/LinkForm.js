@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import NavBar from "../Admin/Navbar";
 import SideNavbar from "./SideNavbar";
+import { useNavigate } from "react-router-dom";
 
 const LinkForm = () => {
   const [socialLinks, setSocialLinks] = useState({
@@ -11,6 +12,26 @@ const LinkForm = () => {
     twitter: "",
     googleMap: "",
   });
+  const [loggedIn, setLoggedIn] = useState(true); // Assume the user is logged in initially
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    // Check if user is logged in
+    const checkLoggedIn = () => {
+      const token = localStorage.getItem("token");
+      if (!token) {
+        // If token doesn't exist, user is not logged in
+        setLoggedIn(false);
+      }
+    };
+
+    checkLoggedIn();
+  }, []);
+
+  if (!loggedIn) {
+    // If user is not logged in, redirect to login page
+    navigate("/login");
+  }
 
   const host = process.env.REACT_APP_BASE_URI;
 

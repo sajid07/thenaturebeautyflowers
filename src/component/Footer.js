@@ -90,7 +90,7 @@ const Footer = () => {
                 </a>
               </div>
             </div>
-            <div className="col-lg-3 col-md-6">
+            <div className="col-lg-3 col-md-6 ms-auto">
               <h5 className="text-white mb-4">Quick Links</h5>
               <a className="btn btn-link text-white-50" href="/contactUs">
                 Contact Us

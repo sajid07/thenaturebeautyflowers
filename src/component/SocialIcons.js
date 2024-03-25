@@ -30,60 +30,23 @@ const SocialIcons = () => {
     fetchData();
   }, []);
   // eslint-disable-next-line
-  {
-    console.log(socialLinks);
-  }
+
   return (
-    <div
-      style={{
-        position: "fixed",
-        top: "60%",
-        right: "20px",
-        transform: "translateY(-50%)",
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        backgroundColor: "#fff",
-        padding: "10px",
-        borderRadius: "5px",
-        boxShadow: "0 0 10px rgba(0, 0, 0, 0.1)",
-        zIndex: 1000,
-      }}
-    >
+    <div className="pool-social-links">
       <a href={socialLinks.youtube} target="_blank" rel="noopener noreferrer">
-        <img
-          src="img/social/y.png"
-          alt="YouTube"
-          style={{ width: "40px", margin: "0 5px" }}
-        />
+        <img src="img/social/y.png" alt="YouTube" />
       </a>
       <a href={socialLinks.facebook} target="_blank" rel="noopener noreferrer">
-        <img
-          src="img/social/fb.png"
-          alt="Facebook"
-          style={{ width: "40px", margin: "0 5px" }}
-        />
+        <img src="img/social/fb.png" alt="Facebook" />
       </a>
       <a href={socialLinks.instagram} target="_blank" rel="noopener noreferrer">
-        <img
-          src="img/social/in.png"
-          alt="LinkedIn"
-          style={{ width: "40px", margin: "0 5px" }}
-        />
+        <img src="img/social/in.png" alt="LinkedIn" />
       </a>
       <a href={socialLinks.googleMap} target="_blank" rel="noopener noreferrer">
-        <img
-          src="img/social/map.png"
-          alt="Google Maps"
-          style={{ width: "40px", margin: "0 5px" }}
-        />
+        <img src="img/social/map.png" alt="Google Maps" />
       </a>
       <a href={socialLinks.twitter} target="_blank" rel="noopener noreferrer">
-        <img
-          src="img/social/t.png"
-          alt="Twitter"
-          style={{ width: "40px", margin: "0 5px" }}
-        />
+        <img src="img/social/t.png" alt="Twitter" />
       </a>
     </div>
   );

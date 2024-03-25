@@ -1,42 +1,74 @@
-/* .App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-} */
 .top-header {
   margin: 0;
   padding: 0;
+  position: fixed;
+
+  .navbar-brand {
+    max-width: calc(100% - 72px);
+
+    h1 {
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
+}
+
+.pool-banner {
+  position: relative;
+
+  img {
+    max-height: calc(100vh - 75px);
+    object-fit: cover;
+  }
+}
+
+.pool-banner-caption {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+  z-index: 44;
+  padding: 0 5%;
+}
+
+.pool-banner-caption-text {
+  color: #fff;
+  text-shadow: 2px 4px rgba(0, 0, 0, 0.5);
+  font-weight: bold;
+}
+
+.whatsapp-btn {
+  white-space: nowrap;
+}
+
+.whatsapp-btn,
+.pool-banner-caption-btn .btn-lg {
+  background-color: #040575;
+  border-color: #040575;
+  margin: 3px 10px;
+}
+
+.pool-social-links {
+  position: fixed;
+  top: calc(50% - 110px);
+  right: 20px;
+  transform: translateY(calc(-50% + 110px));
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #fff;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  z-index: 9999;
+
+  img {
+    width: 40px;
+    margin: 0 5px;
+  }
 }

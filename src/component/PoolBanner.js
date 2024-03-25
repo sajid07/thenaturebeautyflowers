@@ -1,9 +1,12 @@
-import "react-responsive-carousel/lib/styles/carousel.min.css";
 import React, { useEffect, useState } from "react";
+import Slider from "react-slick";
+import { Button, Image } from "react-bootstrap";
 
-import { Carousel } from "react-responsive-carousel";
 import WhatsAppButton from "./WhatsAppButton";
 import axios from "axios";
+
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 const PoolBanner = () => {
   const [contacts, setContacts] = useState({});
@@ -11,6 +14,16 @@ const PoolBanner = () => {
   const api = axios.create({
     baseURL: host,
   });
+
+  const settings = {
+    autoplay: true,
+    fade: true,
+    adaptiveHeight: false,
+    variableWidth: false,
+    infinite: true,
+    dots: false,
+    arrows: false,
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -24,47 +37,7 @@ const PoolBanner = () => {
 
     fetchData();
   }, []);
-  const slideStyle = {
-    position: "relative",
-    width: "100%",
-    height: "700px", // Set a fixed height for all images
-  };
 
-  const textOverlayStyle = {
-    position: "absolute",
-    top: "50%",
-    left: "50%",
-    transform: "translate(-50%, -50%)",
-    textAlign: "center",
-    color: "white",
-    background: "FFFFFF",
-    padding: "50px",
-    borderRadius: "1px",
-    fontSize: "20px",
-  };
-
-  const buttonContainerStyle = {
-    position: "absolute",
-    bottom: "-50px",
-    left: "50%",
-    transform: "translateX(-50%)",
-    display: "flex",
-    justifyContent: "center",
-  };
-
-  const buttonStyle = {
-    background: "#040575",
-    color: "white",
-    border: "none",
-    padding: "10px 20px",
-    margin: "3px 10px",
-    cursor: "pointer",
-    borderRadius: "5px",
-    whiteSpace: "nowrap", // Ensure text is displayed on one line
-  };
-  const textStyles = {
-    color: "#211e1f", // Change the text color to red
-  };
   const handleDownload = () => {
     // Replace 'path/to/your/pdf/file.pdf' with the actual path to your PDF file
     const pdfPath = "/brochure/nbflower-_-Brouchure.pdf";
@@ -75,81 +48,34 @@ const PoolBanner = () => {
   };
   return (
     <>
-      <Carousel
-        showThumbs={false}
-        autoPlay={true}
-        interval={3000}
-        infiniteLoop={true}
-      >
-        <div style={slideStyle}>
-          <img
-            src="/img/banner/banner11.png"
-            alt="Slide 1"
-            style={{ width: "100%", height: "100%" }}
-          />
-          <div style={textOverlayStyle}>
-            <h1 style={textStyles}>Discover Our Pool Products</h1>
-            <p style={textStyles}>
-              Explore a wide range of pool equipment and accessories.
-            </p>
-            <div style={buttonContainerStyle}>
-              {/* <button style={buttonStyle}>Request A Quote</button> */}
-              <WhatsAppButton
-                phoneNumber={contacts.whatsappContact}
-                message="Hello, I have a question!"
-              />
+      <div class="pool-banner">
+        <Slider {...settings}>
+          <Image src="/img/banner/banner1.jpg" alt="Banner 1" fluid />
 
-              <button style={buttonStyle} onClick={handleDownload}>
-                Download Brochure
-              </button>
-            </div>
-          </div>
-        </div>
+          <Image src="/img/banner/banner2.jpg" alt="Banner 2" fluid />
 
-        <div style={slideStyle}>
-          <img
-            src="/img/banner/banner12.png"
-            alt="Slide 1"
-            style={{ width: "100%", height: "100%" }}
-          />
-          <div style={textOverlayStyle}>
-            <div style={buttonContainerStyle}>
-              {/* <button style={buttonStyle}>Request A Quote</button> */}
-              <WhatsAppButton
-                phoneNumber="+971555821382"
-                message="Hello, I have a question!"
-              />
-              <button style={buttonStyle} onClick={handleDownload}>
-                Download Brochure
-              </button>
-            </div>
+          <Image src="/img/banner/banner3.jpg" alt="Banner 3" fluid />
+        </Slider>
+
+        <div class="pool-banner-caption">
+          <h1 className="pool-banner-caption-text">
+            Discover Our Pool Products
+          </h1>
+          <p class="lead pool-banner-caption-text">
+            Explore a wide range of pool equipment and accessories.
+          </p>
+          <div class="pool-banner-caption-btn">
+            <WhatsAppButton
+              phoneNumber={contacts.whatsappContact}
+              message="Hello, I have a question!"
+            />
+
+            <Button size="lg" onClick={handleDownload}>
+              Download Brochure
+            </Button>
           </div>
         </div>
-        <div style={slideStyle}>
-          <img
-            src="/img/banner/banner14.png"
-            alt="Slide 1"
-            style={{ width: "100%", height: "100%" }}
-          />
-          <div style={textOverlayStyle}>
-            <h1 style={textStyles}>Discover Our Pool Products</h1>
-            <p style={textStyles}>
-              {" "}
-              Explore a wide range of pool equipment and accessories.
-            </p>
-            <div style={buttonContainerStyle}>
-              {/* <button style={buttonStyle}>Request A Quote</button> */}
-              <WhatsAppButton
-                phoneNumber="+971555821382"
-                message="Hello, I have a question!"
-              />{" "}
-              <button style={buttonStyle} onClick={handleDownload}>
-                Download Brochure
-              </button>
-            </div>
-          </div>
-        </div>
-      </Carousel>
+      </div>
     </>
   );
 };

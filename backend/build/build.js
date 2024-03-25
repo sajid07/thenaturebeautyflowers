@@ -23,22 +23,6 @@ function getNormalizedEnvVars() {
     envVars[`process.env.${k}`] = JSON.stringify(process.env[k]);
   }
 
-  console.log(
-    `.env.${process.env.REACT_APP_ENV || "local"}`,
-    process.env.REACT_APP_ENV,
-    findConfig(`.env.${process.env.REACT_APP_ENV || "local"}`),
-    findConfig(".env.production"),
-    envVars,
-    processEnv,
-    require("dotenv").config({
-      override: true,
-      path: findConfig(`.env.${process.env.REACT_APP_ENV || "local"}`),
-      processEnv: processEnv,
-    }),
-    findConfig.read(`.env.${process.env.REACT_APP_ENV || "local"}`),
-    findConfig.read(".env.production")
-  );
-
   return envVars;
 }
 

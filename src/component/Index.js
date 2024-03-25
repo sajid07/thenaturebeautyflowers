@@ -9,13 +9,12 @@ import AutoplaySlider from "./AutoplaySlider";
 const Index = () => {
   return (
     <>
-      <div className="">
+      <div className="container-fluide">
         <PoolBanner></PoolBanner>
         <Category></Category>
         <About></About>
         <List></List>
         <AutoplaySlider />
-        {/* <Testimonials></Testimonials> */}
         <Footer></Footer>
       </div>
     </>

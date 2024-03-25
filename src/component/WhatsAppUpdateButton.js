@@ -1,8 +1,9 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import axios from "axios";
 import productContext from "../context/products/productContext";
 import SideNavbar from "./Admin/SideNavbar";
 import NavBar from "./Admin/Navbar";
+import { useNavigate } from "react-router-dom";
 
 const WhatsAppUpdateButton = ({ onUpdate }) => {
   const [newWhatsAppContact, setNewWhatsAppContact] = useState("");
@@ -18,7 +19,26 @@ const WhatsAppUpdateButton = ({ onUpdate }) => {
       "auth-token": localStorage.getItem("token"),
     },
   });
+  const [loggedIn, setLoggedIn] = useState(true); // Assume the user is logged in initially
+  const navigate = useNavigate();
 
+  useEffect(() => {
+    // Check if user is logged in
+    const checkLoggedIn = () => {
+      const token = localStorage.getItem("token");
+      if (!token) {
+        // If token doesn't exist, user is not logged in
+        setLoggedIn(false);
+      }
+    };
+
+    checkLoggedIn();
+  }, []);
+
+  if (!loggedIn) {
+    // If user is not logged in, redirect to login page
+    navigate("/login");
+  }
   const handleUpdateContacts = async (e) => {
     try {
       // Make API call to update contacts on the server
@@ -53,7 +73,7 @@ const WhatsAppUpdateButton = ({ onUpdate }) => {
 
   return (
     <>
-     <NavBar></NavBar>
+      <NavBar></NavBar>
       <SideNavbar>
         <div style={formContainerStyle}>
           <label style={labelStyle}>New WhatsApp Contact:</label>

@@ -2,6 +2,7 @@
   margin: 0;
   padding: 0;
   position: fixed;
+  top: 0;
 
   .navbar-brand {
     max-width: calc(100% - 72px);
@@ -14,6 +15,7 @@
 }
 
 .pool-banner {
+  margin-top: 75px;
   position: relative;
 
   img {

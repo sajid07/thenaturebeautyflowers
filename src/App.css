@@ -1,7 +1,7 @@
 .top-header {
   margin: 0;
   padding: 0;
-  position: fixed;
+  position: sticky;
   top: 0;
 
   .navbar-brand {
@@ -15,7 +15,6 @@
 }
 
 .pool-banner {
-  margin-top: 75px;
   position: relative;
 
   img {

@@ -3,26 +3,28 @@ import React from "react";
 const About = () => {
   return (
     <section id="why-us" className="why-us">
-      <div className="container-fluid">
+      <div className="container">
         <div className="row">
           <div
-            className="col-lg-5 align-items-stretch position-relative video-box"
+            className="col-lg-5 col-md-12 align-items-stretch position-relative video-box"
             data-aos="fade-right"
           >
             <img
               src="/img/about.jpg"
-              style={{ maxWidth: "110%", height: "120%" }}
+              className="img-fluid"
+              alt="About Us"
+              style={{ maxWidth: "100%", height: "auto" }} // Ensure image responsiveness
             />
           </div>
 
           <div
-            className="col-lg-7 d-flex flex-column justify-content-center align-items-stretch"
+            className="col-lg-7 col-md-12 d-flex flex-column justify-content-center align-items-stretch"
             data-aos="fade-left"
           >
             <div className="content">
               <h2>THE NATURE BEAUTY FLOWERS</h2>
               <p>
-                Welcome to <strong>"The Nature Beauty Flower </strong>," your
+                Welcome to <strong>"The Nature Beauty Flower</strong>," your
                 premier destination for exceptional pool services. We are
                 dedicated to enhancing your pool experience with our expertise
                 and commitment. Discover what sets us apart:

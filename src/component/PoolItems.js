@@ -46,7 +46,7 @@ const PoolItems = () => {
                     <img
                       src="img/category/filtration.jpg"
                       alt="Icon"
-                      style={{ height: "200px", width: "auto" }} // Set a fixed height and adjust width for aspect ratio
+                      style={{ maxWidth: "100%", height: "auto" }} // Make the image responsive
                     />
                   </div>
                   <h4>Filtration</h4>
@@ -66,7 +66,7 @@ const PoolItems = () => {
                     <img
                       src="img/category/pool-pump.jpg"
                       alt="Icon"
-                      style={{ height: "200px", width: "200px" }} // Set a fixed height and adjust width for aspect ratio
+                      style={{ maxWidth: "100%", height: "auto" }} // Make the image responsive
                     />
                   </div>
                   <h4>Pool Pumps</h4>
@@ -86,7 +86,7 @@ const PoolItems = () => {
                     <img
                       src="img/category/pool-light.jpg"
                       alt="Icon"
-                      style={{ height: "200px", width: "200px" }} // Set a fixed height and adjust width for aspect ratio
+                      style={{ maxWidth: "100%", height: "auto" }} // Make the image responsive
                     />
                   </div>
                   <h4>Pool Lights</h4>
@@ -104,9 +104,9 @@ const PoolItems = () => {
                 <div className="rounded p-4">
                   <div className="icon mb-3">
                     <img
-                      src="img/category/inlet.png"
+                      src="img/category/inlet.jpg"
                       alt="Icon"
-                      style={{ height: "200px", width: "200px" }} // Set a fixed height and adjust width for aspect ratio
+                      style={{ maxWidth: "100%", height: "auto" }} // Make the image responsive
                     />
                   </div>
                   <h4>Pool Fitting</h4>
@@ -124,9 +124,9 @@ const PoolItems = () => {
                 <div className="rounded p-4">
                   <div className="icon mb-3">
                     <img
-                      src="img/category/cleaning.png"
+                      src="img/category/cleaning.jpg"
                       alt="Icon"
-                      style={{ height: "200px", width: "200px" }} // Set a fixed height and adjust width for aspect ratio
+                      style={{ maxWidth: "100%", height: "auto" }} // Make the image responsive
                     />
                   </div>
                   <h4>Cleaning Product</h4>
@@ -146,7 +146,7 @@ const PoolItems = () => {
                     <img
                       src="img/poolItemImg/heat.jpg"
                       alt="Icon"
-                      style={{ height: "200px", width: "auto" }} // Set a fixed height and adjust width for aspect ratio
+                      style={{ maxWidth: "100%", height: "auto" }} // Make the image responsive
                     />
                   </div>
                   <h4>Heat & Cool Pump</h4>
@@ -166,7 +166,7 @@ const PoolItems = () => {
                     <img
                       src="img/poolItemImg/dosing.jpg"
                       alt="Icon"
-                      style={{ height: "200px", width: "200px" }} // Set a fixed height and adjust width for aspect ratio
+                      style={{ maxWidth: "100%", height: "auto" }} // Make the image responsive
                     />
                   </div>
                   <h4>Dosing Sysytem</h4>
@@ -186,7 +186,7 @@ const PoolItems = () => {
                     <img
                       src="img/poolItemImg/stairs.jpg"
                       alt="Icon"
-                      style={{ height: "178px", width: "200px" }} // Set a fixed height and adjust width for aspect ratio
+                      style={{ maxWidth: "100%", height: "auto" }} // Make the image responsive
                     />
                   </div>
                   <h4>Surrounded Equipments</h4>
@@ -204,9 +204,9 @@ const PoolItems = () => {
                 <div className="rounded p-4">
                   <div className="icon mb-3">
                     <img
-                      src="img/category/pool-safety.jpg"
+                      src="img/poolItemImg/safety.jpg"
                       alt="Icon"
-                      style={{ height: "200px", width: "200px" }} // Set a fixed height and adjust width for aspect ratio
+                      style={{ maxWidth: "100%", height: "auto" }} // Make the image responsive
                     />
                   </div>
                   <h4>Safety Products</h4>
@@ -224,9 +224,9 @@ const PoolItems = () => {
                 <div className="rounded p-4">
                   <div className="icon mb-3">
                     <img
-                      src="img/category/tiles.png"
+                      src="img/poolItemImg/tiles.jpg"
                       alt="Icon"
-                      style={{ height: "200px", width: "200px" }} // Set a fixed height and adjust width for aspect ratio
+                      style={{ maxWidth: "100%", height: "auto" }} // Make the image responsive
                     />
                   </div>
                   <h4>Pool Tiles</h4>
@@ -246,7 +246,7 @@ const PoolItems = () => {
                     <img
                       src="img/category/equipment.jpg"
                       alt="Icon"
-                      style={{ height: "176px", width: "200px" }} // Set a fixed height and adjust width for aspect ratio
+                      style={{ maxWidth: "100%", height: "auto" }} // Make the image responsive
                     />
                   </div>
                   <h4>Commercial Equipments</h4>
@@ -264,9 +264,9 @@ const PoolItems = () => {
                 <div className="rounded p-4">
                   <div className="icon mb-3">
                     <img
-                      src="img/category/panel.png"
+                      src="img/poolItemImg/cpanel.jpg"
                       alt="Icon"
-                      style={{ height: "200px", width: "200px" }} // Set a fixed height and adjust width for aspect ratio
+                      style={{ maxWidth: "100%", height: "auto" }} // Make the image responsive
                     />
                   </div>
                   <h4>Control Panel</h4>

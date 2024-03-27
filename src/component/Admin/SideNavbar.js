@@ -20,30 +20,15 @@ const SideNavbar = ({ children }) => {
                   Dashboard
                 </Link>
                 <div class="sb-sidenav-menu-heading">Products</div>
-                <Link
-                  className="nav-link collapsed"
-                  to="/ProductForm"
-                  data-bs-toggle="collapse"
-                  data-bs-target="#collapseLayouts"
-                  aria-expanded="false"
-                  aria-controls="collapseLayouts"
-                >
+                <Link class="nav-link" to="/ProductForm">
                   <div class="sb-nav-link-icon">
-                    <i class="fas fa-plus"></i>
+                    <i class="fas fa-users"></i>
                   </div>
                   Add Products
                 </Link>
-
-                <Link
-                  className="nav-link collapsed"
-                  to="/UpdateContact"
-                  data-bs-toggle="collapse"
-                  data-bs-target="#collapsePages"
-                  aria-expanded="false"
-                  aria-controls="collapsePages"
-                >
+                <Link class="nav-link" to="/UpdateContact">
                   <div class="sb-nav-link-icon">
-                    <i class="fas fa-book-open"></i>
+                    <i class="fas fa-users"></i>
                   </div>
                   Update Contacts
                 </Link>

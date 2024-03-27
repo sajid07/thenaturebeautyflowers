@@ -18,16 +18,12 @@
 #spinner {
   opacity: 0;
   visibility: hidden;
-  transition:
-    opacity 0.5s ease-out,
-    visibility 0s linear 0.5s;
+  transition: opacity 0.5s ease-out, visibility 0s linear 0.5s;
   z-index: 99999;
 }
 
 #spinner.show {
-  transition:
-    opacity 0.5s ease-out,
-    visibility 0s linear 0s;
+  transition: opacity 0.5s ease-out, visibility 0s linear 0s;
   visibility: visible;
   opacity: 1;
 }
@@ -208,12 +204,11 @@
 
 /*** Icon ***/
 .icon {
-  padding: 15px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   background: #ffffff !important;
-  border-radius: 50px;
+  border-radius: 0px;
   border: 1px dashed var(--primary) !important;
 }
 

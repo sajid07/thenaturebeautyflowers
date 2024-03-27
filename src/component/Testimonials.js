@@ -2,82 +2,185 @@ import React from "react";
 
 const Testimonials = () => {
   return (
-    <div className="container-xxl py-5">
-      <div className="container">
-        <div
-          className="text-center mx-auto mb-5 wow fadeInUp"
-          data-wow-delay="0.1s"
-          style={{ maxWidth: "600px" }}
-        >
-          <h1 className="mb-3">Our Clients Say!</h1>
-          <p>See what out client says</p>
-        </div>
-        <div className="testimonial-item bg-light rounded p-3">
-          <div className="bg-white border rounded p-4">
+    <>
+      <section id="services" class="services">
+        <div class="container" data-aos="fade-up">
+          <div class="section-title">
+            <h2>Services</h2>
             <p>
-              "The Nature Flower Beauty exceeded all our expectations. They
-              turned our ordinary backyard into a pool paradise. Their attention
-              to detail and commitment to quality is truly commendable."
+              Magnam dolores commodi suscipit. Necessitatibus eius consequatur
+              ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam
+              quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea.
+              Quia fugiat sit in iste officiis commodi quidem hic quas.
             </p>
-            <div className="d-flex align-items-center">
-              <img
-                className="img-fluid flex-shrink-0 rounded"
-                src="img/testimonial-1.jpg"
-                style={{ width: "45px", height: "45px" }}
-                alt="Client 1"
-              />
-              <div className="ps-3">
-                <h6 className="fw-bold mb-1">Jessica M.</h6>
-                <small>Profession</small>
-              </div>
+          </div>
+
+          <div className="row g-4">
+            <div
+              className="col-lg-3 col-sm-6 wow fadeInUp"
+              data-wow-delay="100"
+            >
+              <a
+                className="cat-item d-block bg-light text-center rounded p-3"
+                href="/swimmingPool"
+              >
+                <div className="rounded p-4">
+                  <div className="icon mb-3">
+                    <img
+                      src="img/category/swimming.png"
+                      alt="Icon"
+                      style={{ height: "200px", width: "auto" }} // Set a fixed height and adjust width for aspect ratio
+                    />
+                  </div>
+
+                  <h4>Swimming Pool</h4>
+                </div>
+              </a>
+            </div>
+            <div
+              className="col-lg-3 col-sm-6 wow fadeInUp"
+              data-wow-delay="0.3s"
+            >
+              <a
+                className="cat-item d-block bg-light text-center rounded p-3"
+                href="/waterfountain"
+              >
+                <div className="rounded p-4">
+                  <div className="icon mb-3">
+                    <img
+                      src="img/category/fountain.jpg"
+                      alt="Icon"
+                      style={{ height: "200px", width: "auto" }} // Set a fixed height and adjust width for aspect ratio
+                    />
+                  </div>
+                  <h4>Water Fountain</h4>
+                </div>
+              </a>
+            </div>
+            <div
+              className="col-lg-3 col-sm-6 wow fadeInUp"
+              data-wow-delay="0.5s"
+            >
+              <a
+                className="cat-item d-block bg-light text-center rounded p-3"
+                href="/wellness"
+              >
+                <div className="rounded p-4">
+                  <div className="icon mb-3">
+                    <img
+                      src="img/category/wellness.png"
+                      alt="Icon"
+                      style={{ height: "200px", width: "auto" }} // Set a fixed height and adjust width for aspect ratio
+                    />
+                  </div>
+                  <h4>Wellness</h4>
+                </div>
+              </a>
+            </div>
+            <div
+              className="col-lg-3 col-sm-6 wow fadeInUp"
+              data-wow-delay="100"
+            >
+              <a
+                className="cat-item d-block bg-light text-center rounded p-3"
+                href="/poolchemical"
+              >
+                <div className="rounded p-4">
+                  <div className="icon mb-3">
+                    <img
+                      src="img/category/pool-chemical.jpg"
+                      alt="Icon"
+                      style={{ height: "200px", width: "auto" }} // Set a fixed height and adjust width for aspect ratio
+                    />
+                  </div>
+                  <h4>Pool Chemical</h4>
+                </div>
+              </a>
+            </div>
+            <div
+              className="col-lg-3 col-sm-6 wow fadeInUp"
+              data-wow-delay="100"
+            >
+              <a
+                className="cat-item d-block bg-light text-center rounded p-3"
+                href="/waterfall"
+              >
+                <div className="rounded p-4">
+                  <div className="icon mb-3">
+                    <img
+                      src="img/category/waterfall.png"
+                      alt="Icon"
+                      style={{ height: "200px", width: "200px" }} // Set a fixed height and adjust width for aspect ratio
+                    />
+                  </div>
+                  <h4>Waterfalls & Water Curtains</h4>
+                </div>
+              </a>
+            </div>
+            <div
+              className="col-lg-3 col-sm-6 wow fadeInUp"
+              data-wow-delay="100"
+            >
+              <a
+                className="cat-item d-block bg-light text-center rounded p-3"
+                href="/intexpool"
+              >
+                <div className="rounded p-4">
+                  <div className="icon mb-3">
+                    <img
+                      src="img/category/intex.png"
+                      alt="Icon"
+                      style={{ height: "200px", width: "auto" }} // Set a fixed height and adjust width for aspect ratio
+                    />
+                  </div>
+                  <h4>Intext Pool And Bestway</h4>
+                </div>
+              </a>
+            </div>
+            <div
+              className="col-lg-3 col-sm-6 wow fadeInUp"
+              data-wow-delay="100"
+            >
+              <a
+                className="cat-item d-block bg-light text-center rounded p-3"
+                href="/boosterpump"
+              >
+                <div className="rounded p-4">
+                  <div className="icon mb-3">
+                    <img
+                      src="img/category/pool-pump.jpg"
+                      alt="Icon"
+                      style={{ height: "228px", width: "200px" }} // Set a fixed height and adjust width for aspect ratio
+                    />
+                  </div>
+                  <h4>Booster Pumps</h4>
+                </div>
+              </a>
+            </div>
+            <div
+              className="col-lg-3 col-sm-6 wow fadeInUp"
+              data-wow-delay="100"
+            >
+              <a
+                className="cat-item d-block bg-light text-center rounded p-3"
+                href="/irregation"
+              >
+                <div className="rounded p-4">
+                  <div className="icon mb-3">
+                    <img
+                      src="img/category/irregation.jpg"
+                      alt="Icon"
+                      style={{ height: "228px", width: "200px" }} // Set a fixed height and adjust width for aspect ratio
+                    />
+                  </div>
+                  <h4>Irregation Material</h4>
+                </div>
+              </a>
             </div>
           </div>
         </div>
-        <div className="testimonial-item bg-light rounded p-3">
-          <div className="bg-white border rounded p-4">
-            <p>
-              From the initial design discussions to the final touches, working
-              with this team was an absolute pleasure. Our pool is now the envy
-              of the neighborhood, and we couldn't be happier."
-            </p>
-            <div className="d-flex align-items-center">
-              <img
-                className="img-fluid flex-shrink-0 rounded"
-                src="img/testimonial-2.jpg"
-                style={{ width: "45px", height: "45px" }}
-                alt="Client 2"
-              />
-              <div className="ps-3">
-                <h6 className="fw-bold mb-1">Mark S</h6>
-                <small>Profession</small>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className="testimonial-item bg-light rounded p-3">
-          <div className="bg-white border rounded p-4">
-            <p>
-              I can't thank The Nature Flower Beauty enough for transforming our
-              outdoor space. Their innovative designs and top-notch service made
-              our pool project stress-free. Our family is now enjoying the
-              perfect aquatic retreat."
-            </p>
-            <div className="d-flex align-items-center">
-              <img
-                className="img-fluid flex-shrink-0 rounded"
-                src="img/testimonial-3.jpg"
-                style={{ width: "45px", height: "45px" }}
-                alt="Client 3"
-              />
-              <div className="ps-3">
-                <h6 className="fw-bold mb-1">Linda K</h6>
-                <small>Profession</small>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+      </section>{" "}
+    </>
   );
 };
 

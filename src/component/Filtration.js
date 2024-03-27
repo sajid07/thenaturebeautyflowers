@@ -40,32 +40,18 @@ const Filtration = () => {
     filter: "blur(0px)",
   };
 
-  const containerStyle = {
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    minHeight: "100vh",
-  };
-
-  const boxStyle = {
-    border: "1px solid #ccc",
-    borderRadius: "10px",
-    padding: "10px",
-    marginBottom: "20px",
-    overflow: "hidden",
-  };
-
-  const cardBodyStyle = {
-    height: "120px", // Set a fixed height for the card body
-  };
-
   return (
     <>
       <div style={backgroundStyle}></div>
 
       {loading ? ( // Show spinner when loading is true
-        <div style={containerStyle}>
-          <RingLoader color="#fc031c" size={150} loading={loading} />
+        <div className="container mt-5">
+          <div
+            className="row justify-content-center align-items-center"
+            style={{ minHeight: "100vh" }}
+          >
+            <RingLoader color="#fc031c" size={150} loading={loading} />
+          </div>
         </div>
       ) : (
         <div className="container mt-5">
@@ -73,20 +59,35 @@ const Filtration = () => {
           <div className="row">
             {products
               .filter(
-                (product) => product.category.toLowerCase() === "filtration",
+                (product) => product.category.toLowerCase() === "filtration"
               )
               .map((product) => (
                 <div key={product._id} className="col-md-3 mb-3">
-                  <div className="card" style={boxStyle}>
+                  <div className="card">
                     <Link to={`/product/${product._id}`} className="card-link">
-                      <img
-                        src={product.picture}
-                        className="card-img-top"
-                        alt={product.name}
-                        style={{ height: "250px", width: "302px" }}
-                      />
+                      <div
+                        style={{
+                          position: "relative",
+                          paddingBottom: "100%",
+                          overflow: "hidden",
+                        }}
+                      >
+                        <img
+                          src={product.picture}
+                          className="card-img-top"
+                          alt={product.name}
+                          style={{
+                            position: "absolute",
+                            top: 0,
+                            left: 0,
+                            width: "100%",
+                            height: "100%",
+                            objectFit: "cover",
+                          }}
+                        />
+                      </div>
                     </Link>
-                    <div className="card-body" style={cardBodyStyle}>
+                    <div className="card-body">
                       <h5 className="card-title">
                         <Link
                           to={`/product/${product._id}`}

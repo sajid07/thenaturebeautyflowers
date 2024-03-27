@@ -44,16 +44,16 @@ const NavBar = () => {
                 Pool Chemicals
               </NavDropdown.Item>
               <NavDropdown.Item as={Link} to="/waterfall">
-                Waterfalls &Water Curtains
+                Waterfalls & Water Curtains
               </NavDropdown.Item>
               <NavDropdown.Item as={Link} to="/intexpool">
                 Intex Pool & Bestway
               </NavDropdown.Item>
-
               <NavDropdown.Item as={Link} to="/boosterpump">
                 Booster Pumps
               </NavDropdown.Item>
             </NavDropdown>
+
             <Nav.Link as={Link} to="/Projects">
               Projects
             </Nav.Link>

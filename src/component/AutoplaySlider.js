@@ -43,57 +43,52 @@ const AutoplaySlider = () => {
   };
 
   return (
-    <div className="container">
-      <h1 style={{ textAlign: "center", color: "#007bff", marginTop: "50px" }}>
-        Our Brands
-      </h1>
-      <p
-        style={{
-          textAlign: "center",
-          color: "#03bafc",
-          marginTop: "20px",
-          marginBottom: "50px",
-          fontSize: "18px",
-        }}
-      >
-        Explore our curated selection of top-tier brands that exemplify quality,
-        innovation, and style. Each brand we represent is carefully chosen to
-        deliver exceptional products and services, aligning with our commitment
-        to excellence.
-      </p>
-      <Slider {...settings}>
-        <div>
-          <img src="img/brand/aqua.png" alt="Aqua" />
+    <section id="services" class="services">
+      <div className="container">
+        <div className="section-title">
+          <h2>Brands</h2>
+          <p>
+            Explore our curated selection of top-tier brands that exemplify
+            quality, innovation, and style. Each brand we represent is carefully
+            chosen to deliver exceptional products and services, aligning with
+            our commitment to excellence.
+          </p>
         </div>
-        <div>
-          <img src="img/brand/astral.png" alt="Astral" />
-        </div>
-        <div>
-          <img src="img/brand/cepex.png" alt="Cepex" />
-        </div>
-        <div>
-          <img src="img/brand/certikin.png" alt="Certikin" />
-        </div>
-        <div>
-          <img src="img/brand/hayward.png" alt="Hayward" />
-        </div>
-        <div>
-          <img src="img/brand/kripsol.png" alt="Kripsol" />
-        </div>
-        <div>
-          <img src="img/brand/mapei.png" alt="Mapei" />
-        </div>
-        <div>
-          <img src="img/brand/pentair.png" alt="Pentair" />
-        </div>
-        <div>
-          <img src="img/brand/source.png" alt="Source" />
-        </div>
-        <div>
-          <img src="img/brand/terraco.png" alt="Terraco" />
-        </div>
-      </Slider>
-    </div>
+
+        <Slider {...settings}>
+          <div>
+            <img src="img/brand/aqua.png" alt="Aqua" />
+          </div>
+          <div>
+            <img src="img/brand/astral.png" alt="Astral" />
+          </div>
+          <div>
+            <img src="img/brand/cepex.png" alt="Cepex" />
+          </div>
+          <div>
+            <img src="img/brand/certikin.png" alt="Certikin" />
+          </div>
+          <div>
+            <img src="img/brand/hayward.png" alt="Hayward" />
+          </div>
+          <div>
+            <img src="img/brand/kripsol.png" alt="Kripsol" />
+          </div>
+          <div>
+            <img src="img/brand/mapei.png" alt="Mapei" />
+          </div>
+          <div>
+            <img src="img/brand/pentair.png" alt="Pentair" />
+          </div>
+          <div>
+            <img src="img/brand/source.png" alt="Source" />
+          </div>
+          <div>
+            <img src="img/brand/terraco.png" alt="Terraco" />
+          </div>
+        </Slider>
+      </div>
+    </section>
   );
 };
 

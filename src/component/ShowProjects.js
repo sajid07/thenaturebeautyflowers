@@ -76,8 +76,11 @@ const ShowProjects = () => {
           }
         `}
       </style>
+      <div className="section-title">
+        <h2>Portfolio</h2>
+        <p>Explore our stunning swimming pool projects...</p>
+      </div>
 
-      <h2>Projects Gallery</h2>
       <div className="container">
         <div className="image-gallery">
           {projects.map((project) => (

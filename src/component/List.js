@@ -36,13 +36,18 @@ const List = () => {
             border: 1px solid #ddd;
             border-radius: 8px;
             overflow: hidden;
-            transition: transform 0.2s;
             cursor: pointer;
             background-color: #fff;
+            transform: translateY(30px);
+            transition: transform 0.5s ease;
           }
 
           .gallery-item:hover {
-            transform: scale(1.05);
+            transform: scale(1.05) translateY(0);
+          }
+
+          .gallery-item:hover img {
+            transform: scale(1.1);
           }
 
           .gallery-image {
@@ -50,6 +55,7 @@ const List = () => {
             height: 200px;
             object-fit: cover;
             border-bottom: 1px solid #ddd;
+            transition: transform 0.5s ease;
           }
 
           .gallery-content {
@@ -78,36 +84,45 @@ const List = () => {
           }
         `}
       </style>
-
-      <hr />
-      <h2
-        style={{ textAlign: "center", color: "#007bff", marginBottom: "30px" }}
-      >
-        Projects Gallery
-      </h2>
-      <div className="container">
-        <div className="image-gallery">
-          {projects.map((project) => (
-            <div key={project._id} className="gallery-item">
-              {project.picture && (
-                <img
-                  src={project.picture}
-                  alt={project.name}
-                  className="gallery-image"
-                />
-              )}
-              <div className="gallery-content">
-                <h3>{project.name}</h3>
-                <p>{project.description}</p>
-              </div>
+      <section id="services" class="services">
+        <div class="container" data-aos="fade-up" data-wow-delay="100">
+          <div className="section-title">
+            <h2>Portfolio</h2>
+            <p className="section-title">
+              Explore our stunning swimming pool projects...
+            </p>
+          </div>
+          <div className="container">
+            <div className="image-gallery">
+              {projects.map((project, index) => (
+                <div
+                  key={project._id}
+                  className="gallery-item"
+                  style={{
+                    transitionDelay: `${index * 0.1}s`,
+                    transform: "translateY(0)",
+                  }}
+                >
+                  {project.picture && (
+                    <img
+                      src={project.picture}
+                      alt={project.name}
+                      className="gallery-image"
+                    />
+                  )}
+                  <div className="gallery-content">
+                    <h3>{project.name}</h3>
+                    <p>{project.description}</p>
+                  </div>
+                </div>
+              ))}
             </div>
-          ))}
+            <Link to="/showProject" className="see-more-link">
+              See More
+            </Link>
+          </div>
         </div>
-        <Link to="/showProject" className="see-more-link">
-          See More
-        </Link>
-      </div>
-      <hr />
+      </section>
     </div>
   );
 };

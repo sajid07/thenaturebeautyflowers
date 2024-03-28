@@ -31,7 +31,11 @@ const About = () => {
             </p>
           </div>
           <Accordion defaultActiveKey={["0"]} alwaysOpen>
-            <Accordion.Item eventKey="0">
+            <Accordion.Item
+              eventKey="0"
+              data-aos="fade-up"
+              data-aos-delay="200"
+            >
               <Accordion.Header>
                 <span>01</span> Natural Aesthetics{" "}
               </Accordion.Header>
@@ -43,7 +47,11 @@ const About = () => {
               </Accordion.Body>
             </Accordion.Item>
 
-            <Accordion.Item eventKey="1">
+            <Accordion.Item
+              eventKey="1"
+              data-aos="fade-up"
+              data-aos-delay="200"
+            >
               <Accordion.Header>
                 <span>02</span> Experienced Team{" "}
               </Accordion.Header>
@@ -55,7 +63,11 @@ const About = () => {
               </Accordion.Body>
             </Accordion.Item>
 
-            <Accordion.Item eventKey="2">
+            <Accordion.Item
+              eventKey="2"
+              data-aos="fade-up"
+              data-aos-delay="200"
+            >
               <Accordion.Header>
                 <span>03</span> Satisfaction{" "}
               </Accordion.Header>

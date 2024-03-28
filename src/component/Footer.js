@@ -43,18 +43,18 @@ const Footer = () => {
     <footer className=" bg-dark text-white">
       <div className="container py-5">
         <div className="row">
-          <div className="col-lg-4">
+          <div className="col-lg-4 ">
             <h5 className="mb-4">Get In Touch</h5>
-            <p className="mb-3">
+            <p className="mb-3 text-white">
               <i className="fa fa-map-marker-alt me-2"></i>
               Shop # 02, Street 2A, Al Barsha 2,P.O Box :32258, Dubai - UAE
             </p>
-            <p className="mb-3">
+            <p className="mb-3 text-white">
               <i className="fa fa-phone-alt me-2"></i>
               {contacts.whatsappContact}
             </p>
-            <p className="mb-3">
-              <i className="fa fa-envelope me-2"></i>
+            <p className="mb-3 text-white">
+              <i className="fa fa-envelope me-2 "></i>
               nbflower@emirates.net.ae
             </p>
             <div className="d-flex">

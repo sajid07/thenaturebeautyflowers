@@ -1,6 +1,11 @@
 import "bootstrap/dist/css/bootstrap.min.css";
+import "@fortawesome/fontawesome-free/css/all.min.css";
+import "animate.css";
+import "aos/dist/aos.css";
 
 import "./App.css";
+
+import AOS from "aos";
 import Index from "./component/Index";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import SwimmingPool from "./component/SwimmingPool";
@@ -41,6 +46,8 @@ import BoosterPump from "./component/BoosterPump";
 import Irregation from "./component/Irregation";
 
 function App() {
+  AOS.init();
+
   const [alert, setAlert] = useState(null);
   const showAlert = (message, type) => {
     setAlert({ msg: message, type: type });

@@ -17,8 +17,8 @@ const Testimonials = () => {
 
           <div className="row g-4">
             <div
-              className="col-lg-3 col-sm-6 wow fadeInUp"
-              data-wow-delay="100"
+              className="col-lg-3 col-sm-6 animate__animated animate__fadeInUp"
+              data-aos-delay="100"
             >
               <a
                 className="cat-item d-block bg-light text-center rounded p-3"
@@ -38,8 +38,8 @@ const Testimonials = () => {
               </a>
             </div>
             <div
-              className="col-lg-3 col-sm-6 wow fadeInUp"
-              data-wow-delay="0.3s"
+              className="col-lg-3 col-sm-6 animate__animated animate__fadeInUp"
+              data-aos-delay="0.3s"
             >
               <a
                 className="cat-item d-block bg-light text-center rounded p-3"
@@ -58,8 +58,8 @@ const Testimonials = () => {
               </a>
             </div>
             <div
-              className="col-lg-3 col-sm-6 wow fadeInUp"
-              data-wow-delay="0.5s"
+              className="col-lg-3 col-sm-6 animate__animated animate__fadeInUp"
+              data-aos-delay="0.5s"
             >
               <a
                 className="cat-item d-block bg-light text-center rounded p-3"
@@ -78,8 +78,8 @@ const Testimonials = () => {
               </a>
             </div>
             <div
-              className="col-lg-3 col-sm-6 wow fadeInUp"
-              data-wow-delay="100"
+              className="col-lg-3 col-sm-6 animate__animated animate__fadeInUp"
+              data-aos-delay="100"
             >
               <a
                 className="cat-item d-block bg-light text-center rounded p-3"
@@ -98,8 +98,8 @@ const Testimonials = () => {
               </a>
             </div>
             <div
-              className="col-lg-3 col-sm-6 wow fadeInUp"
-              data-wow-delay="100"
+              className="col-lg-3 col-sm-6 animate__animated animate__fadeInUp"
+              data-aos-delay="100"
             >
               <a
                 className="cat-item d-block bg-light text-center rounded p-3"
@@ -118,8 +118,8 @@ const Testimonials = () => {
               </a>
             </div>
             <div
-              className="col-lg-3 col-sm-6 wow fadeInUp"
-              data-wow-delay="100"
+              className="col-lg-3 col-sm-6 animate__animated animate__fadeInUp"
+              data-aos-delay="100"
             >
               <a
                 className="cat-item d-block bg-light text-center rounded p-3"
@@ -138,8 +138,8 @@ const Testimonials = () => {
               </a>
             </div>
             <div
-              className="col-lg-3 col-sm-6 wow fadeInUp"
-              data-wow-delay="100"
+              className="col-lg-3 col-sm-6 animate__animated animate__fadeInUp"
+              data-aos-delay="100"
             >
               <a
                 className="cat-item d-block bg-light text-center rounded p-3"
@@ -158,8 +158,8 @@ const Testimonials = () => {
               </a>
             </div>
             <div
-              className="col-lg-3 col-sm-6 wow fadeInUp"
-              data-wow-delay="100"
+              className="col-lg-3 col-sm-6 animate__animated animate__fadeInUp"
+              data-aos-delay="100"
             >
               <a
                 className="cat-item d-block bg-light text-center rounded p-3"

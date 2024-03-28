@@ -14,12 +14,12 @@ const Category = () => {
     <>
       <section id="services" class="services">
         <div class="container" data-aos="fade-up">
-          <div style={containerStyle} data-wow-delay="100">
+          <div style={containerStyle} data-aos-delay="100">
             <div className="container-xxl py-5">
               <div className="container">
                 <div
-                  className="text-center mx-auto mb-5 wow fadeInUp"
-                  data-wow-delay="100"
+                  className="text-center mx-auto mb-5 animate__animated animate__fadeInUp"
+                  data-aos-delay="100"
                   style={{ maxWidth: "600px" }}
                 >
                   <h1 className="mb-3" style={{ color: "#FF5733" }}>
@@ -29,8 +29,8 @@ const Category = () => {
                 </div>
                 <div className="row g-4">
                   <div
-                    className="col-lg-3 col-sm-6 wow fadeInUp"
-                    data-wow-delay="100"
+                    className="col-lg-3 col-sm-6 animate__animated animate__fadeInUp"
+                    data-aos-delay="100"
                   >
                     <a
                       className="cat-item d-block bg-light text-center rounded p-3"
@@ -50,8 +50,8 @@ const Category = () => {
                     </a>
                   </div>
                   <div
-                    className="col-lg-3 col-sm-6 wow fadeInUp"
-                    data-wow-delay="0.3s"
+                    className="col-lg-3 col-sm-6 animate__animated animate__fadeInUp"
+                    data-aos-delay="0.3s"
                   >
                     <a
                       className="cat-item d-block bg-light text-center rounded p-3"
@@ -70,8 +70,8 @@ const Category = () => {
                     </a>
                   </div>
                   <div
-                    className="col-lg-3 col-sm-6 wow fadeInUp"
-                    data-wow-delay="0.5s"
+                    className="col-lg-3 col-sm-6 animate__animated animate__fadeInUp"
+                    data-aos-delay="0.5s"
                   >
                     <a
                       className="cat-item d-block bg-light text-center rounded p-3"
@@ -90,8 +90,8 @@ const Category = () => {
                     </a>
                   </div>
                   <div
-                    className="col-lg-3 col-sm-6 wow fadeInUp"
-                    data-wow-delay="100"
+                    className="col-lg-3 col-sm-6 animate__animated animate__fadeInUp"
+                    data-aos-delay="100"
                   >
                     <a
                       className="cat-item d-block bg-light text-center rounded p-3"
@@ -110,8 +110,8 @@ const Category = () => {
                     </a>
                   </div>
                   <div
-                    className="col-lg-3 col-sm-6 wow fadeInUp"
-                    data-wow-delay="100"
+                    className="col-lg-3 col-sm-6 animate__animated animate__fadeInUp"
+                    data-aos-delay="100"
                   >
                     <a
                       className="cat-item d-block bg-light text-center rounded p-3"
@@ -130,8 +130,8 @@ const Category = () => {
                     </a>
                   </div>
                   <div
-                    className="col-lg-3 col-sm-6 wow fadeInUp"
-                    data-wow-delay="100"
+                    className="col-lg-3 col-sm-6 animate__animated animate__fadeInUp"
+                    data-aos-delay="100"
                   >
                     <a
                       className="cat-item d-block bg-light text-center rounded p-3"
@@ -150,8 +150,8 @@ const Category = () => {
                     </a>
                   </div>
                   <div
-                    className="col-lg-3 col-sm-6 wow fadeInUp"
-                    data-wow-delay="100"
+                    className="col-lg-3 col-sm-6 animate__animated animate__fadeInUp"
+                    data-aos-delay="100"
                   >
                     <a
                       className="cat-item d-block bg-light text-center rounded p-3"
@@ -170,8 +170,8 @@ const Category = () => {
                     </a>
                   </div>
                   <div
-                    className="col-lg-3 col-sm-6 wow fadeInUp"
-                    data-wow-delay="100"
+                    className="col-lg-3 col-sm-6 animate__animated animate__fadeInUp"
+                    data-aos-delay="100"
                   >
                     <a
                       className="cat-item d-block bg-light text-center rounded p-3"

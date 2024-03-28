@@ -3,6 +3,7 @@
   padding: 0;
   position: sticky;
   top: 0;
+  z-index: 996;
 
   .navbar-brand {
     max-width: calc(100% - 72px);
@@ -71,5 +72,72 @@
   img {
     width: 40px;
     margin: 0 5px;
+  }
+}
+
+.navbar-light .dropdown-item:hover:not(:active) {
+  color: var(--primary);
+}
+
+.why-us {
+  img {
+    height: 100% !important;
+    object-fit: cover;
+  }
+}
+
+.why-us .accordion {
+  padding: 0 100px 60px 100px;
+}
+
+.why-us .accordion .accordion-item + .accordion-item {
+  margin-top: 15px;
+}
+
+.why-us .accordion .accordion-item {
+  background: #fff;
+  border-radius: 4px;
+}
+
+.why-us .accordion button {
+  position: relative;
+  font-family: "Poppins", sans-serif;
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 500;
+  padding-right: 30px;
+  outline: none;
+  cursor: pointer;
+}
+
+.why-us .accordion-button span {
+  color: #0880e8;
+  font-weight: 600;
+  font-size: 18px;
+  padding-right: 10px;
+}
+
+.why-us .accordion-body p {
+  margin-bottom: 0;
+}
+
+.why-us .accordion-button.collapsed::after {
+  color: #343a40;
+}
+
+.why-us .accordion--button.collapsed::after:hover {
+  color: #0880e8;
+}
+
+@media (max-width: 1024px) {
+  .why-us .accordion {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+
+@media (max-width: 992px) {
+  .why-us .accordion {
+    padding-bottom: 30px;
   }
 }

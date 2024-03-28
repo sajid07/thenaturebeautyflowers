@@ -23,7 +23,8 @@
     object-fit: cover;
   }
 }
-.footer .pool-banner-caption {
+
+.pool-banner-caption {
   display: flex;
   flex-direction: column;
   justify-content: center;

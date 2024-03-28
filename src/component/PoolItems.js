@@ -20,7 +20,7 @@ const PoolItems = () => {
     <>
       <div style={backgroundStyle}></div>
 
-      <div className="container-xxl py-5">
+      <div className="container-xxl py-5 ">
         <div className="container">
           <div
             className="text-center mx-auto mb-5 animate__animated animate__fadeInUp"

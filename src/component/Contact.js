@@ -15,7 +15,7 @@ const Contact = () => {
           <div class="col-lg-3 cta-btn-container text-center">
             <a
               class="cta-btn align-middle"
-              href="https://www.google.com/maps/search/?api=1&query=Al+Barsha"
+              href="https://www.google.com/maps/place/The+nature+Beauty+Flowers/@25.1136391,55.2083092,17z/data=!3m1!4b1!4m6!3m5!1s0x3e5f6b7cb489ca09:0xcb3f2d7ef1b9258d!8m2!3d25.1136391!4d55.2108841!16s%2Fg%2F11jm9tfg66?entry=ttu"
               target="_blank"
             >
               Location: Al Barsha

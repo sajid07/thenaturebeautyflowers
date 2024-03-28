@@ -43,10 +43,10 @@ const AutoplaySlider = () => {
   };
 
   return (
-    <section id="services" class="services">
+    <section id="cta" class="cta">
       <div className="container">
         <div className="section-title">
-          <h2>Brands</h2>
+          <h2 style={{ color: "white" }}>Brands</h2>
           <p>
             Explore our curated selection of top-tier brands that exemplify
             quality, innovation, and style. Each brand we represent is carefully

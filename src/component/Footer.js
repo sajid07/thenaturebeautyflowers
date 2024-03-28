@@ -40,7 +40,7 @@ const Footer = () => {
   }, []);
 
   return (
-    <footer className="bg-dark text-white">
+    <footer className=" bg-dark text-white">
       <div className="container py-5">
         <div className="row">
           <div className="col-lg-4">

@@ -64,7 +64,7 @@ const PoolBanner = () => {
           <p class="lead pool-banner-caption-text">
             Explore a wide range of pool equipment and accessories.
           </p>
-          <div class="pool-banner-caption-btn">
+          <div className="pool-banner-caption-btn ">
             <WhatsAppButton
               phoneNumber={contacts.whatsappContact}
               message="Hello, I have a question!"

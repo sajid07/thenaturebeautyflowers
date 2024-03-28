@@ -10,7 +10,7 @@ const WhatsAppButton = ({ phoneNumber, message }) => {
     <Button
       href={whatsappUrl}
       target="_blank"
-      className="whatsapp-btn"
+      className="cta-btn align-middle"
       size="lg"
     >
       Send Message on WhatsApp

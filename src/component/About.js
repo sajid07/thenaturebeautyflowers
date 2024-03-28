@@ -10,7 +10,7 @@ const About = () => {
           data-aos="fade-right"
         >
           <img
-            src="/img/about.jpg"
+            src="/img/about5.jpg"
             class="img-fluid"
             alt="About Us"
             style={{ maxWidth: "100%", height: "auto" }} // Ensure image responsiveness

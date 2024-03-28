@@ -86,17 +86,15 @@ const ProductDetail = () => {
 
   return (
     <>
-      <div style={backgroundStyle}></div>
-
       {loading ? (
         <div style={containerStyle}>
           <RingLoader color="#fc031c" size={150} loading={loading} />
         </div>
       ) : (
-        <div style={containerStyle}>
-          <div style={contentStyle}>
+        <div style={containerStyle} className="cta">
+          <div className="cta">
             <div className="card text-center">
-              <div className="card-header">
+              <div className="card-header ">
                 <h2 style={{ color: "black" }}>{product.name}</h2>
               </div>
               <div className="card-body">
@@ -106,27 +104,34 @@ const ProductDetail = () => {
                   alt={product.name}
                   style={{ height: "AUTO", width: "AUTO" }}
                 />
-                <div style={contentStyle}>
+                <div>
                   <p
                     style={descriptionStyle}
                     dangerouslySetInnerHTML={{ __html: formattedDescription }}
                   />
                 </div>
               </div>
-              <div className="card-footer">
-                <a
-                  href={product.pdfFile}
-                  className="btn btn-primary"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  View Brochure
-                </a>
-                <WhatsAppButton
-                  phoneNumber={contacts.whatsappContact}
-                  message={`Hi! Interested in ${product.name}. Could you share more details?`}
-                />
-              </div>
+              <section id="cta" class="cta">
+                <div class="container">
+                  <div class="row" data-aos="zoom-in">
+                    <div class="col-lg-3 cta-btn-container text-center"></div>
+                  </div>
+                </div>
+                <div className="card-footer">
+                  <a
+                    href={product.pdfFile}
+                    className="cta-btn align-middle"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    View Brochure
+                  </a>
+                  <WhatsAppButton
+                    phoneNumber={contacts.whatsappContact}
+                    message={`Hi! Interested in ${product.name}. Could you share more details?`}
+                  />
+                </div>
+              </section>
             </div>
           </div>
         </div>

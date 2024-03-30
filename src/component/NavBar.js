@@ -14,7 +14,7 @@ const NavBar = () => {
         >
           <div className="icon p-2 me-2">
             <img
-              src="img/banner/logo.jpg"
+              src="/img/banner/logo.jpg"
               alt="Icon"
               style={{ width: "50px", height: "50px" }}
             />

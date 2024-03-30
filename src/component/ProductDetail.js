@@ -102,7 +102,7 @@ const ProductDetail = () => {
                   src={product.picture}
                   className="card-img-top "
                   alt={product.name}
-                  style={{ height: "AUTO", width: "AUTO" }}
+                  style={{ height: "100%", width: "100%" }}
                 />
                 <div>
                   <p

@@ -34,19 +34,19 @@ const SocialIcons = () => {
   return (
     <div className="pool-social-links">
       <a href={socialLinks.youtube} target="_blank" rel="noopener noreferrer">
-        <img src="img/social/y.png" alt="YouTube" />
+        <img src="/img/social/y.png" alt="YouTube" />
       </a>
       <a href={socialLinks.facebook} target="_blank" rel="noopener noreferrer">
-        <img src="img/social/fb.png" alt="Facebook" />
+        <img src="/img/social/fb.png" alt="Facebook" />
       </a>
       <a href={socialLinks.instagram} target="_blank" rel="noopener noreferrer">
-        <img src="img/social/in.png" alt="LinkedIn" />
+        <img src="/img/social/in.png" alt="LinkedIn" />
       </a>
       <a href={socialLinks.googleMap} target="_blank" rel="noopener noreferrer">
-        <img src="img/social/map.png" alt="Google Maps" />
+        <img src="/img/social/map.png" alt="Google Maps" />
       </a>
       <a href={socialLinks.twitter} target="_blank" rel="noopener noreferrer">
-        <img src="img/social/t.png" alt="Twitter" />
+        <img src="/img/social/t.png" alt="Twitter" />
       </a>
     </div>
   );

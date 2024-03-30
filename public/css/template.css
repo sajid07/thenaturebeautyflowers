@@ -485,13 +485,18 @@ section {
   background: linear-gradient(rgba(5, 74, 133, 0.8), rgba(5, 74, 133, 0.9)),
     url("../assets/img/cta-bg.jpg") fixed center center;
   background-size: cover;
-  padding: 120px 0;
+  /* padding: 120px 0; */
 }
 .cta1 {
   background: linear-gradient(rgba(5, 74, 133, 0.8), rgba(5, 74, 133, 0.9)),
     url("../assets/img/cta-bg1.jpg") fixed center center;
   background-size: cover;
   padding: 120px 0;
+}
+.cta2 {
+  background: linear-gradient(rgba(5, 74, 133, 0.8), rgba(5, 74, 133, 0.9)),
+    url("../assets/img/cta-bg.jpg") fixed center center;
+  background-size: cover;
 }
 .text-below-images {
   color: white;

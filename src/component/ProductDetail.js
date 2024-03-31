@@ -111,7 +111,7 @@ const ProductDetail = () => {
                   />
                 </div>
               </div>
-              <section id="cta" class="cta">
+              <div id="cta" class="cta">
                 <div class="container">
                   <div class="row" data-aos="zoom-in">
                     <div class="col-lg-3 cta-btn-container text-center"></div>
@@ -131,7 +131,7 @@ const ProductDetail = () => {
                     message={`Hi! Interested in ${product.name}. Could you share more details?`}
                   />
                 </div>
-              </section>
+              </div>
             </div>
           </div>
         </div>

@@ -74,7 +74,7 @@ const Filtration = () => {
                       >
                         <img
                           src={product.picture}
-                          className="card-img-top"
+                          className="card-img-top img-fluid"
                           alt={product.name}
                           style={{
                             position: "absolute",

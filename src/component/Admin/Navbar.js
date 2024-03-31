@@ -11,7 +11,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav className="navbar navbar-expand-lg navbar-dark bg-dark fixed">
       <div className="container-fluid">
         <Link to="/Admin/Admin" className="navbar-brand">
           The Nature Beauty Flowers

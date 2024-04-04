@@ -88,6 +88,30 @@ const Footer = () => {
                   Swimming Pool Services
                 </a>
               </li>
+              <li className="mb-2">
+                <a
+                  href="/swimmingPool"
+                  className="text-white text-decoration-none"
+                >
+                  Troubleshooting
+                </a>
+              </li>
+              <li className="mb-2">
+                <a
+                  href="/swimmingPool"
+                  className="text-white text-decoration-none"
+                >
+                  Swimming Pool Maintenance
+                </a>
+              </li>
+              <li className="mb-2">
+                <a
+                  href="/swimmingPool"
+                  className="text-white text-decoration-none"
+                >
+                  Dosing System Installation
+                </a>
+              </li>
             </ul>
           </div>
           <div className="col-lg-4">

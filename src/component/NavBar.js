@@ -34,22 +34,22 @@ const NavBar = () => {
               <NavDropdown.Item as={Link} to="/swimmingPool">
                 Swimming Pool
               </NavDropdown.Item>
-              <NavDropdown.Item as={Link} to="/WaterFountain">
+              <NavDropdown.Item as={Link} to="/category/Water Fountain">
                 Water Fountain
               </NavDropdown.Item>
-              <NavDropdown.Item as={Link} to="/Wellness">
+              <NavDropdown.Item as={Link} to="/category/Wellness">
                 Wellness
               </NavDropdown.Item>
-              <NavDropdown.Item as={Link} to="/poolchemical">
+              <NavDropdown.Item as={Link} to="/category/pool chemical">
                 Pool Chemicals
               </NavDropdown.Item>
-              <NavDropdown.Item as={Link} to="/waterfall">
+              <NavDropdown.Item as={Link} to="/category/waterfall">
                 Waterfalls & Water Curtains
               </NavDropdown.Item>
-              <NavDropdown.Item as={Link} to="/intexpool">
+              <NavDropdown.Item as={Link} to="/category/intex pool">
                 Intex Pool & Bestway
               </NavDropdown.Item>
-              <NavDropdown.Item as={Link} to="/boosterpump">
+              <NavDropdown.Item as={Link} to="/category/booster pump">
                 Booster Pumps
               </NavDropdown.Item>
             </NavDropdown>

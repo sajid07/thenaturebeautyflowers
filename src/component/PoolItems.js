@@ -2,6 +2,9 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const PoolItems = () => {
+  const categoryData = {
+    categoryName: "filtration",
+  };
   const backgroundStyle = {
     // backgroundImage: `url(${'/img/banner/out.jpg'})`,
     backgroundSize: "cover",
@@ -23,8 +26,8 @@ const PoolItems = () => {
       <div className="container-xxl py-5 ">
         <div className="container">
           <div
-            className="text-center mx-auto mb-5 animate__animated animate__fadeInUp"
-            data-aos-delay="0.1s"
+            className="text-center mx-auto mb-5 wow fadeInUp"
+            data-wow-delay="0.1s"
             style={{ maxWidth: "600px" }}
           >
             <h1 className="mb-3" style={{ color: "#FF5733" }}>
@@ -34,12 +37,12 @@ const PoolItems = () => {
           </div>
           <div className="row g-4">
             <div
-              className="col-lg-3 col-sm-6 animate__animated animate__fadeInUp"
-              data-aos-delay="0.1s"
+              className="col-lg-3 col-sm-6 wow fadeInUp"
+              data-wow-delay="0.1s"
             >
               <Link
                 className="cat-item d-block bg-light text-center rounded p-3"
-                to="/filtration"
+                to="/category/filtration"
               >
                 <div className="rounded p-4">
                   <div className="icon mb-3">
@@ -54,12 +57,12 @@ const PoolItems = () => {
               </Link>
             </div>
             <div
-              className="col-lg-3 col-sm-6 animate__animated animate__fadeInUp"
-              data-aos-delay="0.3s"
+              className="col-lg-3 col-sm-6 wow fadeInUp"
+              data-wow-delay="0.3s"
             >
               <Link
                 className="cat-item d-block bg-light text-center rounded p-3"
-                to="/category/pool-pump"
+                to="/category/pool pump"
               >
                 <div className="rounded p-4">
                   <div className="icon mb-3">
@@ -74,12 +77,12 @@ const PoolItems = () => {
               </Link>
             </div>
             <div
-              className="col-lg-3 col-sm-6 animate__animated animate__fadeInUp"
-              data-aos-delay="0.5s"
+              className="col-lg-3 col-sm-6 wow fadeInUp"
+              data-wow-delay="0.5s"
             >
               <Link
                 className="cat-item d-block bg-light text-center rounded p-3"
-                to="/category/pool-lights"
+                to="/category/pool lights"
               >
                 <div className="rounded p-4">
                   <div className="icon mb-3">
@@ -94,12 +97,12 @@ const PoolItems = () => {
               </Link>
             </div>
             <div
-              className="col-lg-3 col-sm-6 animate__animated animate__fadeInUp"
-              data-aos-delay="0.7s"
+              className="col-lg-3 col-sm-6 wow fadeInUp"
+              data-wow-delay="0.7s"
             >
               <Link
                 className="cat-item d-block bg-light text-center rounded p-3"
-                to="/category/pool-fitting"
+                to="/category/pool fitting"
               >
                 <div className="rounded p-4">
                   <div className="icon mb-3">
@@ -114,12 +117,12 @@ const PoolItems = () => {
               </Link>
             </div>
             <div
-              className="col-lg-3 col-sm-6 animate__animated animate__fadeInUp"
-              data-aos-delay="0.1s"
+              className="col-lg-3 col-sm-6 wow fadeInUp"
+              data-wow-delay="0.1s"
             >
               <Link
                 className="cat-item d-block bg-light text-center rounded p-3"
-                to="/cleaning-product"
+                to="/category/cleaning product"
               >
                 <div className="rounded p-4">
                   <div className="icon mb-3">
@@ -134,12 +137,12 @@ const PoolItems = () => {
               </Link>
             </div>
             <div
-              className="col-lg-3 col-sm-6 animate__animated animate__fadeInUp"
-              data-aos-delay="0.3s"
+              className="col-lg-3 col-sm-6 wow fadeInUp"
+              data-wow-delay="0.3s"
             >
               <Link
                 className="cat-item d-block bg-light text-center rounded p-3"
-                to="/heat-cool-pump"
+                to="/category/heat cool pump"
               >
                 <div className="rounded p-4">
                   <div className="icon mb-3">
@@ -154,12 +157,12 @@ const PoolItems = () => {
               </Link>
             </div>
             <div
-              className="col-lg-3 col-sm-6 animate__animated animate__fadeInUp"
-              data-aos-delay="0.5s"
+              className="col-lg-3 col-sm-6 wow fadeInUp"
+              data-wow-delay="0.5s"
             >
               <Link
                 className="cat-item d-block bg-light text-center rounded p-3"
-                to="/dosing-system"
+                to="/category/dosing system"
               >
                 <div className="rounded p-4">
                   <div className="icon mb-3">
@@ -174,12 +177,12 @@ const PoolItems = () => {
               </Link>
             </div>
             <div
-              className="col-lg-3 col-sm-6 animate__animated animate__fadeInUp"
-              data-aos-delay="0.7s"
+              className="col-lg-3 col-sm-6 wow fadeInUp"
+              data-wow-delay="0.7s"
             >
               <Link
                 className="cat-item d-block bg-light text-center rounded p-3"
-                to="/surrounded-equipments"
+                to="/category/surrounded equipments"
               >
                 <div className="rounded p-4">
                   <div className="icon mb-3">
@@ -194,12 +197,12 @@ const PoolItems = () => {
               </Link>
             </div>
             <div
-              className="col-lg-3 col-sm-6 animate__animated animate__fadeInUp"
-              data-aos-delay="0.1s"
+              className="col-lg-3 col-sm-6 wow fadeInUp"
+              data-wow-delay="0.1s"
             >
               <Link
                 className="cat-item d-block bg-light text-center rounded p-3"
-                to="/safety-product"
+                to="/category/safety product"
               >
                 <div className="rounded p-4">
                   <div className="icon mb-3">
@@ -214,12 +217,12 @@ const PoolItems = () => {
               </Link>
             </div>
             <div
-              className="col-lg-3 col-sm-6 animate__animated animate__fadeInUp"
-              data-aos-delay="0.3s"
+              className="col-lg-3 col-sm-6 wow fadeInUp"
+              data-wow-delay="0.3s"
             >
               <Link
                 className="cat-item d-block bg-light text-center rounded p-3"
-                to="/pool-tiles"
+                to="/category/pool tiles"
               >
                 <div className="rounded p-4">
                   <div className="icon mb-3">
@@ -234,12 +237,12 @@ const PoolItems = () => {
               </Link>
             </div>
             <div
-              className="col-lg-3 col-sm-6 animate__animated animate__fadeInUp"
-              data-aos-delay="0.5s"
+              className="col-lg-3 col-sm-6 wow fadeInUp"
+              data-wow-delay="0.5s"
             >
               <Link
                 className="cat-item d-block bg-light text-center rounded p-3"
-                to="/commercial-equipment"
+                to="/category/commercial equipment"
               >
                 <div className="rounded p-4">
                   <div className="icon mb-3">
@@ -254,12 +257,12 @@ const PoolItems = () => {
               </Link>
             </div>
             <div
-              className="col-lg-3 col-sm-6 animate__animated animate__fadeInUp"
-              data-aos-delay="0.7s"
+              className="col-lg-3 col-sm-6 wow fadeInUp"
+              data-wow-delay="0.7s"
             >
               <Link
                 className="cat-item d-block bg-light text-center rounded p-3"
-                to="/control-panel"
+                to="/category/control panel"
               >
                 <div className="rounded p-4">
                   <div className="icon mb-3">

@@ -1,19 +1,19 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useProduct } from "../context/products/ProductState";
 import Footer from "./Footer";
-import { RingLoader } from "react-spinners"; // Import the RingLoader component
+import { RingLoader } from "react-spinners";
 
-const Filtration = () => {
-  const productInitial = [];
-  const { products, fetchProduct } = useProduct(productInitial);
-  const [loading, setLoading] = useState(true); // Add loading state
-
+const CategoryProducts = () => {
+  const { category } = useParams();
+  const { fetchProduct, products } = useProduct([]);
+  const [loading, setLoading] = useState(true);
+  console.log("ctae:", category);
   useEffect(() => {
     const fetchData = async () => {
       try {
         setLoading(true); // Set loading to true when fetching starts
-        await fetchProduct({ category: "filtration" }); // Include category filter
+        await fetchProduct();
         setLoading(false); // Set loading to false when data is fetched
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -22,29 +22,13 @@ const Filtration = () => {
     };
 
     fetchData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  const backgroundStyle = {
-    // backgroundImage: `url(${'/img/banner/out.jpg'})`,
-    backgroundSize: "cover",
-    backgroundRepeat: "no-repeat",
-    backgroundPosition: "center",
-    minHeight: "100vh",
-    position: "fixed",
-    top: 0,
-    left: 0,
-    width: "100%",
-    height: "100%",
-    zIndex: -1,
-    filter: "blur(0px)",
-  };
-
+  }, [category]);
+  const catProducts = products.filter(
+    (product) => product.category.toLowerCase() === category
+  );
   return (
     <>
-      <div style={backgroundStyle}></div>
-
-      {loading ? ( // Show spinner when loading is true
+      {loading ? (
         <div className="container mt-5">
           <div
             className="row justify-content-center align-items-center"
@@ -55,13 +39,16 @@ const Filtration = () => {
         </div>
       ) : (
         <div className="container mt-5">
-          <h2 className="mb-4">Filtration Products</h2>
+          <h2 className="mb-4 text-center" style={{ color: "#FF5733" }}>
+            {category.charAt(0).toUpperCase() + category.slice(1)} Products
+          </h2>
           <div className="row">
-            {products
-              .filter(
-                (product) => product.category.toLowerCase() === "filtration"
-              )
-              .map((product) => (
+            {catProducts.length === 0 ? (
+              <div className="col-12 text-center">
+                <p>Sorry, No products found.</p>
+              </div>
+            ) : (
+              catProducts.map((product) => (
                 <div key={product._id} className="col-md-3 mb-3">
                   <div className="card">
                     <Link to={`/product/${product._id}`} className="card-link">
@@ -99,7 +86,8 @@ const Filtration = () => {
                     </div>
                   </div>
                 </div>
-              ))}
+              ))
+            )}
           </div>
         </div>
       )}
@@ -108,4 +96,4 @@ const Filtration = () => {
   );
 };
 
-export default Filtration;
+export default CategoryProducts;

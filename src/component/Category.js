@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Category = () => {
   const containerStyle = {
@@ -30,164 +31,169 @@ const Category = () => {
                 <div className="row g-4">
                   <div
                     className="col-lg-3 col-sm-6 animate__animated animate__fadeInUp"
-                    data-aos-delay="100"
+                    data-aos-delay="0.3s"
                   >
-                    <a
+                    <Link
+                      to="swimmingPool"
                       className="cat-item d-block bg-light text-center rounded p-3"
-                      href="/swimmingPool"
                     >
                       <div className="rounded p-4">
                         <div className="icon mb-3">
                           <img
                             src="img/category/swimming1.jpg"
                             alt="Icon"
-                            style={{ maxWidth: "100%", height: "auto" }} // Make the image responsive
+                            style={{ maxWidth: "100%", height: "auto" }}
                           />
                         </div>
-
                         <h4>Swimming Pool</h4>
                       </div>
-                    </a>
+                    </Link>
                   </div>
+
                   <div
                     className="col-lg-3 col-sm-6 animate__animated animate__fadeInUp"
                     data-aos-delay="0.3s"
                   >
-                    <a
+                    <Link
+                      to="/category/water fountain"
                       className="cat-item d-block bg-light text-center rounded p-3"
-                      href="/waterfountain"
                     >
                       <div className="rounded p-4">
                         <div className="icon mb-3">
                           <img
                             src="img/category/fountain1.jpg"
                             alt="Icon"
-                            style={{ maxWidth: "100%", height: "auto" }} // Make the image responsive
+                            style={{ maxWidth: "100%", height: "auto" }}
                           />
                         </div>
                         <h4>Water Fountain</h4>
                       </div>
-                    </a>
+                    </Link>
                   </div>
+
                   <div
                     className="col-lg-3 col-sm-6 animate__animated animate__fadeInUp"
-                    data-aos-delay="0.5s"
+                    data-aos-delay="0.3s"
                   >
-                    <a
+                    <Link
+                      to="/category/wellness"
                       className="cat-item d-block bg-light text-center rounded p-3"
-                      href="/wellness"
                     >
                       <div className="rounded p-4">
                         <div className="icon mb-3">
                           <img
                             src="img/category/spa.jpg"
                             alt="Icon"
-                            style={{ maxWidth: "100%", height: "auto" }} // Make the image responsive
+                            style={{ maxWidth: "100%", height: "auto" }}
                           />
                         </div>
                         <h4>Wellness</h4>
                       </div>
-                    </a>
+                    </Link>
                   </div>
+
                   <div
                     className="col-lg-3 col-sm-6 animate__animated animate__fadeInUp"
-                    data-aos-delay="100"
+                    data-aos-delay="0.3s"
                   >
-                    <a
+                    <Link
+                      to="/category/pool chemical"
                       className="cat-item d-block bg-light text-center rounded p-3"
-                      href="/poolchemical"
                     >
                       <div className="rounded p-4">
                         <div className="icon mb-3">
                           <img
                             src="img/category/chemical.jpg"
                             alt="Icon"
-                            style={{ maxWidth: "100%", height: "auto" }} // Make the image responsive
+                            style={{ maxWidth: "100%", height: "auto" }}
                           />
                         </div>
                         <h4>Pool Chemical</h4>
                       </div>
-                    </a>
+                    </Link>
                   </div>
+
                   <div
                     className="col-lg-3 col-sm-6 animate__animated animate__fadeInUp"
-                    data-aos-delay="100"
+                    data-aos-delay="0.3s"
                   >
-                    <a
+                    <Link
+                      to="/category/waterfall"
                       className="cat-item d-block bg-light text-center rounded p-3"
-                      href="/waterfall"
                     >
                       <div className="rounded p-4">
                         <div className="icon mb-3">
                           <img
                             src="img/category/wfal.jpg"
                             alt="Icon"
-                            style={{ maxWidth: "100%", height: "auto" }} // Make the image responsive
+                            style={{ maxWidth: "100%", height: "auto" }}
                           />
                         </div>
                         <h4>Waterfalls & Water Curtains</h4>
                       </div>
-                    </a>
+                    </Link>
                   </div>
                   <div
                     className="col-lg-3 col-sm-6 animate__animated animate__fadeInUp"
-                    data-aos-delay="100"
+                    data-aos-delay="0.3s"
                   >
-                    <a
+                    <Link
+                      to="/category/intex pool"
                       className="cat-item d-block bg-light text-center rounded p-3"
-                      href="/intexpool"
                     >
                       <div className="rounded p-4">
                         <div className="icon mb-3">
                           <img
                             src="img/category/iintex.jpg"
                             alt="Icon"
-                            style={{ maxWidth: "100%", height: "auto" }} // Make the image responsive
+                            style={{ maxWidth: "100%", height: "auto" }}
                           />
                         </div>
                         <h4>Intext Pool And Bestway</h4>
                       </div>
-                    </a>
+                    </Link>
                   </div>
+
                   <div
                     className="col-lg-3 col-sm-6 animate__animated animate__fadeInUp"
-                    data-aos-delay="100"
+                    data-aos-delay="0.3s"
                   >
-                    <a
+                    <Link
+                      to="/category/booster pump"
                       className="cat-item d-block bg-light text-center rounded p-3"
-                      href="/boosterpump"
                     >
                       <div className="rounded p-4">
                         <div className="icon mb-3">
                           <img
                             src="img/category/motor.jpg"
                             alt="Icon"
-                            style={{ maxWidth: "100%", height: "auto" }} // Make the image responsive
+                            style={{ maxWidth: "100%", height: "auto" }}
                           />
                         </div>
                         <h4>Booster Pumps</h4>
                       </div>
-                    </a>
+                    </Link>
                   </div>
+
                   <div
                     className="col-lg-3 col-sm-6 animate__animated animate__fadeInUp"
-                    data-aos-delay="100"
+                    data-aos-delay="0.3s"
                   >
-                    <a
+                    <Link
+                      to="/category/irregation"
                       className="cat-item d-block bg-light text-center rounded p-3"
-                      href="/irregation"
                     >
                       <div className="rounded p-4">
                         <div className="icon mb-3">
                           <img
                             src="img/category/irregation.jpg"
                             alt="Icon"
-                            style={{ maxWidth: "100%", height: "auto" }} // Make the image responsive
+                            style={{ maxWidth: "100%", height: "auto" }}
                           />
                         </div>
                         <h4>Irregation Material</h4>
                       </div>
-                    </a>
+                    </Link>
                   </div>
                 </div>
               </div>

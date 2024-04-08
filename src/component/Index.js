@@ -1,7 +1,6 @@
 import React from "react";
 import PoolBanner from "./PoolBanner";
 import Category from "./Category";
-import Footer from "./Footer";
 import About from "./About";
 import List from "./List";
 import AutoplaySlider from "./AutoplaySlider";
@@ -16,7 +15,6 @@ const Index = () => {
       <Services />
       <List></List>
       <AutoplaySlider />
-      <Footer></Footer>
     </>
   );
 };

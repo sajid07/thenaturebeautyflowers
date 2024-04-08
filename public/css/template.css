@@ -14,7 +14,11 @@ body {
 #root {
   display: flex;
   flex-direction: column;
-  height: 100%;
+  min-height: 100%;
+}
+.route-body {
+  position: relative;
+  flex-grow: 1;
 }
 .custom-button {
   background-color: #3498db; /* Default button color */
@@ -114,15 +118,20 @@ section {
 }
 .not-found-container {
   text-align: center;
-  margin: auto 0 calc(var(--footer-top-padding) * -1);
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
 }
 
 .content-container {
   flex: 1;
 }
 .footer {
-  padding-top: var(--footer-top-padding);
-  margin: auto 0 0;
+  flex-grow: 0;
+  flex-shrink: 0;
 }
 .section-bg {
   background-color: #f1f8ff;
@@ -1977,6 +1986,8 @@ section {
   padding: 0 3rem;
   transition: 0.5s;
   z-index: 9999;
+  flex-grow: 0;
+  flex-shrink: 0;
 }
 
 .nav-bar.sticky-top {

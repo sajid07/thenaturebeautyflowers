@@ -1,7 +1,6 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Footer from "./Footer";
 
 export const Login = (props) => {
   const [credential, setCredential] = useState({ email: "", password: "" });
@@ -111,7 +110,6 @@ export const Login = (props) => {
           </form>
         </div>
       </div>
-      <Footer />
     </>
   );
 };

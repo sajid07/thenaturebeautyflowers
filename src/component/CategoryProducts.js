@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { useProduct } from "../context/products/ProductState";
-import Footer from "./Footer";
 import { RingLoader } from "react-spinners";
 
 const CategoryProducts = () => {
@@ -118,7 +117,6 @@ const CategoryProducts = () => {
           </nav>
         </div>
       )}
-      <Footer />
     </>
   );
 };

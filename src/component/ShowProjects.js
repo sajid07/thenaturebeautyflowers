@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import Footer from "./Footer";
 
 const ShowProjects = () => {
   const [projects, setProjects] = useState([]);
@@ -100,7 +99,6 @@ const ShowProjects = () => {
           ))}
         </div>
       </div>
-      <Footer></Footer>
     </div>
   );
 };

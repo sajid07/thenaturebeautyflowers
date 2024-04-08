@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import Footer from "./Footer";
 
 const CreateAdmin = (props) => {
   const [credential, setCredential] = useState({ email: "", password: "" });
@@ -29,7 +28,7 @@ const CreateAdmin = (props) => {
           email: credential.email,
           password: credential.password,
         }),
-      },
+      }
     );
     const json = await response.json();
     if (response.status === 400) {
@@ -137,7 +136,6 @@ const CreateAdmin = (props) => {
             </div>
           </div>
         </div>
-        <Footer></Footer>
       </section>
     </>
   );

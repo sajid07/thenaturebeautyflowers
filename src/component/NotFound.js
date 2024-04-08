@@ -1,5 +1,4 @@
 import React from "react";
-import Footer from "./Footer";
 
 const NotFound = () => {
   return (
@@ -10,7 +9,6 @@ const NotFound = () => {
           <p>Sorry, the page you are looking for does not exist.</p>
         </div>
       </div>
-      <Footer></Footer>
     </>
   );
 };

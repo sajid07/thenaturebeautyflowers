@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { RingLoader } from "react-spinners";
-import Footer from "./Footer";
 import WhatsAppButton from "./WhatsAppButton";
 import axios from "axios";
 
@@ -136,8 +135,6 @@ const ProductDetail = () => {
           </div>
         </div>
       )}
-
-      <Footer />
     </>
   );
 };

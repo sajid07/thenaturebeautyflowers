@@ -102,6 +102,7 @@ const {
   awsS3UploadMiddleware,
   awsS3DeleteMiddleware,
 } = require("../Middleware/awsS3Middleware");
+const mongooseValidationMiddleware = require("../Middleware/mongooseValidationMiddleware");
 
 router.use(express.json());
 
@@ -134,7 +135,7 @@ router.get("/fetchallproducts", async (req, res) => {
 });
 
 // Fetch a product by ID
-router.get("/:productId", async (req, res) => {
+router.get("/:productId", mongooseValidationMiddleware, async (req, res) => {
   try {
     const { productId } = req.params;
     const product = await Product.findById(productId);
@@ -154,6 +155,7 @@ router.get("/:productId", async (req, res) => {
 router.delete(
   "/:productId",
   authmiddleware,
+  mongooseValidationMiddleware,
   awsS3DeleteMiddleware,
   async (req, res) => {
     try {
@@ -177,31 +179,36 @@ router.delete(
 );
 
 // Update a product by ID
-router.put("/:productId", authmiddleware, async (req, res) => {
-  try {
-    console.log("hi from product update");
-    const { productId } = req.params;
-    const { name, description, category } = req.body;
+router.put(
+  "/:productId",
+  authmiddleware,
+  mongooseValidationMiddleware,
+  async (req, res) => {
+    try {
+      console.log("hi from product update");
+      const { productId } = req.params;
+      const { name, description, category } = req.body;
 
-    const product = await Product.findById(productId);
+      const product = await Product.findById(productId);
 
-    if (!product) {
-      return res.status(404).json({ message: "Product not found" });
+      if (!product) {
+        return res.status(404).json({ message: "Product not found" });
+      }
+
+      product.name = name;
+      product.description = description;
+      product.category = category;
+
+      await product.save();
+
+      console.log("Product updated successfully");
+
+      res.json({ message: "Product updated successfully" });
+    } catch (error) {
+      console.error("Error updating product:", error);
+      res.status(500).json({ message: "Internal Server Error" });
     }
-
-    product.name = name;
-    product.description = description;
-    product.category = category;
-
-    await product.save();
-
-    console.log("Product updated successfully");
-
-    res.json({ message: "Product updated successfully" });
-  } catch (error) {
-    console.error("Error updating product:", error);
-    res.status(500).json({ message: "Internal Server Error" });
   }
-});
+);
 
 module.exports = router;

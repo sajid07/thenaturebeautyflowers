@@ -1,10 +1,9 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useState } from "react";
 import productContext from "../../context/products/productContext";
 import NavBar from "../Admin/Navbar";
 import SideNavbar from "./SideNavbar";
-import { useNavigate } from "react-router-dom";
 
-const ProductForm = (props) => {
+const ProductForm = () => {
   const context = useContext(productContext);
   const { addProduct } = context || {};
 
@@ -16,8 +15,6 @@ const ProductForm = (props) => {
     pdfFile: "",
   });
   const [loading, setLoading] = useState(false); // Add loading state
-  const [loggedIn, setLoggedIn] = useState(true); // Assume the user is logged in initially
-  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();

@@ -31,7 +31,7 @@ const NavBar = () => {
             </Nav.Link>
 
             <NavDropdown title="Products">
-              <NavDropdown.Item as={Link} to="/swimmingPool">
+              <NavDropdown.Item as={Link} to="/swimming-pool">
                 Swimming Pool
               </NavDropdown.Item>
               <NavDropdown.Item as={Link} to="/category/Water Fountain">
@@ -54,11 +54,11 @@ const NavBar = () => {
               </NavDropdown.Item>
             </NavDropdown>
 
-            <Nav.Link as={Link} to="/Projects">
+            <Nav.Link as={Link} to="/projects">
               Projects
             </Nav.Link>
 
-            <Nav.Link as={Link} to="/ContactUs">
+            <Nav.Link as={Link} to="/contact-us">
               Contact Us
             </Nav.Link>
           </Nav>

@@ -6,6 +6,7 @@ const {
   awsS3UploadMiddleware,
   awsS3DeleteMiddleware,
 } = require("../Middleware/awsS3Middleware");
+const mongooseValidationMiddleware = require("../Middleware/mongooseValidationMiddleware");
 
 router.use(express.json());
 
@@ -41,7 +42,7 @@ router.get("/fetchallprojects", async (req, res) => {
 });
 
 // Fetch a product by ID
-router.get("/:projectId", async (req, res) => {
+router.get("/:projectId", mongooseValidationMiddleware, async (req, res) => {
   try {
     const { projectId } = req.params;
     const project = await Project.findById(projectId);
@@ -61,6 +62,7 @@ router.get("/:projectId", async (req, res) => {
 router.delete(
   "/:projectId",
   authmiddleware,
+  mongooseValidationMiddleware,
   awsS3DeleteMiddleware,
   async (req, res) => {
     try {
@@ -86,6 +88,7 @@ router.delete(
 router.delete(
   "/projects/:projectId",
   authmiddleware,
+  mongooseValidationMiddleware,
   awsS3DeleteMiddleware,
   async (req, res) => {
     const { projectId } = req.params;

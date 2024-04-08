@@ -83,7 +83,7 @@ const Footer = () => {
                 </li>
                 <li className="mb-2">
                   <a
-                    href="/swimmingPool"
+                    href="/swimming-pool"
                     className="text-white text-decoration-none"
                   >
                     Swimming Pool Services
@@ -91,7 +91,7 @@ const Footer = () => {
                 </li>
                 <li className="mb-2">
                   <a
-                    href="/swimmingPool"
+                    href="/swimming-pool"
                     className="text-white text-decoration-none"
                   >
                     Troubleshooting
@@ -99,7 +99,7 @@ const Footer = () => {
                 </li>
                 <li className="mb-2">
                   <a
-                    href="/swimmingPool"
+                    href="/swimming-pool"
                     className="text-white text-decoration-none"
                   >
                     Swimming Pool Maintenance
@@ -107,7 +107,7 @@ const Footer = () => {
                 </li>
                 <li className="mb-2">
                   <a
-                    href="/swimmingPool"
+                    href="/swimming-pool"
                     className="text-white text-decoration-none"
                   >
                     Dosing System Installation
@@ -125,7 +125,7 @@ const Footer = () => {
                 </li>
                 <li className="mb-2">
                   <a
-                    href="/contactUs"
+                    href="/contact-us"
                     className="text-white text-decoration-none"
                   >
                     Contact Us
@@ -133,7 +133,7 @@ const Footer = () => {
                 </li>
                 <li className="mb-2">
                   <a
-                    href="/swimmingPool"
+                    href="/swimming-pool"
                     className="text-white text-decoration-none"
                   >
                     Swimming Pool Services

@@ -1,11 +1,10 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext } from "react";
 import axios from "axios";
-import productContext from "../context/products/productContext";
-import SideNavbar from "./Admin/SideNavbar";
-import NavBar from "./Admin/Navbar";
-import { useNavigate } from "react-router-dom";
+import productContext from "../../context/products/productContext";
+import SideNavbar from "./SideNavbar";
+import NavBar from "./Navbar";
 
-const WhatsAppUpdateButton = ({ onUpdate }) => {
+const WhatsAppUpdateButton = () => {
   const [newWhatsAppContact, setNewWhatsAppContact] = useState("");
   const [newCallContact, setNewCallContact] = useState("");
   const host = process.env.REACT_APP_BASE_URI;
@@ -19,26 +18,7 @@ const WhatsAppUpdateButton = ({ onUpdate }) => {
       "auth-token": localStorage.getItem("token"),
     },
   });
-  const [loggedIn, setLoggedIn] = useState(true); // Assume the user is logged in initially
-  const navigate = useNavigate();
 
-  useEffect(() => {
-    // Check if user is logged in
-    const checkLoggedIn = () => {
-      const token = localStorage.getItem("token");
-      if (!token) {
-        // If token doesn't exist, user is not logged in
-        setLoggedIn(false);
-      }
-    };
-
-    checkLoggedIn();
-  }, []);
-
-  if (!loggedIn) {
-    // If user is not logged in, redirect to login page
-    navigate("/login");
-  }
   const handleUpdateContacts = async (e) => {
     try {
       // Make API call to update contacts on the server
@@ -52,11 +32,6 @@ const WhatsAppUpdateButton = ({ onUpdate }) => {
         // If successful, call the updateContacts function from productContext
         if (updateContacts) {
           await updateContacts(newWhatsAppContact, newCallContact, host);
-
-          // Notify the parent component about the update
-          // onUpdate();
-
-          // Optionally, reset the form or close the modal after submission
 
           // Log success or perform other actions if needed
           console.log("Contacts updated successfully!");

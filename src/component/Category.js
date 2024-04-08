@@ -34,7 +34,7 @@ const Category = () => {
                     data-aos-delay="0.3s"
                   >
                     <Link
-                      to="swimmingPool"
+                      to="swimming-pool"
                       className="cat-item d-block bg-light text-center rounded p-3"
                     >
                       <div className="rounded p-4">

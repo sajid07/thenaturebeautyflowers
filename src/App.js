@@ -7,7 +7,12 @@ import "./App.css";
 
 import AOS from "aos";
 import Index from "./component/Index";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+  Outlet,
+} from "react-router-dom";
 import SwimmingPool from "./component/SwimmingPool";
 import Projects from "./component/Projects";
 import ContactUs from "./component/ContactUs";
@@ -20,7 +25,7 @@ import Alert from "./component/Alert";
 import { Login } from "./component/Login";
 import { useState } from "react";
 import NavBar from "./component/NavBar";
-import WhatsAppUpdateButton from "./component/WhatsAppUpdateButton";
+import WhatsAppUpdateButton from "./component/Admin/WhatsAppUpdateButton";
 import SocialIcons from "./component/SocialIcons";
 import LinkForm from "./component/Admin/LinkForm";
 import AddProject from "./component/Admin/AddProject";
@@ -46,11 +51,21 @@ function App() {
           <NavBar />
           <SocialIcons />
           <div className="alert-container">
-            {" "}
             <Alert alert={alert}></Alert>
           </div>
-          <div className="route-body">
-            <Routes>
+          <Routes>
+            {/* Client Routes with Footer */}
+            <Route
+              element={
+                <>
+                  <div className="route-body">
+                    <Outlet />
+                  </div>
+                  <Footer />
+                </>
+              }
+            >
+              <Route exact path="/" element={<Index />} />
               <Route
                 exact
                 path="/signup"
@@ -66,34 +81,39 @@ function App() {
                 path="/login"
                 element={<Login showAlert={showAlert} />}
               />
-              <Route exact path="/addProject" element={<AddProject />} />
-
-              <Route exact path="Dashboard" element={<Admin />} />
-              <Route
-                exact
-                path="UpdateContact"
-                element={<WhatsAppUpdateButton />}
-              />
-              <Route exact path="/socialLinks" element={<LinkForm />} />
-              <Route exact path="/showProject" element={<ShowProjects />} />
-
-              <Route exact path="ProductForm" element={<ProductForm />} />
-
-              <Route exact path="/" element={<Index />} />
-              <Route exact path="/showProjects" element={<ShowProjects />} />
+              <Route exact path="/show-project" element={<ShowProjects />} />
+              <Route exact path="/show-projects" element={<ShowProjects />} />
               <Route
                 path="/category/:category"
                 element={<CategoryProducts />}
               />
-
-              <Route exact path="/swimmingPool" element={<SwimmingPool />} />
+              <Route exact path="/swimming-pool" element={<SwimmingPool />} />
               <Route path="/product/:productId" element={<ProductDetail />} />
+              <Route exact path="/projects" element={<Projects />} />
+              <Route exact path="/contact-us" element={<ContactUs />} />
+            </Route>
 
-              <Route exact path="/Projects" element={<Projects />} />
-              <Route exact path="/ContactUs" element={<ContactUs />} />
-            </Routes>
-          </div>
-          <Footer />
+            {/* Admin Routes without Footer */}
+            <Route
+              element={
+                <>
+                  <div className="route-body">
+                    <Outlet />
+                  </div>
+                </>
+              }
+            >
+              <Route exact path="/add-project" element={<AddProject />} />
+              <Route exact path="dashboard" element={<Admin />} />
+              <Route
+                exact
+                path="update-contact"
+                element={<WhatsAppUpdateButton />}
+              />
+              <Route exact path="/social-links" element={<LinkForm />} />
+              <Route exact path="/product-form" element={<ProductForm />} />
+            </Route>
+          </Routes>
         </Router>
       </ProductState>
     </>

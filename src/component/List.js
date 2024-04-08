@@ -117,7 +117,7 @@ const List = () => {
                 </div>
               ))}
             </div>
-            <Link to="/showProject" className="see-more-link">
+            <Link to="/show-project" className="see-more-link">
               See More
             </Link>
           </div>

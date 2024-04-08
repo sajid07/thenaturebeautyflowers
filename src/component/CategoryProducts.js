@@ -8,7 +8,9 @@ const CategoryProducts = () => {
   const { category } = useParams();
   const { fetchProduct, products } = useProduct([]);
   const [loading, setLoading] = useState(true);
-  console.log("ctae:", category);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [productsPerPage] = useState(12); // Change this number to adjust the number of products per page
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -23,9 +25,17 @@ const CategoryProducts = () => {
 
     fetchData();
   }, [category]);
-  const catProducts = products.filter(
-    (product) => product.category.toLowerCase() === category
-  );
+
+  // Get current products
+  const indexOfLastProduct = currentPage * productsPerPage;
+  const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
+  const currentProducts = products
+    .filter((product) => product.category.toLowerCase() === category)
+    .slice(indexOfFirstProduct, indexOfLastProduct);
+
+  // Change page
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
   return (
     <>
       {loading ? (
@@ -39,16 +49,16 @@ const CategoryProducts = () => {
         </div>
       ) : (
         <div className="container mt-5">
-          <h2 className="mb-4 text-center" style={{ color: "#FF5733" }}>
+          <h2 className="mb-4 text-center" style={{ color: "#3498db" }}>
             {category.charAt(0).toUpperCase() + category.slice(1)} Products
           </h2>
           <div className="row">
-            {catProducts.length === 0 ? (
+            {currentProducts.length === 0 ? (
               <div className="col-12 text-center">
                 <p>Sorry, No products found.</p>
               </div>
             ) : (
-              catProducts.map((product) => (
+              currentProducts.map((product) => (
                 <div key={product._id} className="col-md-3 mb-3">
                   <div className="card">
                     <Link to={`/product/${product._id}`} className="card-link">
@@ -89,6 +99,23 @@ const CategoryProducts = () => {
               ))
             )}
           </div>
+          {/* Pagination */}
+          <nav className="mt-4">
+            <ul className="pagination justify-content-center">
+              {[
+                ...Array(Math.ceil(products.length / productsPerPage)).keys(),
+              ].map((number) => (
+                <li key={number} className="page-item">
+                  <button
+                    onClick={() => paginate(number + 1)}
+                    className="page-link"
+                  >
+                    {number + 1}
+                  </button>
+                </li>
+              ))}
+            </ul>
+          </nav>
         </div>
       )}
       <Footer />

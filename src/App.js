@@ -25,7 +25,7 @@ import SocialIcons from "./component/SocialIcons";
 import LinkForm from "./component/Admin/LinkForm";
 import AddProject from "./component/Admin/AddProject";
 import ShowProjects from "./component/ShowProjects";
-
+import NotFound from "./component/NotFound";
 import CategoryProducts from "./component/CategoryProducts";
 
 function App() {
@@ -54,6 +54,11 @@ function App() {
                 exact
                 path="/signup"
                 element={<CreateAdmin showAlert={showAlert} />}
+              />
+              <Route
+                exact
+                path="*"
+                element={<NotFound showAlert={showAlert} />}
               />
               <Route
                 exact

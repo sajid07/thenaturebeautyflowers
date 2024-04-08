@@ -103,7 +103,21 @@ section {
   padding: 60px 0;
   overflow: hidden;
 }
+.not-found-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
 
+.content-container {
+  flex: 1;
+}
+.footer {
+  flex-shrink: 0;
+  padding-top: 60px;
+}
 .section-bg {
   background-color: #f1f8ff;
 }

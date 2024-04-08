@@ -1,9 +1,15 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+import React, { useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
 const Navbar = () => {
-  let navigate = useNavigate();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      navigate("/login");
+    }
+  }, [navigate]);
 
   const handleLogout = () => {
     localStorage.removeItem("token");
@@ -40,15 +46,9 @@ const Navbar = () => {
             </li>
 
             <li className="nav-item">
-              {!localStorage.getItem("token") ? (
-                <Link to="/login" className="nav-link">
-                  <button className="btn btn-primary">Login</button>
-                </Link>
-              ) : (
-                <button className="btn btn-primary" onClick={handleLogout}>
-                  Logout
-                </button>
-              )}
+              <button className="btn btn-primary" onClick={handleLogout}>
+                Logout
+              </button>
             </li>
           </ul>
         </div>

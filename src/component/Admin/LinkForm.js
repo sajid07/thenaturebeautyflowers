@@ -15,24 +15,6 @@ const LinkForm = () => {
   const [loggedIn, setLoggedIn] = useState(true); // Assume the user is logged in initially
   const navigate = useNavigate();
 
-  useEffect(() => {
-    // Check if user is logged in
-    const checkLoggedIn = () => {
-      const token = localStorage.getItem("token");
-      if (!token) {
-        // If token doesn't exist, user is not logged in
-        setLoggedIn(false);
-      }
-    };
-
-    checkLoggedIn();
-  }, []);
-
-  if (!loggedIn) {
-    // If user is not logged in, redirect to login page
-    navigate("/login");
-  }
-
   const host = process.env.REACT_APP_BASE_URI;
 
   const api = axios.create({

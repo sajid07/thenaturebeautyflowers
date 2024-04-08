@@ -42,56 +42,51 @@ function App() {
     <>
       <ProductState>
         <Router>
-          <div className="">
-            <NavBar />
-            <SocialIcons />
-            <div className="alert-container">
-              {" "}
-              <Alert alert={alert}></Alert>
-            </div>
-            <Routes>
-              <Route
-                exact
-                path="/signup"
-                element={<CreateAdmin showAlert={showAlert} />}
-              />
-              <Route
-                exact
-                path="*"
-                element={<NotFound showAlert={showAlert} />}
-              />
-              <Route
-                exact
-                path="/login"
-                element={<Login showAlert={showAlert} />}
-              />
-              <Route exact path="/addProject" element={<AddProject />} />
-
-              <Route exact path="Dashboard" element={<Admin />} />
-              <Route
-                exact
-                path="UpdateContact"
-                element={<WhatsAppUpdateButton />}
-              />
-              <Route exact path="/socialLinks" element={<LinkForm />} />
-              <Route exact path="/showProject" element={<ShowProjects />} />
-
-              <Route exact path="ProductForm" element={<ProductForm />} />
-
-              <Route exact path="/" element={<Index />} />
-              <Route exact path="/showProjects" element={<ShowProjects />} />
-              <Route
-                path="/category/:category"
-                element={<CategoryProducts />}
-              />
-
-              <Route exact path="/swimmingPool" element={<SwimmingPool />} />
-              <Route path="/product/:productId" element={<ProductDetail />} />
-
-              <Route exact path="/Projects" element={<Projects />} />
-              <Route exact path="/ContactUs" element={<ContactUs />} />
-            </Routes>
+          <NavBar />
+          <SocialIcons />
+          <div className="alert-container">
+            {" "}
+            <Alert alert={alert}></Alert>
           </div>
+          <Routes>
+            <Route
+              exact
+              path="/signup"
+              element={<CreateAdmin showAlert={showAlert} />}
+            />
+            <Route
+              exact
+              path="*"
+              element={<NotFound showAlert={showAlert} />}
+            />
+            <Route
+              exact
+              path="/login"
+              element={<Login showAlert={showAlert} />}
+            />
+            <Route exact path="/addProject" element={<AddProject />} />
+
+            <Route exact path="Dashboard" element={<Admin />} />
+            <Route
+              exact
+              path="UpdateContact"
+              element={<WhatsAppUpdateButton />}
+            />
+            <Route exact path="/socialLinks" element={<LinkForm />} />
+            <Route exact path="/showProject" element={<ShowProjects />} />
+
+            <Route exact path="ProductForm" element={<ProductForm />} />
+
+            <Route exact path="/" element={<Index />} />
+            <Route exact path="/showProjects" element={<ShowProjects />} />
+            <Route path="/category/:category" element={<CategoryProducts />} />
+
+            <Route exact path="/swimmingPool" element={<SwimmingPool />} />
+            <Route path="/product/:productId" element={<ProductDetail />} />
+
+            <Route exact path="/Projects" element={<Projects />} />
+            <Route exact path="/ContactUs" element={<ContactUs />} />
+          </Routes>
         </Router>
       </ProductState>
     </>

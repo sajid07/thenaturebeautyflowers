@@ -9,6 +9,12 @@
 body {
   font-family: "Open Sans", sans-serif;
   color: #444444;
+  min-height: 100vh;
+}
+#root {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 .custom-button {
   background-color: #3498db; /* Default button color */
@@ -42,6 +48,9 @@ h4,
 h5,
 h6 {
   font-family: "Inter", sans-serif;
+}
+:root {
+  --footer-top-padding: 60px;
 }
 
 /*--------------------------------------------------------------
@@ -104,19 +113,16 @@ section {
   overflow: hidden;
 }
 .not-found-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
+  text-align: center;
+  margin: auto 0 calc(var(--footer-top-padding) * -1);
 }
 
 .content-container {
   flex: 1;
 }
 .footer {
-  flex-shrink: 0;
-  padding-top: 60px;
+  padding-top: var(--footer-top-padding);
+  margin: auto 0 0;
 }
 .section-bg {
   background-color: #f1f8ff;

@@ -82,7 +82,7 @@ const PoolItems = () => {
             >
               <Link
                 className="cat-item d-block bg-light text-center rounded p-3"
-                to="/category/pool lights"
+                to="/category/pool light"
               >
                 <div className="rounded p-4">
                   <div className="icon mb-3">

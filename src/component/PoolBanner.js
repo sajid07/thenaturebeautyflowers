@@ -48,7 +48,7 @@ const PoolBanner = () => {
   };
   return (
     <>
-      <div class="pool-banner">
+      <div className="pool-banner">
         <Slider {...settings}>
           <Image src="/img/banner/banner1.jpg" alt="Banner 1" fluid />
 
@@ -57,11 +57,11 @@ const PoolBanner = () => {
           <Image src="/img/banner/banner3.jpg" alt="Banner 3" fluid />
         </Slider>
 
-        <div class="pool-banner-caption">
+        <div className="pool-banner-caption">
           <h1 className="pool-banner-caption-text">
             Discover Our Pool Products
           </h1>
-          <p class="lead pool-banner-caption-text">
+          <p className="lead pool-banner-caption-text">
             Explore a wide range of pool equipment and accessories.
           </p>
           <div className="pool-banner-caption-btn ">

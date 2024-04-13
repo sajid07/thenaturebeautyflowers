@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import axios from "axios";
 import productContext from "../../context/products/productContext";
 import SideNavbar from "./SideNavbar";
@@ -9,6 +9,7 @@ const WhatsAppUpdateButton = () => {
   const [newCallContact, setNewCallContact] = useState("");
   const host = process.env.REACT_APP_BASE_URI;
   const context = useContext(productContext);
+  const [Contact, setContacts] = useState("");
 
   const { updateContacts } = context || {};
   const api = axios.create({
@@ -18,6 +19,18 @@ const WhatsAppUpdateButton = () => {
       "auth-token": localStorage.getItem("token"),
     },
   });
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const contactsResponse = await api.get("/api/contacts/contacts");
+        setContacts(contactsResponse.data);
+      } catch (error) {
+        console.error("Error fetching contacts:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   const handleUpdateContacts = async (e) => {
     try {
@@ -55,6 +68,7 @@ const WhatsAppUpdateButton = () => {
           <input
             type="text"
             value={newWhatsAppContact}
+            placeholder={Contact.whatsappContact}
             onChange={(e) => setNewWhatsAppContact(e.target.value)}
             style={inputStyle}
           />
@@ -62,6 +76,7 @@ const WhatsAppUpdateButton = () => {
           <label style={labelStyle}>New Call Contact:</label>
           <input
             type="text"
+            placeholder={Contact.callContact}
             value={newCallContact}
             onChange={(e) => setNewCallContact(e.target.value)}
             style={inputStyle}

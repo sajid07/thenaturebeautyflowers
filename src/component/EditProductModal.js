@@ -36,11 +36,7 @@ const EditProductModal = ({ isModalOpen, onClose, onSave, product }) => {
         <div className="modal-content">
           <div className="modal-header bg-primary text-white">
             <h5 className="modal-title">Edit Product</h5>
-            <button
-              type="button"
-              className="close text-white"
-              onClick={onClose}
-            >
+            <button type="button" className="btn btn-info" onClick={onClose}>
               <span>&times;</span>
             </button>
           </div>

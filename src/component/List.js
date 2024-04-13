@@ -84,8 +84,8 @@ const List = () => {
           }
         `}
       </style>
-      <section id="services" class="services">
-        <div class="container" data-aos="fade-up" data-aos-delay="100">
+      <section id="services" className="services">
+        <div className="container" data-aos="fade-up" data-aos-delay="100">
           <div className="section-title">
             <h2>Portfolio</h2>
             <p className="section-title">

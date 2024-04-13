@@ -40,7 +40,7 @@ const AddProject = () => {
       <NavBar />
       <SideNavbar>
         {" "}
-        <h1 class="mt-4">Dashboard</h1>
+        <h1 className="mt-4">Dashboard</h1>
         <div className="container my-3">
           <h2>Add Project</h2>
           <form
@@ -99,9 +99,9 @@ const AddProject = () => {
           </form>
           <ProjectList></ProjectList>
         </div>
-        <footer class="py-4 bg-light mt-auto">
-          <div class="container-fluid px-4">
-            <div class="d-flex align-items-center justify-content-between small"></div>
+        <footer className="py-4 bg-light mt-auto">
+          <div className="container-fluid px-4">
+            <div className="d-flex align-items-center justify-content-between small"></div>
           </div>
         </footer>
       </SideNavbar>

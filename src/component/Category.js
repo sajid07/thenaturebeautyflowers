@@ -13,8 +13,8 @@ const Category = () => {
   };
   return (
     <>
-      <section id="services" class="services">
-        <div class="container" data-aos="fade-up">
+      <section id="services" className="services">
+        <div className="container" data-aos="fade-up">
           <div style={containerStyle} data-aos-delay="100">
             <div className="container-xxl py-5">
               <div className="container">

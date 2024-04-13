@@ -3,25 +3,25 @@ import Accordion from "react-bootstrap/Accordion";
 
 const About = () => {
   return (
-    <section id="why-us" class="why-us">
-      <div class="row">
+    <section id="why-us" className="why-us">
+      <div className="row">
         <div
-          class="col-lg-5 col-md-12 align-items-stretch position-relative video-box"
+          className="col-lg-5 col-md-12 align-items-stretch position-relative video-box"
           data-aos="fade-right"
         >
           <img
             src="/img/about5.jpg"
-            class="img-fluid"
+            className="img-fluid"
             alt="About Us"
             style={{ maxWidth: "100%", height: "auto" }} // Ensure image responsiveness
           />
         </div>
 
         <div
-          class="col-lg-7 col-md-12 d-flex flex-column justify-content-center align-items-stretch"
+          className="col-lg-7 col-md-12 d-flex flex-column justify-content-center align-items-stretch"
           data-aos="fade-left"
         >
-          <div class="content">
+          <div className="content">
             <h2>THE NATURE BEAUTY FLOWERS</h2>
             <p>
               Welcome to <strong>"The Nature Beauty Flower</strong>," your

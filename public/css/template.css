@@ -138,6 +138,20 @@ section {
   text-align: center;
   padding-bottom: 30px;
 }
+.service-item {
+  text-align: center;
+  padding: 0 10px; /* Adjust as needed */
+}
+
+.service-item img {
+  width: 100%;
+  height: auto;
+}
+
+.text-below-images {
+  color: white;
+  margin-top: 10px; /* Adjust as needed */
+}
 
 .section-title h2 {
   font-size: 32px;

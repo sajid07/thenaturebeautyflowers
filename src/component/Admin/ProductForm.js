@@ -196,9 +196,9 @@ const ProductForm = () => {
             </button>
           </form>
         </div>
-        <footer class="py-4 bg-light mt-auto">
-          <div class="container-fluid px-4">
-            <div class="d-flex align-items-center justify-content-between small"></div>
+        <footer className="py-4 bg-light mt-auto">
+          <div className="container-fluid px-4">
+            <div className="d-flex align-items-center justify-content-between small"></div>
           </div>
         </footer>
       </SideNavbar>

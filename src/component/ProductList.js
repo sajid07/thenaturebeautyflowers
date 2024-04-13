@@ -76,7 +76,7 @@ const ProductList = () => {
       : products.filter((product) => product.category === selectedCategory);
 
   useEffect(() => {
-    setTotalPages(Math.ceil(filteredProducts.length / 10)); // Assuming 10 items per page
+    setTotalPages(Math.ceil(filteredProducts.length / 12)); // Assuming 10 items per page
   }, [filteredProducts]);
 
   const handlePageChange = (page) => {
@@ -197,25 +197,30 @@ const ProductList = () => {
           </div>
         ))}
       </div>
-      <Pagination>
-        <Pagination.Prev
-          onClick={() => handlePageChange(currentPage - 1)}
-          disabled={currentPage === 1}
-        />
-        {Array.from({ length: totalPages }, (_, index) => (
-          <Pagination.Item
-            key={index}
-            active={index + 1 === currentPage}
-            onClick={() => handlePageChange(index + 1)}
-          >
-            {index + 1}
-          </Pagination.Item>
-        ))}
-        <Pagination.Next
-          onClick={() => handlePageChange(currentPage + 1)}
-          disabled={currentPage === totalPages}
-        />
-      </Pagination>
+      <div className="container mt-5 text-center">
+        <div className="text-center">
+          <Pagination>
+            <Pagination.Prev
+              onClick={() => handlePageChange(currentPage - 1)}
+              disabled={currentPage === 1}
+            />
+            {Array.from({ length: totalPages }, (_, index) => (
+              <Pagination.Item
+                key={index}
+                active={index + 1 === currentPage}
+                onClick={() => handlePageChange(index + 1)}
+              >
+                {index + 1}
+              </Pagination.Item>
+            ))}
+            <Pagination.Next
+              onClick={() => handlePageChange(currentPage + 1)}
+              disabled={currentPage === totalPages}
+            />
+          </Pagination>
+        </div>
+      </div>
+
       {isModalOpen && (
         <EditProductModal
           isModalOpen={isModalOpen}

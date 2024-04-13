@@ -8,7 +8,7 @@ const CategoryProducts = () => {
   const { fetchProduct, products } = useProduct([]);
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
-  const [productsPerPage] = useState(12); // Change this number to adjust the number of products per page
+  const [productsPerPage] = useState(8); // Change this number to adjust the number of products per page
 
   useEffect(() => {
     const fetchData = async () => {
@@ -25,12 +25,21 @@ const CategoryProducts = () => {
     fetchData();
   }, [category]);
 
+  // Filter products by category
+  const filteredProducts = products.filter(
+    (product) => product.category.toLowerCase() === category
+  );
+
+  // Calculate total number of pages
+  const totalPages = Math.ceil(filteredProducts.length / productsPerPage);
+
   // Get current products
   const indexOfLastProduct = currentPage * productsPerPage;
   const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
-  const currentProducts = products
-    .filter((product) => product.category.toLowerCase() === category)
-    .slice(indexOfFirstProduct, indexOfLastProduct);
+  const currentProducts = filteredProducts.slice(
+    indexOfFirstProduct,
+    indexOfLastProduct
+  );
 
   // Change page
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
@@ -99,22 +108,22 @@ const CategoryProducts = () => {
             )}
           </div>
           {/* Pagination */}
-          <nav className="mt-4">
-            <ul className="pagination justify-content-center">
-              {[
-                ...Array(Math.ceil(products.length / productsPerPage)).keys(),
-              ].map((number) => (
-                <li key={number} className="page-item">
-                  <button
-                    onClick={() => paginate(number + 1)}
-                    className="page-link"
-                  >
-                    {number + 1}
-                  </button>
-                </li>
-              ))}
-            </ul>
-          </nav>
+          {totalPages > 1 && (
+            <nav className="mt-4">
+              <ul className="pagination justify-content-center">
+                {[...Array(totalPages).keys()].map((number) => (
+                  <li key={number} className="page-item">
+                    <button
+                      onClick={() => paginate(number + 1)}
+                      className="page-link"
+                    >
+                      {number + 1}
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+          )}
         </div>
       )}
     </>

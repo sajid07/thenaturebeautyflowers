@@ -7,42 +7,42 @@ const SideNavbar = ({ children }) => {
       <div id="layoutSidenav">
         <div id="layoutSidenav_nav">
           <nav
-            class="sb-sidenav accordion sb-sidenav-dark"
+            className="sb-sidenav accordion sb-sidenav-dark"
             id="sidenavAccordion"
           >
-            <div class="sb-sidenav-menu">
-              <div class="nav">
-                <div class="sb-sidenav-menu-heading">Core</div>
+            <div className="sb-sidenav-menu">
+              <div className="nav">
+                <div className="sb-sidenav-menu-heading">Core</div>
                 <Link className="nav-link" to="/dashboard">
-                  <div class="sb-nav-link-icon">
-                    <i class="fas fa-tachometer-alt"></i>
+                  <div className="sb-nav-link-icon">
+                    <i className="fas fa-tachometer-alt"></i>
                   </div>
                   Dashboard
                 </Link>
-                <div class="sb-sidenav-menu-heading">Products</div>
-                <Link class="nav-link" to="/product-form">
-                  <div class="sb-nav-link-icon">
-                    <i class="fas fa-users"></i>
+                <div className="sb-sidenav-menu-heading">Products</div>
+                <Link className="nav-link" to="/product-form">
+                  <div className="sb-nav-link-icon">
+                    <i className="fas fa-users"></i>
                   </div>
                   Add Products
                 </Link>
-                <Link class="nav-link" to="/update-contact">
-                  <div class="sb-nav-link-icon">
-                    <i class="fas fa-users"></i>
+                <Link className="nav-link" to="/update-contact">
+                  <div className="sb-nav-link-icon">
+                    <i className="fas fa-users"></i>
                   </div>
                   Update Contacts
                 </Link>
 
-                <div class="sb-sidenav-menu-heading">Projects</div>
-                <Link class="nav-link" to="/social-links">
-                  <div class="sb-nav-link-icon">
-                    <i class="fas fa-users"></i>
+                <div className="sb-sidenav-menu-heading">Projects</div>
+                <Link className="nav-link" to="/social-links">
+                  <div className="sb-nav-link-icon">
+                    <i className="fas fa-users"></i>
                   </div>
                   Add New Social Link
                 </Link>
-                <Link class="nav-link" to="/add-project">
-                  <div class="sb-nav-link-icon">
-                    <i class="fas fa-briefcase"></i>
+                <Link className="nav-link" to="/add-project">
+                  <div className="sb-nav-link-icon">
+                    <i className="fas fa-briefcase"></i>
                   </div>
                   Add New Project
                 </Link>
@@ -52,7 +52,7 @@ const SideNavbar = ({ children }) => {
         </div>
         <div id="layoutSidenav_content">
           <main>
-            <div class="container-fluid px-4">{children}</div>
+            <div className="container-fluid px-4">{children}</div>
           </main>
         </div>
       </div>

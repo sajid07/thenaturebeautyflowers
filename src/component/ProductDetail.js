@@ -110,10 +110,10 @@ const ProductDetail = () => {
                   />
                 </div>
               </div>
-              <div id="cta" class="cta">
-                <div class="container">
-                  <div class="row" data-aos="zoom-in">
-                    <div class="col-lg-3 cta-btn-container text-center"></div>
+              <div id="cta" className="cta">
+                <div className="container">
+                  <div className="row" data-aos="zoom-in">
+                    <div className="col-lg-3 cta-btn-container text-center"></div>
                   </div>
                 </div>
                 <div className="card-footer">

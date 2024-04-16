@@ -1,27 +1,51 @@
 import React, { useContext, useState } from "react";
 import productContext from "../../context/products/productContext";
 import NavBar from "../Admin/Navbar";
-import ProjectList from "./ProjectList";
 import SideNavbar from "./SideNavbar";
+import CategoryList from "./CategoryList";
 
-const AddProject = () => {
+const CategoryManagement = () => {
   const context = useContext(productContext);
+  const host = process.env.REACT_APP_BASE_URI;
 
-  const { addProject } = context || {};
+  const { addCategory } = context || {};
 
-  const [product, setProduct] = useState({
+  const [category, setCategory] = useState({
     name: "",
-    description: "",
     picture: "",
   });
 
+  const checkDuplicateCategory = async (categoryName) => {
+    try {
+      const response = await fetch(
+        `${host}/api/category/exists?name=${categoryName}`
+      );
+      const data = await response.json();
+      return data.exists;
+    } catch (error) {
+      console.error("Error checking category existence:", error.message);
+      throw error;
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // Pass the entire product object to the addProduct function
-    await addProject(new FormData(e.currentTarget));
-    setProduct({
+
+    // Check if the category name already exists
+    const isDuplicate = await checkDuplicateCategory(category.name);
+
+    if (isDuplicate) {
+      alert(
+        "Category with this name already exists. Please choose a different name."
+      );
+      return; // Prevent form submission
+    }
+
+    // If category name doesn't exist, proceed with form submission
+    const formData = new FormData(e.target);
+    await addCategory(formData);
+    setCategory({
       name: "",
-      description: "",
       picture: "",
     });
   };
@@ -29,10 +53,10 @@ const AddProject = () => {
   const onChange = (e) => {
     if (e.target.name === "picture" || e.target.name === "pdfFile") {
       // Handle file inputs
-      setProduct({ ...product, [e.target.name]: e.target.files[0] });
+      setCategory({ ...category, [e.target.name]: e.target.files[0] });
     } else {
       // Handle text inputs
-      setProduct({ ...product, [e.target.name]: e.target.value });
+      setCategory({ ...category, [e.target.name]: e.target.value });
     }
   };
   return (
@@ -40,11 +64,9 @@ const AddProject = () => {
       <NavBar />
       <SideNavbar>
         {" "}
-        <div className="section-title">
-          <h2></h2>
-          <h2>Add Project</h2>
-        </div>{" "}
+        <h1 className="mt-4">Dashboard</h1>
         <div className="container my-3">
+          <h2>Add Category</h2>
           <form
             className="my-3"
             encType="multipart/form-data"
@@ -57,25 +79,11 @@ const AddProject = () => {
               </label>
               <input
                 type="text"
+                placeholder="Enter Category Name Here"
                 className="form-control"
                 id="name"
                 name="name"
-                value={product.name}
-                onChange={onChange}
-                minLength={1}
-                required
-              />
-            </div>
-            <div className="mb-3">
-              <label htmlFor="description" className="form-label">
-                Description
-              </label>
-              <input
-                type="text"
-                className="form-control"
-                id="description"
-                name="description"
-                value={product.description}
+                value={category.name}
                 onChange={onChange}
                 minLength={1}
                 required
@@ -87,19 +95,17 @@ const AddProject = () => {
                 Picture
               </label>
               <input type="file" name="picture" onChange={onChange} required />
+              <label className="form-label">Picture Dimension 640*426</label>
             </div>
-
             <button
-              disabled={
-                product.name.length < 1 || product.description.length < 1
-              }
+              disabled={category.name.length < 1}
               type="submit"
               className="btn btn-primary"
             >
-              Add Project
+              Add Category
             </button>
           </form>
-          <ProjectList></ProjectList>
+          <CategoryList></CategoryList>
         </div>
         <footer className="py-4 bg-light mt-auto">
           <div className="container-fluid px-4">
@@ -110,4 +116,4 @@ const AddProject = () => {
     </>
   );
 };
-export default AddProject;
+export default CategoryManagement;

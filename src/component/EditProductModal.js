@@ -1,8 +1,26 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 
 const EditProductModal = ({ isModalOpen, onClose, onSave, product }) => {
   const [editedProduct, setEditedProduct] = useState({ ...product });
+  const [categories, setCategories] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState(product.category);
+
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const response = await axios.get(
+          `${process.env.REACT_APP_BASE_URI}/api/category/category`
+        );
+        setCategories(response.data);
+      } catch (error) {
+        console.error("Error fetching categories:", error);
+      }
+    };
+
+    fetchCategories();
+  }, []);
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
 
@@ -16,15 +34,18 @@ const EditProductModal = ({ isModalOpen, onClose, onSave, product }) => {
       }));
     }
   };
+
   const handleSave = () => {
     // Update the editedProduct with the selectedCategory
     const updatedProduct = { ...editedProduct, category: selectedCategory };
     onSave(updatedProduct);
     onClose();
   };
+
   const handleCategoryChange = (event) => {
     setSelectedCategory(event.target.value);
   };
+
   return (
     <div
       className={`modal ${isModalOpen ? "show" : ""}`}
@@ -73,44 +94,20 @@ const EditProductModal = ({ isModalOpen, onClose, onSave, product }) => {
                 <label htmlFor="category" className="form-label">
                   Category:
                 </label>
-                {/* <input
-                type="text"
-                className="form-control"
-                id="category"
-                name="category"
-                value={editedProduct.category}
-                onChange={handleInputChange}
-              /> */}
                 <select
                   className="form-select"
                   id="categoryFilter"
                   value={selectedCategory}
                   onChange={handleCategoryChange}
                 >
-                  <option value="All">All</option>
-                  <option value="filtration">Filtration</option>
-                  <option value="pool pump">Pool Pump</option>
-                  <option value="pool light">Pool Light</option>
-                  <option value="pool fitting">Pool Fitting</option>
-                  <option value="cleaning product">Cleaning Product</option>
-                  <option value="heat cool pump">Heat & Cool Pump</option>
-                  <option value="dosing system">Dosing System</option>
-                  <option value="surrounded equipment">
-                    Surrounded Equipments
+                  <option value="" disabled>
+                    Select a Category
                   </option>
-                  <option value="safety product">Safety Product</option>
-                  <option value="commercial equipments">
-                    Commercial Equipments
-                  </option>
-                  <option value="control panel">Control Panel</option>
-                  <option value="water fountain">Water Fountain</option>
-                  <option value="wellness">Wellness</option>
-                  <option value="pool chemical">Pool Chemical</option>
-                  <option value="waterfall">Waterfall</option>
-                  <option value="intex pool">Intex pool</option>
-                  <option value="booster pump">Booster Pumps</option>
-                  <option value="pool tiles">Pool Tiles</option>
-                  <option value="irregation">Irregation</option>
+                  {categories.map((category) => (
+                    <option key={category._id} value={category.value}>
+                      {category.name}
+                    </option>
+                  ))}
                 </select>
               </div>
 

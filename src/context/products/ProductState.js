@@ -53,6 +53,50 @@ const ProductState = (props) => {
     }
   };
 
+  //add category
+  const addCategory = async (category) => {
+    try {
+      const response = await fetch(`${host}/api/category`, {
+        method: "POST",
+        headers: {
+          "auth-token": localStorage.getItem("token"),
+        },
+        body: category,
+      });
+
+      const data = await response.json(); // Parse the response as JSON
+
+      console.log("Categotry added successfully:", data);
+      alert("Categotry added successfully");
+    } catch (error) {
+      console.error("Error adding Categotry:", error);
+      // Handle error and provide user feedback
+      throw error;
+    }
+  };
+
+  //delet categories
+  const deleteCategory = async (categoryId) => {
+    await fetch(`${host}/api/category/category/${categoryId}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        "auth-token": localStorage.getItem("token"),
+      },
+    });
+  };
+  //fetch categories
+  const getCategories = async () => {
+    try {
+      const response = await fetch("/api/category/category"); // Assuming '/api/category' is the endpoint for fetching categories
+      const data = await response.json();
+      return data; // Return the fetched categories data
+    } catch (error) {
+      console.error("Error fetching categories:", error);
+      throw error; // Throw the error to handle it in the component
+    }
+  };
+
   //fetch Product
   const fetchProduct = async () => {
     try {
@@ -219,6 +263,8 @@ const ProductState = (props) => {
         fetchProduct,
         setProduct,
         addProject,
+        addCategory,
+        deleteCategory,
       }}
     >
       {props.children}

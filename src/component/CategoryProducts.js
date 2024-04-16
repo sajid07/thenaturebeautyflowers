@@ -4,7 +4,7 @@ import { useProduct } from "../context/products/ProductState";
 import { RingLoader } from "react-spinners";
 
 const CategoryProducts = () => {
-  const { category } = useParams();
+  let { category } = useParams();
   const { fetchProduct, products } = useProduct([]);
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
@@ -24,7 +24,10 @@ const CategoryProducts = () => {
 
     fetchData();
   }, [category]);
-
+  // if (category.includes("-")) {
+  //   // Replace hyphens with spaces
+  //   category = category.replace(/-/g, " ");
+  // }
   // Filter products by category
   const filteredProducts = products.filter(
     (product) => product.category.toLowerCase() === category

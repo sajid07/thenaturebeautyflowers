@@ -98,7 +98,9 @@ const awsS3UploadMiddleware = async (req, res, next) => {
     const isPic = fieldname === "picture";
     const timestamp = Date.now();
     const fileKey = `pool/${
-      isPic && req.originalUrl.includes("project")
+      isPic && req.originalUrl.includes("category")
+        ? "categories"
+        : isPic && req.originalUrl.includes("project")
         ? "projects"
         : isPic
         ? "images"

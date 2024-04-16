@@ -55,7 +55,7 @@ const Category = () => {
                     data-aos-delay="0.3s"
                   >
                     <Link
-                      to="/category/water fountain"
+                      to="/category/water-fountain"
                       className="cat-item d-block bg-light text-center rounded p-3"
                     >
                       <div className="rounded p-4">
@@ -97,7 +97,7 @@ const Category = () => {
                     data-aos-delay="0.3s"
                   >
                     <Link
-                      to="/category/pool chemical"
+                      to="/category/pool-chemical"
                       className="cat-item d-block bg-light text-center rounded p-3"
                     >
                       <div className="rounded p-4">
@@ -138,7 +138,7 @@ const Category = () => {
                     data-aos-delay="0.3s"
                   >
                     <Link
-                      to="/category/intex pool"
+                      to="/category/intex-pool"
                       className="cat-item d-block bg-light text-center rounded p-3"
                     >
                       <div className="rounded p-4">
@@ -159,7 +159,7 @@ const Category = () => {
                     data-aos-delay="0.3s"
                   >
                     <Link
-                      to="/category/booster pump"
+                      to="/category/booster-pump"
                       className="cat-item d-block bg-light text-center rounded p-3"
                     >
                       <div className="rounded p-4">

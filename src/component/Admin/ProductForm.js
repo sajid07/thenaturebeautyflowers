@@ -1,12 +1,29 @@
-import React, { useContext, useState } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import productContext from "../../context/products/productContext";
 import NavBar from "../Admin/Navbar";
 import SideNavbar from "./SideNavbar";
+import axios from "axios";
+const host = process.env.REACT_APP_BASE_URI;
 
 const ProductForm = () => {
   const context = useContext(productContext);
   const { addProduct } = context || {};
+  const [categories, setCategories] = useState([]);
+  const api = axios.create({
+    baseURL: host,
+  });
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const response = await api.get("/api/category/category");
+        setCategories(response.data);
+      } catch (error) {
+        console.error("Error fetching categories:", error);
+      }
+    };
 
+    fetchCategories();
+  }, []);
   const [product, setProduct] = useState({
     name: "",
     description: "",
@@ -69,7 +86,7 @@ const ProductForm = () => {
             Add a Product
           </h2>
           <form
-            className=" my-3"
+            className="my-3"
             encType="multipart/form-data"
             method="post"
             onSubmit={handleSubmit}
@@ -132,32 +149,14 @@ const ProductForm = () => {
                 <option value="" disabled>
                   Select a Category
                 </option>
-                <option value="filtration">Filtration</option>
-                <option value="pool pump">Pool Pump</option>
-                <option value="pool light">Pool Light</option>
-                <option value="pool fitting">Pool Fitting</option>
-                <option value="cleaning product">Cleaning Product</option>
-                <option value="heat cool pump">Heat & Cool Pump</option>
-                <option value="dosing system">Dosing System</option>
-                <option value="surrounded equipment">
-                  Surrounded Equipments
-                </option>
-                <option value="safety product">Safety Product</option>
-                <option value="commercial equipments">
-                  Commercial Equipments
-                </option>
-                <option value="control panel">Control Panel</option>
-                <option value="water fountain">Water Fountain</option>
-                <option value="wellness">Wellness</option>
-                <option value="pool chemical">Pool Chemical</option>
-                <option value="waterfall">Waterfall</option>
-                <option value="intex pool">Intex pool</option>
-                <option value="booster pump">Booster Pumps</option>
-                <option value="pool tiles">Pool Tiles</option>
-                <option value="irregation">Irregation</option>
-                {/* Add more options as needed */}
+                {categories.map((category) => (
+                  <option key={category._id} value={category.value}>
+                    {category.name}
+                  </option>
+                ))}
               </select>
             </div>
+
             <div className="mb-3">
               <h5
                 htmlFor="picture"

@@ -62,7 +62,7 @@ const PoolItems = () => {
             >
               <Link
                 className="cat-item d-block bg-light text-center rounded p-3"
-                to="/category/pool pump"
+                to="/category/pool-pump"
               >
                 <div className="rounded p-4">
                   <div className="icon mb-3">
@@ -82,7 +82,7 @@ const PoolItems = () => {
             >
               <Link
                 className="cat-item d-block bg-light text-center rounded p-3"
-                to="/category/pool light"
+                to="/category/pool-light"
               >
                 <div className="rounded p-4">
                   <div className="icon mb-3">
@@ -102,7 +102,7 @@ const PoolItems = () => {
             >
               <Link
                 className="cat-item d-block bg-light text-center rounded p-3"
-                to="/category/pool fitting"
+                to="/category/pool-fitting"
               >
                 <div className="rounded p-4">
                   <div className="icon mb-3">
@@ -122,7 +122,7 @@ const PoolItems = () => {
             >
               <Link
                 className="cat-item d-block bg-light text-center rounded p-3"
-                to="/category/cleaning product"
+                to="/category/cleaning-product"
               >
                 <div className="rounded p-4">
                   <div className="icon mb-3">
@@ -142,7 +142,7 @@ const PoolItems = () => {
             >
               <Link
                 className="cat-item d-block bg-light text-center rounded p-3"
-                to="/category/heat cool pump"
+                to="/category/heat-cool-pump"
               >
                 <div className="rounded p-4">
                   <div className="icon mb-3">
@@ -162,7 +162,7 @@ const PoolItems = () => {
             >
               <Link
                 className="cat-item d-block bg-light text-center rounded p-3"
-                to="/category/dosing system"
+                to="/category/dosing-system"
               >
                 <div className="rounded p-4">
                   <div className="icon mb-3">
@@ -182,7 +182,7 @@ const PoolItems = () => {
             >
               <Link
                 className="cat-item d-block bg-light text-center rounded p-3"
-                to="/category/surrounded equipments"
+                to="/category/surrounded-equipments"
               >
                 <div className="rounded p-4">
                   <div className="icon mb-3">
@@ -202,7 +202,7 @@ const PoolItems = () => {
             >
               <Link
                 className="cat-item d-block bg-light text-center rounded p-3"
-                to="/category/safety product"
+                to="/category/safety-product"
               >
                 <div className="rounded p-4">
                   <div className="icon mb-3">
@@ -222,7 +222,7 @@ const PoolItems = () => {
             >
               <Link
                 className="cat-item d-block bg-light text-center rounded p-3"
-                to="/category/pool tiles"
+                to="/category/pool-tiles"
               >
                 <div className="rounded p-4">
                   <div className="icon mb-3">
@@ -242,7 +242,7 @@ const PoolItems = () => {
             >
               <Link
                 className="cat-item d-block bg-light text-center rounded p-3"
-                to="/category/commercial equipment"
+                to="/category/commercial-equipment"
               >
                 <div className="rounded p-4">
                   <div className="icon mb-3">
@@ -262,7 +262,7 @@ const PoolItems = () => {
             >
               <Link
                 className="cat-item d-block bg-light text-center rounded p-3"
-                to="/category/control panel"
+                to="/category/control-panel"
               >
                 <div className="rounded p-4">
                   <div className="icon mb-3">

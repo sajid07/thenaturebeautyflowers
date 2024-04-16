@@ -33,6 +33,7 @@ import ShowProjects from "./component/ShowProjects";
 import NotFound from "./component/NotFound";
 import CategoryProducts from "./component/CategoryProducts";
 import Footer from "./component/Footer";
+import CategoryManagement from "./component/Admin/CategoryManagement";
 
 function App() {
   AOS.init();
@@ -104,6 +105,12 @@ function App() {
               }
             >
               <Route exact path="/add-project" element={<AddProject />} />
+              <Route
+                exact
+                path="/add-Category"
+                element={<CategoryManagement />}
+              />
+
               <Route exact path="dashboard" element={<Admin />} />
               <Route
                 exact

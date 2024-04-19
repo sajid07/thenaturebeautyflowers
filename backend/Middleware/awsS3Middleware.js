@@ -9,6 +9,7 @@ const bucketUri = process.env.REACT_APP_AWS_BUCKET_URI;
 
 const Products = require("../models/Product");
 const Projects = require("../models/Project");
+const category = require("../models/Category");
 
 const s3 = new aws.S3({
   accessKeyId: accessKeyId,
@@ -143,6 +144,8 @@ const awsS3DeleteMiddleware = async (req, res, next) => {
 
     if (req.originalUrl.includes("project")) {
       itemToDelete = await Projects.findById(req.params.projectId);
+    } else if (req.originalUrl.includes("category")) {
+      itemToDelete = await category.findById(req.params.categoryId);
     } else {
       itemToDelete = await Products.findById(req.params.productId);
     }
@@ -151,7 +154,12 @@ const awsS3DeleteMiddleware = async (req, res, next) => {
       throw new Error("Item not found in database");
     }
 
-    s3FileKeysToDelete.push(itemToDelete.picture);
+    // Adjusting for different property names
+    if (req.originalUrl.includes("category")) {
+      s3FileKeysToDelete.push(itemToDelete.picture_url);
+    } else {
+      s3FileKeysToDelete.push(itemToDelete.picture);
+    }
     if (itemToDelete.pdfFile) {
       s3FileKeysToDelete.push(itemToDelete.pdfFile);
     }

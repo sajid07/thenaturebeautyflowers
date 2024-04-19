@@ -2,15 +2,10 @@ import React from "react";
 
 const Pagination = ({ currentPage, totalPages, onPageChange }) => {
   // Function to handle page navigation
+  console.log("pagination", totalPages);
   const handleClick = (page) => {
     onPageChange(page);
   };
-
-  // Generate an array of page numbers
-  const pages = [];
-  for (let i = 1; i <= totalPages; i++) {
-    pages.push(i);
-  }
 
   return (
     <nav>
@@ -19,17 +14,21 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
           <button
             className="page-link"
             onClick={() => handleClick(currentPage - 1)}
+            disabled={currentPage === 1}
           >
             Previous
           </button>
         </li>
-        {pages.map((page) => (
+        {[...Array(totalPages)].map((_, index) => (
           <li
-            key={page}
-            className={`page-item ${currentPage === page && "active"}`}
+            key={index + 1}
+            className={`page-item ${currentPage === index + 1 && "active"}`}
           >
-            <button className="page-link" onClick={() => handleClick(page)}>
-              {page}
+            <button
+              className="page-link"
+              onClick={() => handleClick(index + 1)}
+            >
+              {index + 1}
             </button>
           </li>
         ))}
@@ -37,6 +36,7 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
           <button
             className="page-link"
             onClick={() => handleClick(currentPage + 1)}
+            disabled={currentPage === totalPages}
           >
             Next
           </button>

@@ -82,6 +82,23 @@ router.delete(
     }
   }
 );
+router.get("/category/:categoryValue", async (req, res) => {
+  try {
+    const { categoryValue } = req.params;
+    console.log("categoryValue in backend we recieving", categoryValue);
+    // Check if there are any products associated with the category
+    const productCount = await Product.countDocuments({
+      category: categoryValue,
+    });
+    console.log("productCount in backend we fetching", productCount);
+
+    // Return a response indicating whether there are associated products or not
+    res.json({ productCount: productCount });
+  } catch (error) {
+    console.error("Error checking if category has associated products:", error);
+    res.status(500).json({ message: "Internal Server Error" });
+  }
+});
 
 // Update a product by ID
 router.put(

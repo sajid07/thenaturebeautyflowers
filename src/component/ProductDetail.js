@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { RingLoader } from "react-spinners";
+import Spinner from "react-bootstrap/Spinner";
 import WhatsAppButton from "./WhatsAppButton";
 import axios from "axios";
 
@@ -87,7 +87,9 @@ const ProductDetail = () => {
     <>
       {loading ? (
         <div style={containerStyle}>
-          <RingLoader color="#fc031c" size={150} loading={loading} />
+          <Spinner animation="grow" variant="secondary" />
+          <Spinner animation="grow" variant="success" />
+          <Spinner animation="grow" variant="danger" />{" "}
         </div>
       ) : (
         <div style={containerStyle} className="cta">

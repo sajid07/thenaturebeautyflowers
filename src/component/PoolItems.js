@@ -1,284 +1,135 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { useProduct } from "../context/products/ProductState";
+import Spinner from "react-bootstrap/Spinner";
+import Pagination from "./Pagination";
+import InputGroup from "react-bootstrap/InputGroup";
+import Form from "react-bootstrap/Form";
+import Button from "react-bootstrap/Button";
 
 const PoolItems = () => {
-  const categoryData = {
-    categoryName: "filtration",
+  const [categories, setCategories] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage] = useState(12); // Number of items per page
+  const [searchTerm, setSearchTerm] = useState(""); // State for search term
+  const { getCategories } = useProduct();
+
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        setLoading(true);
+        const categoriesData = await getCategories();
+        const sortedCategories = categoriesData.sort((a, b) =>
+          a.name.localeCompare(b.name)
+        );
+        setCategories(sortedCategories);
+        setLoading(false);
+      } catch (error) {
+        console.error("Error fetching categories:", error);
+        setLoading(false);
+      }
+    };
+
+    fetchCategories();
+  }, [getCategories]);
+
+  // Filter categories based on search term
+  const filteredCategories = categories.filter((category) =>
+    category.name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
+  // Calculate total pages based on the number of filtered categories
+  const totalPages = Math.ceil(filteredCategories.length / itemsPerPage);
+
+  // Function to handle page change
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
   };
-  const backgroundStyle = {
-    // backgroundImage: `url(${'/img/banner/out.jpg'})`,
-    backgroundSize: "cover",
-    backgroundRepeat: "no-repeat",
-    backgroundPosition: "center",
-    minHeight: "100vh",
-    position: "fixed",
-    top: 0,
-    left: 0,
-    width: "100%",
-    height: "100%",
-    zIndex: -1,
-    filter: "blur(0px)",
-  };
+
+  // Calculate the start and end index for slicing categories to display on the current page
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = currentPage * itemsPerPage;
+
   return (
     <>
-      <div style={backgroundStyle}></div>
+      <section id="services" className="services">
+        <div className="container" data-aos="fade-up">
+          <div className="container-xxl py-5">
+            <div className="container">
+              <div
+                className="text-center mx-auto mb-5 animate__animated animate__fadeInUp"
+                data-aos-delay="100"
+                style={{ maxWidth: "600px" }}
+              >
+                <h1 className="mb-3" style={{ color: "#FF5733" }}>
+                  Our Services
+                </h1>
+                <p>We provide a wide range of services to meet your needs.</p>
+              </div>
+              {/* Search bar */}
 
-      <div className="container-xxl py-5 ">
-        <div className="container">
-          <div
-            className="text-center mx-auto mb-5 animate__animated animate__fadeInUp"
-            data-aos-delay="0.1s"
-            style={{ maxWidth: "600px" }}
-          >
-            <h1 className="mb-3" style={{ color: "#FF5733" }}>
-              Swimming Pool Items
-            </h1>
-            <p>We provide a wide range of items to meet your needs.</p>
-          </div>
-          <div className="row g-4">
-            <div
-              className="col-lg-3 col-sm-6 animate__animated animate__fadeInUp"
-              data-aos-delay="0.1s"
-            >
-              <Link
-                className="cat-item d-block bg-light text-center rounded p-3"
-                to="/category/filtration"
-              >
-                <div className="rounded p-4">
-                  <div className="icon mb-3">
-                    <img
-                      src="img/category/filtration.jpg"
-                      alt="Icon"
-                      style={{ maxWidth: "100%", height: "auto" }} // Make the image responsive
-                    />
+              <Form.Group controlId="searchCategories">
+                <Form.Control
+                  type="text"
+                  placeholder="Search categories..."
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                  style={{ border: "1px solid #ced4da" }}
+                />
+              </Form.Group>
+              <div className="row g-4">
+                {loading ? (
+                  <div
+                    style={{
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      minHeight: "100vh",
+                    }}
+                  >
+                    <Spinner animation="grow" variant="success" />
+                    <Spinner animation="grow" variant="danger" />
+                    <Spinner animation="grow" variant="warning" />
                   </div>
-                  <h4>Filtration</h4>
-                </div>
-              </Link>
-            </div>
-            <div
-              className="col-lg-3 col-sm-6 animate__animated animate__fadeInUp"
-              data-aos-delay="0.3s"
-            >
-              <Link
-                className="cat-item d-block bg-light text-center rounded p-3"
-                to="/category/pool-pump"
-              >
-                <div className="rounded p-4">
-                  <div className="icon mb-3">
-                    <img
-                      src="img/category/pool-pump.jpg"
-                      alt="Icon"
-                      style={{ maxWidth: "100%", height: "auto" }} // Make the image responsive
-                    />
-                  </div>
-                  <h4>Pool Pumps</h4>
-                </div>
-              </Link>
-            </div>
-            <div
-              className="col-lg-3 col-sm-6 animate__animated animate__fadeInUp"
-              data-aos-delay="0.5s"
-            >
-              <Link
-                className="cat-item d-block bg-light text-center rounded p-3"
-                to="/category/pool-light"
-              >
-                <div className="rounded p-4">
-                  <div className="icon mb-3">
-                    <img
-                      src="img/category/pool-light.jpg"
-                      alt="Icon"
-                      style={{ maxWidth: "100%", height: "auto" }} // Make the image responsive
-                    />
-                  </div>
-                  <h4>Pool Lights</h4>
-                </div>
-              </Link>
-            </div>
-            <div
-              className="col-lg-3 col-sm-6 animate__animated animate__fadeInUp"
-              data-aos-delay="0.7s"
-            >
-              <Link
-                className="cat-item d-block bg-light text-center rounded p-3"
-                to="/category/pool-fitting"
-              >
-                <div className="rounded p-4">
-                  <div className="icon mb-3">
-                    <img
-                      src="img/category/inlet.jpg"
-                      alt="Icon"
-                      style={{ maxWidth: "100%", height: "auto" }} // Make the image responsive
-                    />
-                  </div>
-                  <h4>Pool Fitting</h4>
-                </div>
-              </Link>
-            </div>
-            <div
-              className="col-lg-3 col-sm-6 animate__animated animate__fadeInUp"
-              data-aos-delay="0.1s"
-            >
-              <Link
-                className="cat-item d-block bg-light text-center rounded p-3"
-                to="/category/cleaning-product"
-              >
-                <div className="rounded p-4">
-                  <div className="icon mb-3">
-                    <img
-                      src="img/category/cleaning.jpg"
-                      alt="Icon"
-                      style={{ maxWidth: "100%", height: "auto" }} // Make the image responsive
-                    />
-                  </div>
-                  <h4>Cleaning Product</h4>
-                </div>
-              </Link>
-            </div>
-            <div
-              className="col-lg-3 col-sm-6 animate__animated animate__fadeInUp"
-              data-aos-delay="0.3s"
-            >
-              <Link
-                className="cat-item d-block bg-light text-center rounded p-3"
-                to="/category/heat-cool-pump"
-              >
-                <div className="rounded p-4">
-                  <div className="icon mb-3">
-                    <img
-                      src="img/poolItemImg/heat.jpg"
-                      alt="Icon"
-                      style={{ maxWidth: "100%", height: "auto" }} // Make the image responsive
-                    />
-                  </div>
-                  <h4>Heat & Cool Pump</h4>
-                </div>
-              </Link>
-            </div>
-            <div
-              className="col-lg-3 col-sm-6 animate__animated animate__fadeInUp"
-              data-aos-delay="0.5s"
-            >
-              <Link
-                className="cat-item d-block bg-light text-center rounded p-3"
-                to="/category/dosing-system"
-              >
-                <div className="rounded p-4">
-                  <div className="icon mb-3">
-                    <img
-                      src="img/poolItemImg/dosing.jpg"
-                      alt="Icon"
-                      style={{ maxWidth: "100%", height: "auto" }} // Make the image responsive
-                    />
-                  </div>
-                  <h4>Dosing Sysytem</h4>
-                </div>
-              </Link>
-            </div>
-            <div
-              className="col-lg-3 col-sm-6 animate__animated animate__fadeInUp"
-              data-aos-delay="0.7s"
-            >
-              <Link
-                className="cat-item d-block bg-light text-center rounded p-3"
-                to="/category/surrounded-equipments"
-              >
-                <div className="rounded p-4">
-                  <div className="icon mb-3">
-                    <img
-                      src="img/poolItemImg/stairs.jpg"
-                      alt="Icon"
-                      style={{ maxWidth: "100%", height: "auto" }} // Make the image responsive
-                    />
-                  </div>
-                  <h4>Surrounded Equipments</h4>
-                </div>
-              </Link>
-            </div>
-            <div
-              className="col-lg-3 col-sm-6 animate__animated animate__fadeInUp"
-              data-aos-delay="0.1s"
-            >
-              <Link
-                className="cat-item d-block bg-light text-center rounded p-3"
-                to="/category/safety-product"
-              >
-                <div className="rounded p-4">
-                  <div className="icon mb-3">
-                    <img
-                      src="img/poolItemImg/safety.jpg"
-                      alt="Icon"
-                      style={{ maxWidth: "100%", height: "auto" }} // Make the image responsive
-                    />
-                  </div>
-                  <h4>Safety Products</h4>
-                </div>
-              </Link>
-            </div>
-            <div
-              className="col-lg-3 col-sm-6 animate__animated animate__fadeInUp"
-              data-aos-delay="0.3s"
-            >
-              <Link
-                className="cat-item d-block bg-light text-center rounded p-3"
-                to="/category/pool-tiles"
-              >
-                <div className="rounded p-4">
-                  <div className="icon mb-3">
-                    <img
-                      src="img/poolItemImg/tiles.jpg"
-                      alt="Icon"
-                      style={{ maxWidth: "100%", height: "auto" }} // Make the image responsive
-                    />
-                  </div>
-                  <h4>Pool Tiles</h4>
-                </div>
-              </Link>
-            </div>
-            <div
-              className="col-lg-3 col-sm-6 animate__animated animate__fadeInUp"
-              data-aos-delay="0.5s"
-            >
-              <Link
-                className="cat-item d-block bg-light text-center rounded p-3"
-                to="/category/commercial-equipment"
-              >
-                <div className="rounded p-4">
-                  <div className="icon mb-3">
-                    <img
-                      src="img/category/equipment.jpg"
-                      alt="Icon"
-                      style={{ maxWidth: "100%", height: "auto" }} // Make the image responsive
-                    />
-                  </div>
-                  <h4>Commercial Equipments</h4>
-                </div>
-              </Link>
-            </div>
-            <div
-              className="col-lg-3 col-sm-6 animate__animated animate__fadeInUp"
-              data-wow-delay="0.7s"
-            >
-              <Link
-                className="cat-item d-block bg-light text-center rounded p-3"
-                to="/category/control-panel"
-              >
-                <div className="rounded p-4">
-                  <div className="icon mb-3">
-                    <img
-                      src="img/poolItemImg/cpanel.jpg"
-                      alt="Icon"
-                      style={{ maxWidth: "100%", height: "auto" }} // Make the image responsive
-                    />
-                  </div>
-                  <h4>Control Panel</h4>
-                </div>
-              </Link>
+                ) : (
+                  filteredCategories
+                    .slice(startIndex, endIndex)
+                    .map((category, index) => (
+                      <div
+                        key={index}
+                        className="col-lg-3 col-sm-6 animate__animated animate__fadeInUp"
+                        data-aos-delay="0.3s"
+                      >
+                        <Link
+                          to={`/category/${category.value}`}
+                          className="cat-item d-block bg-light text-center rounded p-3"
+                        >
+                          <div className="rounded p-4">
+                            <div className="icon mb-3">
+                              <img
+                                src={category.picture_url}
+                                alt={category.name}
+                                style={{ maxWidth: "100%", height: "auto" }}
+                              />
+                            </div>
+                            <h4>{category.name}</h4>
+                          </div>
+                        </Link>
+                      </div>
+                    ))
+                )}
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      </section>
+      {/* Render the Pagination component */}
+      <Pagination
+        currentPage={currentPage}
+        totalPages={totalPages}
+        onPageChange={handlePageChange}
+      />
     </>
   );
 };

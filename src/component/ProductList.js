@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useProduct } from "../context/products/ProductState";
 import EditProductModal from "./EditProductModal";
-import { Pagination } from "react-bootstrap";
+import axios from "axios";
+import Pagination from "./Pagination"; // Import the Pagination component
 
 const ProductList = () => {
   const productInitial = [];
@@ -13,7 +14,12 @@ const ProductList = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [currentPage, setCurrentPage] = useState(1); // State for current page
-  const [totalPages, setTotalPages] = useState(1); // State for total pages
+  const [categories, setCategories] = useState([]);
+  const host = process.env.REACT_APP_BASE_URI;
+
+  const api = axios.create({
+    baseURL: host,
+  });
 
   useEffect(() => {
     const fetchData = async () => {
@@ -27,10 +33,21 @@ const ProductList = () => {
 
     fetchData();
     // eslint-disable-next-line
+    const fetchCategories = async () => {
+      try {
+        const response = await api.get("/api/category/category");
+        setCategories(response.data);
+      } catch (error) {
+        console.error("Error fetching categories:", error);
+      }
+    };
+
+    fetchCategories();
   }, []);
 
   const handleCategoryChange = (event) => {
     setSelectedCategory(event.target.value);
+    setCurrentPage(1); // Reset currentPage to 1 when category changes
   };
 
   const handleReadMore = (productId) => {
@@ -75,17 +92,24 @@ const ProductList = () => {
       ? products
       : products.filter((product) => product.category === selectedCategory);
 
-  useEffect(() => {
-    setTotalPages(Math.ceil(filteredProducts.length / 12)); // Assuming 10 items per page
-  }, [filteredProducts]);
+  // Sort products alphabetically by name
+  const sortedProducts = [...filteredProducts].sort((a, b) =>
+    a.name.localeCompare(b.name)
+  );
 
-  const handlePageChange = (page) => {
-    setCurrentPage(page);
+  const productsPerPage = 10;
+  const indexOfLastProduct = currentPage * productsPerPage;
+  const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
+  const paginatedProducts = sortedProducts.slice(
+    indexOfFirstProduct,
+    indexOfLastProduct
+  );
+
+  const totalPages = Math.ceil(sortedProducts.length / productsPerPage);
+
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
   };
-
-  const startIndex = (currentPage - 1) * 10; // Assuming 10 items per page
-  const endIndex = startIndex + 10; // Assuming 10 items per page
-  const paginatedProducts = filteredProducts.slice(startIndex, endIndex);
 
   return (
     <div className="container mt-5">
@@ -115,25 +139,11 @@ const ProductList = () => {
             onChange={handleCategoryChange}
           >
             <option value="All">All</option>
-            <option value="filtration">Filtration</option>
-            <option value="pool pump">Pool Pump</option>
-            <option value="pool light">Pool Light</option>
-            <option value="pool fitting">Pool Fitting</option>
-            <option value="cleaning product">Cleaning Product</option>
-            <option value="heat cool pump">Heat & Cool Pump</option>
-            <option value="dosing system">Dosing System</option>
-            <option value="surrounded equipment">Surrounded Equipments</option>
-            <option value="safety product">Safety Product</option>
-            <option value="commercial equipments">Commercial Equipments</option>
-            <option value="control panel">Control Panel</option>
-            <option value="water fountain">Water Fountain</option>
-            <option value="wellness">Wellness</option>
-            <option value="pool chemical">Pool Chemical</option>
-            <option value="waterfall">Waterfall</option>
-            <option value="intex pool">Intex pool</option>
-            <option value="booster pump">Booster Pumps</option>
-            <option value="pool tiles">Pool Tiles</option>
-            <option value="irregation">Irregation</option>
+            {categories.map((category) => (
+              <option key={category._id} value={category.value}>
+                {category.name}
+              </option>
+            ))}
           </select>
         </div>
       </div>
@@ -199,25 +209,13 @@ const ProductList = () => {
       </div>
       <div className="container mt-5 text-center">
         <div className="text-center">
-          <Pagination>
-            <Pagination.Prev
-              onClick={() => handlePageChange(currentPage - 1)}
-              disabled={currentPage === 1}
+          {totalPages > 1 && (
+            <Pagination
+              currentPage={currentPage}
+              totalPages={totalPages}
+              onPageChange={handlePageChange}
             />
-            {Array.from({ length: totalPages }, (_, index) => (
-              <Pagination.Item
-                key={index}
-                active={index + 1 === currentPage}
-                onClick={() => handlePageChange(index + 1)}
-              >
-                {index + 1}
-              </Pagination.Item>
-            ))}
-            <Pagination.Next
-              onClick={() => handlePageChange(currentPage + 1)}
-              disabled={currentPage === totalPages}
-            />
-          </Pagination>
+          )}
         </div>
       </div>
 

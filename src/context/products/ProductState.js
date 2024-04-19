@@ -88,15 +88,38 @@ const ProductState = (props) => {
   //fetch categories
   const getCategories = async () => {
     try {
-      const response = await fetch("/api/category/category"); // Assuming '/api/category' is the endpoint for fetching categories
+      const response = await fetch(`${host}/api/category/category`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          "auth-token": localStorage.getItem("token"),
+        },
+      });
+
       const data = await response.json();
-      return data; // Return the fetched categories data
+      return data;
     } catch (error) {
       console.error("Error fetching categories:", error);
-      throw error; // Throw the error to handle it in the component
+      throw error;
     }
   };
+  const getPaginatedCategories = async (startIdx, endIdx) => {
+    try {
+      const response = await fetch(`${host}/api/category/category`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          "auth-token": localStorage.getItem("token"),
+        },
+      });
 
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      console.error("Error fetching categories:", error);
+      throw error;
+    }
+  };
   //fetch Product
   const fetchProduct = async () => {
     try {
@@ -265,6 +288,8 @@ const ProductState = (props) => {
         addProject,
         addCategory,
         deleteCategory,
+        getCategories,
+        getPaginatedCategories,
       }}
     >
       {props.children}

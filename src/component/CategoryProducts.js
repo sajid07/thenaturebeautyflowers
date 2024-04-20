@@ -93,25 +93,12 @@ const CategoryProducts = () => {
                 <div key={product._id} className="col-md-3 mb-3">
                   <div className="card">
                     <Link to={`/product/${product._id}`} className="card-link">
-                      <div
-                        style={{
-                          position: "relative",
-                          paddingBottom: "100%",
-                          overflow: "hidden",
-                        }}
-                      >
+                      <div>
                         <img
                           src={product.picture}
                           className="card-img-top img-fluid"
                           alt={product.name}
-                          style={{
-                            position: "absolute",
-                            top: 0,
-                            left: 0,
-                            width: "100%",
-                            height: "100%",
-                            objectFit: "cover",
-                          }}
+                          style={{ height: "225px", width: "180px" }}
                         />
                       </div>
                     </Link>

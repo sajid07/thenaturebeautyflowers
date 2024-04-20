@@ -64,7 +64,6 @@ const CategoryList = () => {
         categories.filter((category) => category._id !== categoryValue)
       );
       alert("Category deleted successfully"); // Display a simple alert message
-      navigate("/dashboard/add-Category");
     } catch (error) {
       console.error("Error deleting category:", error);
     }

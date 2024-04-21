@@ -88,7 +88,7 @@ function App() {
                 element={<CategoryProducts />}
               />
               <Route exact path="/swimming-pool" element={<SwimmingPool />} />
-              <Route path="/product/:productId" element={<ProductDetail />} />
+              <Route path="/product/:slug" element={<ProductDetail />} />
               <Route exact path="/projects" element={<Projects />} />
               <Route exact path="/contact-us" element={<ContactUs />} />
             </Route>

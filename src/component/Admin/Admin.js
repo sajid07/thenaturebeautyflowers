@@ -3,7 +3,7 @@ import SideNavbar from "./SideNavbar";
 import ProductList from "../ProductList";
 import productContext from "../../context/products/productContext";
 import React, { useContext, useEffect, useState } from "react";
-import { RingLoader } from "react-spinners";
+import Spinner from "react-bootstrap/Spinner";
 
 const Admin = () => {
   const context = useContext(productContext);
@@ -40,7 +40,9 @@ const Admin = () => {
             minHeight: "100vh",
           }}
         >
-          <RingLoader color="#fc031c" size={150} loading={loading} />
+          <Spinner animation="grow" variant="secondary" />
+          <Spinner animation="grow" variant="success" />
+          <Spinner animation="grow" variant="danger" />{" "}
         </div>
       ) : (
         <SideNavbar>

@@ -3,12 +3,16 @@ import productContext from "../../context/products/productContext";
 import NavBar from "../Admin/Navbar";
 import SideNavbar from "./SideNavbar";
 import axios from "axios";
+import { Container, Form, Button, Col, Row, InputGroup } from "react-bootstrap";
+
 const host = process.env.REACT_APP_BASE_URI;
 
 const ProductForm = () => {
   const context = useContext(productContext);
   const { addProduct } = context || {};
   const [categories, setCategories] = useState([]);
+  const [features, setFeatures] = useState([]); // State for storing features
+  const [feature, setFeature] = useState(""); // State for the feature input // State for storing features
   const api = axios.create({
     baseURL: host,
   });
@@ -31,15 +35,15 @@ const ProductForm = () => {
     picture: "",
     pdfFile: "",
   });
-  const [loading, setLoading] = useState(false); // Add loading state
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true); // Set loading to true when submitting form
+    setLoading(true);
     try {
-      // Pass the entire product object to the addProduct function
-      const product = new FormData(e.currentTarget);
-      await addProduct(product);
+      const formData = new FormData(e.currentTarget);
+      formData.append("features", JSON.stringify(features)); // Append features to form data
+      await addProduct(formData);
       setProduct({
         name: "",
         description: "",
@@ -47,103 +51,87 @@ const ProductForm = () => {
         picture: "",
         pdfFile: "",
       });
-      setLoading(false); // Reset loading state after adding product
+      setLoading(false);
+      setFeatures([]); // Clear features state after adding product
     } catch (error) {
       console.error("Error adding product:", error);
-      setLoading(false); // Reset loading state if an error occurs
-      // Handle error and provide user feedback
+      setLoading(false);
     }
   };
 
   const onChange = (e) => {
     if (e.target.name === "picture" || e.target.name === "pdfFile") {
-      // Handle file inputs
       const file = e.target.files[0];
       if (file) {
-        // Check if file size exceeds 100 MB
         if (file.size > 100 * 1024 * 1024) {
-          // File size exceeds the maximum allowed size (100 MB)
           alert("Maximum file size allowed is 100 MB");
-          // Clear the input field
           e.target.value = "";
         } else {
-          // File size is within the allowed limit, update the state
           setProduct({ ...product, [e.target.name]: file });
         }
       }
     } else {
-      // Handle text inputs
       setProduct({ ...product, [e.target.name]: e.target.value });
     }
+  };
+
+  const handleAddFeature = () => {
+    if (feature.trim()) {
+      setFeatures([...features, feature.trim()]); // Add new feature to the features array
+      setFeature(""); // Clear the input field
+    }
+  };
+
+  const handleRemoveFeature = (index) => {
+    const updatedFeatures = [...features];
+    updatedFeatures.splice(index, 1); // Remove feature at the specified index
+    setFeatures(updatedFeatures); // Update the features state
   };
 
   return (
     <>
       <NavBar />
       <SideNavbar>
-        <div className="container my-3">
+        <Container className="my-3">
           <h2 style={{ color: "#3498db" }} className="mt-5">
             Add a Product
           </h2>
-          <form
+          <Form
             className="my-3"
             encType="multipart/form-data"
             method="post"
             onSubmit={handleSubmit}
           >
-            <div className="mb-3">
-              <h5
-                htmlFor="name"
-                className="form-label"
-                style={{ color: "green" }}
-              >
-                Name
-              </h5>
-              <input
+            <Form.Group className="mb-3">
+              <Form.Label style={{ color: "green" }}>Name</Form.Label>
+              <Form.Control
                 type="text"
                 placeholder="Enter The Product Name"
-                className="form-control form-control-lg"
-                id="name"
                 name="name"
                 value={product.name}
                 onChange={onChange}
                 minLength={1}
                 required
               />
-            </div>
-            <div className="mb-3">
-              <h5
-                htmlFor="description"
-                style={{ color: "green" }}
-                className="form-label"
-              >
-                Description
-              </h5>
-              <textarea
+            </Form.Group>
+            <Form.Group className="mb-3">
+              <Form.Label style={{ color: "green" }}>Description</Form.Label>
+              <Form.Control
+                as="textarea"
                 placeholder="Enter The Product Description"
-                className="form-control form-control-lg"
-                id="description"
                 name="description"
                 value={product.description}
                 onChange={onChange}
                 minLength={1}
                 required
               />
-            </div>
-            <div className="mb-3">
-              <h5
-                htmlFor="category"
-                style={{ color: "green" }}
-                className="form-label"
-              >
-                Category
-              </h5>
-              <select
-                className="form-control form-control-lg"
-                id="category"
-                name="category"
+            </Form.Group>
+            <Form.Group className="mb-3">
+              <Form.Label style={{ color: "green" }}>Category</Form.Label>
+              <Form.Select
                 value={product.category}
                 onChange={onChange}
+                name="category"
                 required
               >
                 <option value="" disabled>
@@ -154,47 +142,62 @@ const ProductForm = () => {
                     {category.name}
                   </option>
                 ))}
-              </select>
-            </div>
-
-            <div className="mb-3">
-              <h5
-                htmlFor="picture"
-                style={{ color: "green" }}
-                className="form-label"
-              >
-                Picture
-              </h5>
-              <input type="file" name="picture" onChange={onChange} />
-            </div>
-            <div className="mb-3">
-              <h5
-                htmlFor="pdfFile"
-                style={{ color: "green" }}
-                className="form-label"
-              >
-                PDF File
-              </h5>
-              <input
+              </Form.Select>
+            </Form.Group>
+            <Form.Group className="mb-3">
+              <Form.Label style={{ color: "green" }}>Picture</Form.Label>
+              <Form.Control type="file" name="picture" onChange={onChange} />
+            </Form.Group>
+            <Form.Group className="mb-3">
+              <Form.Label style={{ color: "green" }}>PDF File</Form.Label>
+              <Form.Control
                 type="file"
                 name="pdfFile"
                 accept=".pdf"
                 onChange={onChange}
               />
-            </div>
-            <button
+            </Form.Group>
+            <Form.Group className="mb-3">
+              <Form.Label style={{ color: "green" }}>Features</Form.Label>
+              <div>
+                {features.map((feature, index) => (
+                  <div key={index} className="d-flex align-items-center mb-2">
+                    <p className="mb-0 me-2">{feature}</p>
+                    <Button
+                      variant="danger"
+                      size="sm"
+                      onClick={() => handleRemoveFeature(index)}
+                    >
+                      Remove
+                    </Button>
+                  </div>
+                ))}
+              </div>
+              <InputGroup className="mb-3">
+                <Form.Control
+                  type="text"
+                  placeholder="Enter a feature"
+                  value={feature}
+                  onChange={(e) => setFeature(e.target.value)}
+                />
+                <Button variant="primary" onClick={handleAddFeature}>
+                  Add Feature
+                </Button>
+              </InputGroup>
+            </Form.Group>
+            <Button
               disabled={
                 loading ||
                 product.name.length < 1 ||
                 product.description.length < 1
               }
               type="submit"
-              className="btn btn-primary"
+              variant="primary"
             >
               {loading ? "Adding Product..." : "Add Product"}
-            </button>
-          </form>
-        </div>
+            </Button>
+          </Form>
+        </Container>
         <footer className="py-4 bg-light mt-auto">
           <div className="container-fluid px-4">
             <div className="d-flex align-items-center justify-content-between small"></div>

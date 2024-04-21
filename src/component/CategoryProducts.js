@@ -92,7 +92,7 @@ const CategoryProducts = () => {
               currentProducts.map((product) => (
                 <div key={product._id} className="col-md-3 mb-3">
                   <div className="card">
-                    <Link to={`/product/${product._id}`} className="card-link">
+                    <Link to={`/product/${product.slug}`} className="card-link">
                       <div>
                         <img
                           src={product.picture}
@@ -105,7 +105,7 @@ const CategoryProducts = () => {
                     <div className="card-body">
                       <h5 className="card-title">
                         <Link
-                          to={`/product/${product._id}`}
+                          to={`/product/${product.slug}`}
                           className="card-link"
                         >
                           {product.name}

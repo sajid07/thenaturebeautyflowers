@@ -33,7 +33,7 @@ const CategoryManagement = () => {
     300
   );
 
-  const categoryAdded = useRef();
+  const categoryAdded = useRef(false);
   const formikRef = useRef();
   const [category, setCategory] = useState({
     name: "",

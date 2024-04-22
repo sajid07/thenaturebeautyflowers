@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext, useReducer } from "react";
 import axios from "axios";
 import productContext from "../../context/products/productContext";
 import Image from "react-bootstrap/Image";
@@ -21,29 +21,41 @@ const CategoryList = ({ categoryAdded }) => {
   const initSorting = [{ id: "name", desc: false }];
   const context = useContext(productContext);
   const { deleteCategory } = context;
+  const [, forceUpdate] = useReducer((x) => x + 1, 0); // trigger category list re-render
   const [loading, setLoading] = useState(true);
-
   const [categories, setCategories] = useState([]);
   const api = axios.create({
     baseURL: host,
   });
 
-  useEffect(
-    () => async () => {
-      try {
-        setLoading(true); // Set loading to true when fetching starts
+  const fetchCategories = async () => {
+    try {
+      setLoading(true); // Set loading to true when fetching starts
 
-        const response = await api.get("/api/category/category");
-        const categoriesWithValues = response.data.map((category) => ({
-          ...category,
-          value: category.value,
-        }));
-        setCategories(categoriesWithValues);
-        setLoading(false); // Set loading to false when data is fetched
-      } catch (error) {
-        console.error("Error fetching categories:", error);
-        setLoading(false); // Set loading to false when data is fetched
-      }
+      const response = await api.get("/api/category/category");
+      const categoriesWithValues = response.data.map((category) => ({
+        ...category,
+        value: category.value,
+      }));
+      setCategories(categoriesWithValues);
+      setLoading(false); // Set loading to false when data is fetched
+    } catch (error) {
+      console.error("Error fetching categories:", error);
+      setLoading(false);
+    }
+  };
+
+  useEffect(
+    () => {
+      fetchCategories();
+    },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    []
+  );
+
+  useEffect(
+    () => {
+      fetchCategories();
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [categoryAdded]

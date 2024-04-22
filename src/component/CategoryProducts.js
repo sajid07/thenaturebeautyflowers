@@ -3,12 +3,14 @@ import { Link, useParams } from "react-router-dom";
 import { useProduct } from "../context/products/ProductState";
 import Spinner from "react-bootstrap/Spinner";
 import Pagination from "./Pagination"; // Import the Pagination component
+import NotFound from "./NotFound";
 
 const CategoryProducts = () => {
   let { category } = useParams();
   const { fetchProduct, products } = useProduct([]);
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
+  const [itemNotFound, setItemNotFound] = useState(false);
   const [productsPerPage] = useState(8); // Change this number to adjust the number of products per page
   const [searchTerm, setSearchTerm] = useState(""); // State for search term
 
@@ -20,12 +22,17 @@ const CategoryProducts = () => {
         setLoading(false); // Set loading to false when data is fetched
       } catch (error) {
         console.error("Error fetching data:", error);
+
+        if (error?.response?.status === 404) {
+          setItemNotFound(true);
+        }
+
         setLoading(false); // Set loading to false on error
       }
     };
 
     fetchData();
-  }, [category]);
+  }, []);
 
   // Filter products by category
   const filteredProducts = products.filter(
@@ -55,7 +62,9 @@ const CategoryProducts = () => {
   // Change page
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
-  return (
+  return itemNotFound ? (
+    <NotFound />
+  ) : (
     <>
       <div className="container mt-5">
         <h2 className="mb-4 text-center" style={{ color: "#3498db" }}>

@@ -1,17 +1,19 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import axios from "axios";
 import Spinner from "react-bootstrap/Spinner";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import ListGroup from "react-bootstrap/ListGroup";
 import WhatsAppButton from "./WhatsAppButton";
-import axios from "axios";
+import NotFound from "./NotFound";
 
 const ProductDetail = () => {
   const { slug } = useParams();
   const [contacts, setContacts] = useState({});
   const [product, setProduct] = useState({});
   const [loading, setLoading] = useState(true);
+  const [itemNotFound, setItemNotFound] = useState(false);
 
   const host = process.env.REACT_APP_BASE_URI;
   const api = axios.create({
@@ -40,6 +42,11 @@ const ProductDetail = () => {
         console.log("Product set successfully!", productResponse.data);
       } catch (error) {
         console.error("Error fetching data:", error);
+
+        if (error?.response?.status === 404) {
+          setItemNotFound(true);
+        }
+
         setLoading(false);
       }
     };
@@ -55,6 +62,8 @@ const ProductDetail = () => {
           <Spinner animation="grow" variant="success" />
           <Spinner animation="grow" variant="danger" />{" "}
         </div>
+      ) : itemNotFound ? (
+        <NotFound />
       ) : (
         <div className="d-flex justify-content-center align-items-center min-vh-100">
           <Card style={{ width: "30rem" }}>

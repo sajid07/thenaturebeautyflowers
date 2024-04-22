@@ -1,6 +1,4 @@
-import NavBar from "../Admin/Navbar";
-import SideNavbar from "./SideNavbar";
-import ProductList from "../ProductList";
+import ProductList from "./ProductList";
 import productContext from "../../context/products/productContext";
 import React, { useContext, useEffect, useState } from "react";
 import Spinner from "react-bootstrap/Spinner";
@@ -29,8 +27,6 @@ const Admin = () => {
 
   return (
     <>
-      <NavBar />
-
       {loading ? (
         <div
           style={{
@@ -45,9 +41,7 @@ const Admin = () => {
           <Spinner animation="grow" variant="danger" />{" "}
         </div>
       ) : (
-        <SideNavbar>
-          <ProductList />
-        </SideNavbar>
+        <ProductList />
       )}
     </>
   );

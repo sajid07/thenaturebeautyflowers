@@ -1,12 +1,24 @@
 import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import productContext from "../../context/products/productContext";
-import { ListGroup, Button } from "react-bootstrap";
-import Spinner from "react-bootstrap/Spinner";
+import Image from "react-bootstrap/Image";
+import Datatable from "./Datatable";
 
 const host = process.env.REACT_APP_BASE_URI;
 
-const CategoryList = () => {
+const CategoryList = ({ categoryAdded }) => {
+  const columns = {
+    name: { title: "Category Name" },
+    picture_url: {
+      title: "Category Image",
+      disableSorting: true,
+      disableFiltering: true,
+      template: (cell) => (
+        <Image src={cell.getValue()} width={130} thumbnail fluid />
+      ),
+    },
+  };
+  const initSorting = [{ id: "name", desc: false }];
   const context = useContext(productContext);
   const { deleteCategory } = context;
   const [loading, setLoading] = useState(true);
@@ -16,8 +28,8 @@ const CategoryList = () => {
     baseURL: host,
   });
 
-  useEffect(() => {
-    const fetchCategories = async () => {
+  useEffect(
+    () => async () => {
       try {
         setLoading(true); // Set loading to true when fetching starts
 
@@ -26,23 +38,22 @@ const CategoryList = () => {
           ...category,
           value: category.value,
         }));
-        setLoading(false); // Set loading to false when data is fetched
-
         setCategories(categoriesWithValues);
+        setLoading(false); // Set loading to false when data is fetched
       } catch (error) {
         console.error("Error fetching categories:", error);
         setLoading(false); // Set loading to false when data is fetched
       }
-    };
+    },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [categoryAdded]
+  );
 
-    fetchCategories();
-  }, []);
-
-  const handleDelete = async (categoryValue, categoryId) => {
+  const handleDelete = async (category) => {
     try {
       // Check if there are any products associated with the category
       const productsResponse = await api.get(
-        `/api/product/category/${categoryValue}`
+        `/api/product/category/${category.value}`
       );
       const productCount = productsResponse.data.productCount;
       console.log("productCount", productCount);
@@ -59,10 +70,7 @@ const CategoryList = () => {
       }
 
       // If there are no products associated with the category, proceed with deletion
-      await deleteCategory(categoryId);
-      setCategories(
-        categories.filter((category) => category._id !== categoryValue)
-      );
+      await deleteCategory(category._id);
       alert("Category deleted successfully"); // Display a simple alert message
     } catch (error) {
       console.error("Error deleting category:", error);
@@ -71,37 +79,16 @@ const CategoryList = () => {
 
   return (
     <>
-      {loading ? (
-        <div
-          className="row justify-content-center align-items-center"
-          style={{ minHeight: "100vh" }}
-        >
-          <Spinner animation="grow" variant="secondary" />
-          <Spinner animation="grow" variant="success" />
-          <Spinner animation="grow" variant="danger" />{" "}
-        </div>
-      ) : (
-        <div>
-          <div className="section-title">
-            <h2>Category List</h2>
-          </div>
-          <ListGroup as="ul">
-            {categories.map((category) => (
-              <ListGroup.Item as="li" key={category._id}>
-                <div className="d-flex justify-content-between align-items-center">
-                  <span className="section-title">{category.name}</span>
-                  <Button
-                    variant="danger"
-                    onClick={() => handleDelete(category.value, category._id)}
-                  >
-                    Delete
-                  </Button>
-                </div>
-              </ListGroup.Item>
-            ))}
-          </ListGroup>
-        </div>
-      )}
+      <div className="section-title">
+        <h2>Category List</h2>
+      </div>
+      <Datatable
+        loading={loading}
+        columns={columns}
+        tableData={categories}
+        initSorting={initSorting}
+        itemDeleteFn={handleDelete}
+      />
     </>
   );
 };

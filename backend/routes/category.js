@@ -52,8 +52,7 @@ router.post("/", authmiddleware, awsS3UploadMiddleware, async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 });
-router.get("/exists", async (req, res) => {
-  console.log("welcome to backend");
+router.get("/exists", authmiddleware, async (req, res) => {
   try {
     const { name } = req.query;
 

@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import NavBar from "../Admin/Navbar";
-import SideNavbar from "./SideNavbar";
 
 const LinkForm = () => {
   const [socialLinks, setSocialLinks] = useState({
@@ -58,79 +56,74 @@ const LinkForm = () => {
 
   return (
     <>
-      <NavBar />
-      <SideNavbar>
-        <div style={formContainerStyle}>
-          <label style={labelStyle}>Facebook Link:</label>
-          <input
-            type="text"
-            value={socialLinks.facebook}
-            onChange={(e) =>
-              setSocialLinks({ ...socialLinks, facebook: e.target.value })
-            }
-            style={inputStyle}
-          />
-          <label style={labelStyle}>YouTube Link:</label>
-          <input
-            type="text"
-            value={socialLinks.youtube}
-            onChange={(e) =>
-              setSocialLinks({ ...socialLinks, youtube: e.target.value })
-            }
-            style={inputStyle}
-          />
-          <label style={labelStyle}>Instagram Link:</label>
-          <input
-            type="text"
-            value={socialLinks.instagram}
-            onChange={(e) =>
-              setSocialLinks({
-                ...socialLinks,
-                instagram: e.target.value,
-              })
-            }
-            style={inputStyle}
-          />
-          <label style={labelStyle}>Twitter Link:</label>
-          <input
-            type="text"
-            value={socialLinks.twitter}
-            onChange={(e) =>
-              setSocialLinks({ ...socialLinks, twitter: e.target.value })
-            }
-            style={inputStyle}
-          />
-          <label style={labelStyle}>Google Map Link:</label>
-          <input
-            type="text"
-            value={socialLinks.googleMap}
-            onChange={(e) =>
-              setSocialLinks({
-                ...socialLinks,
-                googleMap: e.target.value,
-              })
-            }
-            style={inputStyle}
-          />
-          <button onClick={handleUpdateSocialLinks} style={buttonStyle}>
-            Update Social Links
-          </button>
-        </div>
-        <footer className="py-4 bg-light mt-auto">
-          <div className="container-fluid px-4">
-            <div className="d-flex align-items-center justify-content-between small">
-              <div className="text-muted">
-                Copyright &copy; Your Website 2023
-              </div>
-              <div>
-                <a href="/AddSalesitems">Privacy Policy</a>
-                &middot;
-                <a href="/AddSalesitems">Terms &amp; Conditions</a>
-              </div>
+      <div style={formContainerStyle}>
+        <label style={labelStyle}>Facebook Link:</label>
+        <input
+          type="text"
+          value={socialLinks.facebook}
+          onChange={(e) =>
+            setSocialLinks({ ...socialLinks, facebook: e.target.value })
+          }
+          style={inputStyle}
+        />
+        <label style={labelStyle}>YouTube Link:</label>
+        <input
+          type="text"
+          value={socialLinks.youtube}
+          onChange={(e) =>
+            setSocialLinks({ ...socialLinks, youtube: e.target.value })
+          }
+          style={inputStyle}
+        />
+        <label style={labelStyle}>Instagram Link:</label>
+        <input
+          type="text"
+          value={socialLinks.instagram}
+          onChange={(e) =>
+            setSocialLinks({
+              ...socialLinks,
+              instagram: e.target.value,
+            })
+          }
+          style={inputStyle}
+        />
+        <label style={labelStyle}>Twitter Link:</label>
+        <input
+          type="text"
+          value={socialLinks.twitter}
+          onChange={(e) =>
+            setSocialLinks({ ...socialLinks, twitter: e.target.value })
+          }
+          style={inputStyle}
+        />
+        <label style={labelStyle}>Google Map Link:</label>
+        <input
+          type="text"
+          value={socialLinks.googleMap}
+          onChange={(e) =>
+            setSocialLinks({
+              ...socialLinks,
+              googleMap: e.target.value,
+            })
+          }
+          style={inputStyle}
+        />
+        <button onClick={handleUpdateSocialLinks} style={buttonStyle}>
+          Update Social Links
+        </button>
+      </div>
+      <footer className="py-4 bg-light mt-auto">
+        <div className="container-fluid px-4">
+          <div className="d-flex align-items-center justify-content-between small">
+            <div className="text-muted">Copyright &copy; Your Website 2023</div>
+            <div>
+              <a href="/AddSalesitems">Privacy Policy</a>
+              &middot;
+              <a href="/AddSalesitems">Terms &amp; Conditions</a>
             </div>
           </div>
-        </footer>
-      </SideNavbar>
+        </div>
+      </footer>
     </>
   );
 };

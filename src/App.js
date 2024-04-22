@@ -33,6 +33,8 @@ import NotFound from "./component/NotFound";
 import CategoryProducts from "./component/CategoryProducts";
 import Footer from "./component/Footer";
 import CategoryManagement from "./component/Admin/CategoryManagement";
+import SideNavbar from "./component/Admin/SideNavbar";
+import AdminNavbar from "./component/Admin/AdminNavbar";
 
 function App() {
   AOS.init();
@@ -98,7 +100,10 @@ function App() {
               element={
                 <>
                   <div className="route-body">
-                    <Outlet />
+                    <AdminNavbar />
+                    <SideNavbar>
+                      <Outlet />
+                    </SideNavbar>
                   </div>
                 </>
               }
@@ -106,7 +111,7 @@ function App() {
               <Route exact path="/add-project" element={<AddProject />} />
               <Route
                 exact
-                path="/add-Category"
+                path="/add-category"
                 element={<CategoryManagement />}
               />
 

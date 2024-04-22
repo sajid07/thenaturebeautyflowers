@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { useProduct } from "../context/products/ProductState";
+import { useProduct } from "../../context/products/ProductState";
 import EditProductModal from "./EditProductModal";
 import axios from "axios";
-import Pagination from "./Pagination"; // Import the Pagination component
+import Pagination from "../Pagination"; // Import the Pagination component
 
 const ProductList = () => {
   const productInitial = [];

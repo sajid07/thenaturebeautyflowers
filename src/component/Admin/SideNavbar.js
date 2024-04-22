@@ -46,7 +46,7 @@ const SideNavbar = ({ children }) => {
                   </div>
                   Add New Project
                 </Link>
-                <Link className="nav-link" to="/add-Category">
+                <Link className="nav-link" to="/add-category">
                   <div className="sb-nav-link-icon">
                     <i className="fas fa-briefcase"></i>
                   </div>

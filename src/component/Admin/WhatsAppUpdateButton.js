@@ -1,8 +1,6 @@
 import React, { useState, useContext, useEffect } from "react";
 import axios from "axios";
 import productContext from "../../context/products/productContext";
-import SideNavbar from "./SideNavbar";
-import NavBar from "./Navbar";
 
 const WhatsAppUpdateButton = () => {
   const [newWhatsAppContact, setNewWhatsAppContact] = useState("");
@@ -61,32 +59,29 @@ const WhatsAppUpdateButton = () => {
 
   return (
     <>
-      <NavBar></NavBar>
-      <SideNavbar>
-        <div style={formContainerStyle}>
-          <label style={labelStyle}>New WhatsApp Contact:</label>
-          <input
-            type="text"
-            value={newWhatsAppContact}
-            placeholder={Contact.whatsappContact}
-            onChange={(e) => setNewWhatsAppContact(e.target.value)}
-            style={inputStyle}
-          />
+      <div style={formContainerStyle}>
+        <label style={labelStyle}>New WhatsApp Contact:</label>
+        <input
+          type="text"
+          value={newWhatsAppContact}
+          placeholder={Contact.whatsappContact}
+          onChange={(e) => setNewWhatsAppContact(e.target.value)}
+          style={inputStyle}
+        />
 
-          <label style={labelStyle}>New Call Contact:</label>
-          <input
-            type="text"
-            placeholder={Contact.callContact}
-            value={newCallContact}
-            onChange={(e) => setNewCallContact(e.target.value)}
-            style={inputStyle}
-          />
+        <label style={labelStyle}>New Call Contact:</label>
+        <input
+          type="text"
+          placeholder={Contact.callContact}
+          value={newCallContact}
+          onChange={(e) => setNewCallContact(e.target.value)}
+          style={inputStyle}
+        />
 
-          <button onClick={handleUpdateContacts} style={buttonStyle}>
-            Update Contacts
-          </button>
-        </div>
-      </SideNavbar>
+        <button onClick={handleUpdateContacts} style={buttonStyle}>
+          Update Contacts
+        </button>
+      </div>
     </>
   );
 };

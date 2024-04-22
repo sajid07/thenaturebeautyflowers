@@ -66,10 +66,10 @@ const ProductState = (props) => {
 
       const data = await response.json(); // Parse the response as JSON
 
-      console.log("Categotry added successfully:", data);
-      alert("Categotry added successfully");
+      console.log("Category added successfully:", data);
+      alert("Category added successfully");
     } catch (error) {
-      console.error("Error adding Categotry:", error);
+      console.error("Error adding Category:", error);
       // Handle error and provide user feedback
       throw error;
     }

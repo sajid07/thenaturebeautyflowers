@@ -1,8 +1,6 @@
 import React, { useContext, useState } from "react";
 import productContext from "../../context/products/productContext";
-import NavBar from "../Admin/Navbar";
 import ProjectList from "./ProjectList";
-import SideNavbar from "./SideNavbar";
 
 const AddProject = () => {
   const context = useContext(productContext);
@@ -37,76 +35,69 @@ const AddProject = () => {
   };
   return (
     <>
-      <NavBar />
-      <SideNavbar>
-        {" "}
-        <div className="section-title">
-          <h2></h2>
-          <h2>Add Project</h2>
-        </div>{" "}
-        <div className="container my-3">
-          <form
-            className="my-3"
-            encType="multipart/form-data"
-            method="post"
-            onSubmit={handleSubmit}
-          >
-            <div className="mb-3">
-              <label htmlFor="name" className="form-label">
-                Name
-              </label>
-              <input
-                type="text"
-                className="form-control"
-                id="name"
-                name="name"
-                value={product.name}
-                onChange={onChange}
-                minLength={1}
-                required
-              />
-            </div>
-            <div className="mb-3">
-              <label htmlFor="description" className="form-label">
-                Description
-              </label>
-              <input
-                type="text"
-                className="form-control"
-                id="description"
-                name="description"
-                value={product.description}
-                onChange={onChange}
-                minLength={1}
-                required
-              />
-            </div>
-
-            <div className="mb-3">
-              <label htmlFor="picture" className="form-label">
-                Picture
-              </label>
-              <input type="file" name="picture" onChange={onChange} required />
-            </div>
-
-            <button
-              disabled={
-                product.name.length < 1 || product.description.length < 1
-              }
-              type="submit"
-              className="btn btn-primary"
-            >
-              Add Project
-            </button>
-          </form>
-          <ProjectList></ProjectList>
-        </div>
-        <footer className="py-4 bg-light mt-auto">
-          <div className="container-fluid px-4">
-            <div className="d-flex align-items-center justify-content-between small"></div>
+      <div className="section-title">
+        <h2>Add Project</h2>
+      </div>
+      <div className="container my-3">
+        <form
+          className="my-3"
+          encType="multipart/form-data"
+          method="post"
+          onSubmit={handleSubmit}
+        >
+          <div className="mb-3">
+            <label htmlFor="name" className="form-label">
+              Name
+            </label>
+            <input
+              type="text"
+              className="form-control"
+              id="name"
+              name="name"
+              value={product.name}
+              onChange={onChange}
+              minLength={1}
+              required
+            />
           </div>
-        </footer>
-      </SideNavbar>
+          <div className="mb-3">
+            <label htmlFor="description" className="form-label">
+              Description
+            </label>
+            <input
+              type="text"
+              className="form-control"
+              id="description"
+              name="description"
+              value={product.description}
+              onChange={onChange}
+              minLength={1}
+              required
+            />
+          </div>
+
+          <div className="mb-3">
+            <label htmlFor="picture" className="form-label">
+              Picture
+            </label>
+            <input type="file" name="picture" onChange={onChange} required />
+          </div>
+
+          <button
+            disabled={product.name.length < 1 || product.description.length < 1}
+            type="submit"
+            className="btn btn-primary"
+          >
+            Add Project
+          </button>
+        </form>
+        <ProjectList></ProjectList>
+      </div>
+      <footer className="py-4 bg-light mt-auto">
+        <div className="container-fluid px-4">
+          <div className="d-flex align-items-center justify-content-between small"></div>
+        </div>
+      </footer>
     </>
   );
 };

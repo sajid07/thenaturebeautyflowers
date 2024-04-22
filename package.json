@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@fortawesome/fontawesome-free": "^6.5.1",
+    "@tanstack/react-table": "^8.16.0",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
@@ -12,6 +13,8 @@
     "axios": "^1.6.2",
     "bootstrap": "^5.3.2",
     "concurrently": "^8.2.2",
+    "downshift": "^9.0.4",
+    "formik": "^2.4.5",
     "react": "^18.2.0",
     "react-bootstrap": "^2.9.0",
     "react-dom": "^18.2.0",
@@ -20,8 +23,11 @@
     "react-scripts": "5.0.1",
     "react-slick": "^0.29.0",
     "react-spinners": "^0.13.8",
+    "react-window-infinite-loader": "^1.0.9",
     "slick-carousel": "^1.8.1",
-    "web-vitals": "^2.1.4"
+    "use-debounce": "^10.0.0",
+    "web-vitals": "^2.1.4",
+    "yup": "^1.4.0"
   },
   "scripts": {
     "start": "react-scripts start",

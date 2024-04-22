@@ -71,9 +71,7 @@ router.get("/:slug", async (req, res) => {
 
     // Parse the features field
     console.log("in backend", product.features);
-    if (Array.isArray(product.features)) {
-      product.features = JSON.parse(product.features);
-    } else if (typeof product.features === "string") {
+    if (typeof product.features === "string") {
       const trimmedFeatures = product.features.trim();
       if (trimmedFeatures !== "") {
         product.features = JSON.parse(trimmedFeatures);
@@ -115,6 +113,7 @@ router.delete(
     }
   }
 );
+
 router.get("/category/:categoryValue", async (req, res) => {
   try {
     const { categoryValue } = req.params;

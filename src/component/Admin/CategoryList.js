@@ -3,6 +3,7 @@ import axios from "axios";
 import productContext from "../../context/products/productContext";
 import Image from "react-bootstrap/Image";
 import Datatable from "./Datatable";
+import CategoryEditModal from "./CategoryEditModal"; // Import the modal component
 
 const host = process.env.REACT_APP_BASE_URI;
 
@@ -24,6 +25,8 @@ const CategoryList = ({ categoryAdded }) => {
   const [, forceUpdate] = useReducer((x) => x + 1, 0); // trigger category list re-render
   const [loading, setLoading] = useState(true);
   const [categories, setCategories] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState(null); // State variable to hold the selected category for editing
+  const [showModal, setShowModal] = useState(false); // State variable for modal visibility
   const api = axios.create({
     baseURL: host,
   });
@@ -60,6 +63,11 @@ const CategoryList = ({ categoryAdded }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [categoryAdded]
   );
+  const handleEdit = async (category) => {
+    // Set the selected category and open the modal for editing
+    setSelectedCategory(category);
+    setShowModal(true);
+  };
 
   const handleDelete = async (category) => {
     try {
@@ -88,11 +96,29 @@ const CategoryList = ({ categoryAdded }) => {
       console.error("Error deleting category:", error);
     }
   };
-
+  const handleSave = async (editedCategory) => {
+    try {
+      // Call the backend function to update category data
+      const response = await api.put(
+        `/api/category/category/${editedCategory._id}`,
+        editedCategory
+      );
+      // Handle response from the backend if needed
+      console.log("Category updated successfully:", response.data);
+      // Close the modal after saving
+      setShowModal(false);
+      // Fetch categories to update the list
+      fetchCategories();
+    } catch (error) {
+      console.error("Error updating category:", error);
+    }
+  };
   return (
     <>
       <div className="section-title">
-        <h2>Category List</h2>
+        <h2 style={{ color: "#3498db" }} className="mt-5">
+          Category List
+        </h2>
       </div>
       <Datatable
         loading={loading}
@@ -100,7 +126,16 @@ const CategoryList = ({ categoryAdded }) => {
         tableData={categories}
         initSorting={initSorting}
         itemDeleteFn={handleDelete}
+        itemEditFn={handleEdit}
       />
+      {/* Render the modal if showModal state is true */}
+      {showModal && (
+        <CategoryEditModal
+          category={selectedCategory}
+          onSave={handleSave} // Pass the handleSave function to the modal
+          onClose={() => setShowModal(false)}
+        />
+      )}
     </>
   );
 };

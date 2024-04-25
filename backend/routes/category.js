@@ -90,4 +90,48 @@ router.delete(
     }
   }
 );
+router.put(
+  "/category/:categoryId",
+
+  awsS3DeleteMiddleware, // Delete old picture from S3 first
+  awsS3UploadMiddleware, // Middleware for deleting old picture from S3
+  async (req, res) => {
+    console.log("welcome to the backend first");
+
+    try {
+      console.log("welcome to the backend");
+      const { name, picture } = req.body;
+
+      // Check if req.body.name exists and is not undefined
+      if (!name) {
+        return res.status(400).json({ error: "Category name is required" });
+      }
+
+      // Find the category by ID
+      const category = await Category.findById(req.params.categoryId);
+
+      // If category not found, return error
+      if (!category) {
+        return res.status(404).json({ error: "Category not found" });
+      }
+
+      // Update the category fields
+      category.name = name;
+      category.value = name
+        .replace(/[^\w\s]/g, "-")
+        .toLowerCase()
+        .replace(/\s+/g, "-");
+      category.picture_url = picture; // Assuming picture_url is in the request body
+
+      // Save the updated category to the database
+      const updatedCategory = await category.save();
+
+      // Respond with the updated category
+      res.json(updatedCategory);
+    } catch (error) {
+      console.error("Error updating category:", error);
+      res.status(500).json({ error: error.message });
+    }
+  }
+);
 module.exports = router;

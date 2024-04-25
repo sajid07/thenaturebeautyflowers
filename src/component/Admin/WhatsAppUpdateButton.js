@@ -59,8 +59,13 @@ const WhatsAppUpdateButton = () => {
 
   return (
     <>
+      <div className="section-title">
+        <h2 style={{ color: "#3498db" }} className="mt-5">
+          Contact List
+        </h2>
+      </div>
       <div style={formContainerStyle}>
-        <label style={labelStyle}>New WhatsApp Contact:</label>
+        <label style={{ color: "green" }}>New WhatsApp Contact:</label>
         <input
           type="text"
           value={newWhatsAppContact}
@@ -69,7 +74,7 @@ const WhatsAppUpdateButton = () => {
           style={inputStyle}
         />
 
-        <label style={labelStyle}>New Call Contact:</label>
+        <label style={{ color: "green" }}>New Call Contact:</label>
         <input
           type="text"
           placeholder={Contact.callContact}

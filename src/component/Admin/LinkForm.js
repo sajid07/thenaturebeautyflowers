@@ -57,6 +57,11 @@ const LinkForm = () => {
   return (
     <>
       <div style={formContainerStyle}>
+        <div className="section-title">
+          <h2 style={{ color: "#3498db" }} className="mt-5">
+            Social Links
+          </h2>
+        </div>
         <label style={labelStyle}>Facebook Link:</label>
         <input
           type="text"

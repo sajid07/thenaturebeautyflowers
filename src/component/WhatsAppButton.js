@@ -9,9 +9,9 @@ const WhatsAppButton = ({ phoneNumber, message }) => {
   return (
     <Button
       href={whatsappUrl}
+      type="button"
       target="_blank"
-      className="cta-btn align-middle"
-      size="lg"
+      className="btn btn-success"
     >
       Send Message on WhatsApp
     </Button>

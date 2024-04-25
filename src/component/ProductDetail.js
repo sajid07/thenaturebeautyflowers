@@ -65,47 +65,82 @@ const ProductDetail = () => {
       ) : itemNotFound ? (
         <NotFound />
       ) : (
-        <div className="d-flex justify-content-center align-items-center min-vh-100">
-          <Card style={{ width: "30rem" }}>
-            <Card.Header className="text-center">
-              <h2>{product.name}</h2>
-            </Card.Header>
-            <Card.Body>
-              <Card.Img src={product.picture} alt={product.name} />
-              <Card.Text
-                dangerouslySetInnerHTML={{ __html: product.description }}
-              />
-              {product.features && product.features.length > 0 && (
-                <>
-                  <Card.Title className="mt-3">Features:</Card.Title>
-                  <ListGroup as="ol" numbered>
-                    {product.features.map((feature, index) => (
-                      <ListGroup.Item as="li" key={index}>
-                        {feature}
-                      </ListGroup.Item>
-                    ))}
-                  </ListGroup>
-                </>
-              )}
-              {/* If there are no features, display a message */}
-            </Card.Body>
-            <Card.Footer className="text-center">
-              <Button
-                href={product.pdfFile}
-                variant="primary"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="me-2"
-              >
-                View Brochure
-              </Button>
-              <WhatsAppButton
-                phoneNumber={contacts.whatsappContact}
-                message={`Hi! Interested in ${product.name}. Could you share more details?`}
-              />
-            </Card.Footer>
-          </Card>
-        </div>
+        <section className=" bg-image justify-content-center cta2 ">
+          <div className="mask d-flex align-items-center h-100 gradient-custom-3">
+            <div className="container h-100">
+              <div className="row d-flex justify-content-center align-items-center h-100">
+                <Card>
+                  <Card.Header className="text-center">
+                    <h2>{product.name}</h2>
+                  </Card.Header>
+                  <Card.Body>
+                    <div className="row">
+                      <div className="col-md-6  align-items-center">
+                        <Card.Img
+                          src={product.picture}
+                          alt={product.name}
+                          className="img-fluid"
+                        />
+                      </div>
+                      <div className="col-md-6 d-flex align-items-center justify-content-center">
+                        <div className="row">
+                          <div className="col">
+                            <Card.Text
+                              style={{
+                                fontSize: "1.2rem",
+                                fontWeight: "bold",
+                                lineHeight: "1.5",
+                              }}
+                              dangerouslySetInnerHTML={{
+                                __html: product.description,
+                              }}
+                            />{" "}
+                            <div className="col-md-6">
+                              {product.features &&
+                                product.features.length > 0 && (
+                                  <>
+                                    <Card.Title>Features:</Card.Title>
+                                    <ListGroup as="ol" numbered>
+                                      {product.features.map(
+                                        (feature, index) => (
+                                          <ListGroup.Item as="li" key={index}>
+                                            {feature}
+                                          </ListGroup.Item>
+                                        )
+                                      )}
+                                    </ListGroup>
+                                  </>
+                                )}
+                            </div>
+                          </div>
+                          <Button
+                            href={product.pdfFile}
+                            style={{ marginBottom: "15px", marginTop: "20px" }}
+                            variant="warning"
+                            target="_blank"
+                            type="button"
+                            rel="noopener noreferrer"
+                            class="btn btn-info"
+                          >
+                            View Brochure
+                          </Button>
+                          <WhatsAppButton
+                            phoneNumber={contacts.whatsappContact}
+                            message={`Hi! Interested in ${product.name}. Could you share more details?`}
+                          />
+                        </div>
+                      </div>
+
+                      {/* If there are no features, display a message */}
+                    </div>
+                  </Card.Body>
+
+                  <Card.Footer className="text-center"></Card.Footer>
+                </Card>
+              </div>
+            </div>
+          </div>
+        </section>
       )}
     </>
   );

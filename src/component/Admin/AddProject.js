@@ -36,7 +36,9 @@ const AddProject = () => {
   return (
     <>
       <div className="section-title">
-        <h2>Add Project</h2>
+        <h2 style={{ color: "#3498db" }} className="mt-5">
+          Add Project
+        </h2>
       </div>
       <div className="container my-3">
         <form

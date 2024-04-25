@@ -69,17 +69,13 @@ router.get("/:slug", async (req, res) => {
       return res.status(404).json({ message: "Product not found" });
     }
 
-    // Parse the features field
-    console.log("in backend", product.features);
-    if (typeof product.features === "string") {
-      const trimmedFeatures = product.features.trim();
-      if (trimmedFeatures !== "") {
-        product.features = JSON.parse(trimmedFeatures);
-      } else {
-        product.features = ["No features available"]; // Provide a default message if features array is empty, null, or contains only whitespace
-      }
+    // Parse the features field if it's a string
+    if (
+      typeof product.features === "string" &&
+      product.features.trim() !== ""
+    ) {
+      product.features = JSON.parse(product.features);
     }
-
     res.json(product);
   } catch (error) {
     console.error("Error fetching product:", error);

@@ -156,13 +156,28 @@ const Datatable = ({
 
   const handleItemEdit = async (e, row) => {
     e.stopPropagation();
-
     setIsLoading(true);
 
-    const updatedRow = await itemEditFn(row.original);
-    const dataCopy = [...data];
-    dataCopy.splice(row.index, 1, updatedRow);
-    setData(dataCopy);
+    try {
+      // Call the itemEditFn with the original record
+      console.log("original row", row.original);
+
+      // Update the record using itemEditFn
+      const updatedRow = await itemEditFn(row.original);
+
+      if (!updatedRow) {
+        throw new Error("Updated row is undefined");
+      }
+
+      console.log("updated row", updatedRow);
+
+      // Update the datatable's state with the updated record
+      setData(
+        data.map((item) => (item.name === updatedRow.name ? updatedRow : item))
+      );
+    } catch (error) {
+      console.error("Error editing item:", error);
+    }
 
     setIsLoading(false);
   };
@@ -172,7 +187,6 @@ const Datatable = ({
 
     setIsLoading(true);
     setAutoReset(false);
-
     await itemDeleteFn(row.original);
     const dataCopy = [...data];
     dataCopy.splice(row.index, 1);
@@ -263,28 +277,28 @@ const Datatable = ({
                   onClick={() => table.firstPage()}
                   disabled={!table.getCanPreviousPage()}
                 >
-                  {"<<"}
+                  {"GOTO FIRST PAGE"}
                 </Button>
                 <Button
                   className="border rounded p-1"
                   onClick={() => table.previousPage()}
                   disabled={!table.getCanPreviousPage()}
                 >
-                  {"<"}
+                  {"PREVIOUS PAGE"}
                 </Button>
                 <Button
                   className="border rounded p-1"
                   onClick={() => table.nextPage()}
                   disabled={!table.getCanNextPage()}
                 >
-                  {">"}
+                  {"NEXT PAGE"}
                 </Button>
                 <Button
                   className="border rounded p-1"
                   onClick={() => table.lastPage()}
                   disabled={!table.getCanNextPage()}
                 >
-                  {">>"}
+                  {"LAST PAGE"}
                 </Button>
                 <span className="flex items-center gap-1">
                   <div>Page</div>

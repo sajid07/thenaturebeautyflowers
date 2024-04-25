@@ -1,10 +1,33 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 const NavBar = () => {
+  const [categories, setCategories] = useState([]);
+
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const response = await axios.get(
+          `${process.env.REACT_APP_BASE_URI}/api/category/category`
+        );
+        setCategories(response.data);
+      } catch (error) {
+        console.error("Error fetching categories:", error);
+      }
+    };
+
+    fetchCategories();
+  }, []);
+
+  // Extract the first 5 categories
+  const firstFiveCategories = categories.slice(0, 5);
+  // Extract the remaining categories
+  const remainingCategories = categories.slice(5);
+
   return (
     <div className="container-fluid nav-bar bg-transparent top-header">
       <Navbar expand="lg" bg="white" variant="light" className="py-0 px-4">
@@ -31,27 +54,30 @@ const NavBar = () => {
             </Nav.Link>
 
             <NavDropdown title="Products">
-              <NavDropdown.Item as={Link} to="/swimming-pool">
-                Swimming Pool
-              </NavDropdown.Item>
-              <NavDropdown.Item as={Link} to="/category/Water Fountain">
-                Water Fountain
-              </NavDropdown.Item>
-              <NavDropdown.Item as={Link} to="/category/Wellness">
-                Wellness
-              </NavDropdown.Item>
-              <NavDropdown.Item as={Link} to="/category/pool chemical">
-                Pool Chemicals
-              </NavDropdown.Item>
-              <NavDropdown.Item as={Link} to="/category/waterfall">
-                Waterfalls & Water Curtains
-              </NavDropdown.Item>
-              <NavDropdown.Item as={Link} to="/category/intex pool">
-                Intex Pool & Bestway
-              </NavDropdown.Item>
-              <NavDropdown.Item as={Link} to="/category/booster pump">
-                Booster Pumps
-              </NavDropdown.Item>
+              {/* Display the first 5 categories */}
+              {firstFiveCategories.map((category) => (
+                <NavDropdown.Item
+                  key={category._id}
+                  as={Link}
+                  to={`/category/${category.value}`}
+                >
+                  {category.name}
+                </NavDropdown.Item>
+              ))}
+              {/* Dropdown for remaining categories */}
+              {remainingCategories.length > 0 && (
+                <NavDropdown title="More">
+                  {remainingCategories.map((category) => (
+                    <NavDropdown.Item
+                      key={category._id}
+                      as={Link}
+                      to={`/category/${category.value}`}
+                    >
+                      {category.name}
+                    </NavDropdown.Item>
+                  ))}
+                </NavDropdown>
+              )}
             </NavDropdown>
 
             <Nav.Link as={Link} to="/projects">

@@ -113,9 +113,12 @@ const CategoryManagement = () => {
 
   return (
     <>
-      <h1 className="mt-4">Dashboard</h1>
       <div className="container my-3">
-        <h2>Add Category</h2>
+        <div className="section-title">
+          <h2 style={{ color: "#3498db" }} className="mt-5">
+            Add Category
+          </h2>
+        </div>{" "}
         <Formik
           validationSchema={schema}
           initialValues={category}

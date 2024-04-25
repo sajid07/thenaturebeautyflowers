@@ -38,7 +38,11 @@ const ProjectList = () => {
 
   return (
     <div style={styles.container}>
-      <h1 style={styles.heading}>Project Gallery</h1>
+      <div className="section-title">
+        <h2 style={{ color: "#3498db" }} className="mt-5">
+          Project Gallery{" "}
+        </h2>{" "}
+      </div>
       <div style={styles.gallery}>
         {projects.map((project) => (
           <div style={styles.projectCard} key={project._id}>

@@ -1,10 +1,16 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { Modal, Form, Button, InputGroup } from "react-bootstrap";
 
 const EditProductModal = ({ isModalOpen, onClose, onSave, product }) => {
   const [editedProduct, setEditedProduct] = useState({ ...product });
   const [categories, setCategories] = useState([]);
-  const [selectedCategory, setSelectedCategory] = useState(product.category);
+  const [features, setFeatures] = useState([]); // State for storing features
+  const [feature, setFeature] = useState(""); // State for the feature input // State for storing features
+
+  const [selectedCategory, setSelectedCategory] = useState(
+    product.category || ""
+  );
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -24,7 +30,6 @@ const EditProductModal = ({ isModalOpen, onClose, onSave, product }) => {
   const handleInputChange = (e) => {
     const { name, value } = e.target;
 
-    // Handle category separately
     if (name === "category") {
       setSelectedCategory(value);
     } else {
@@ -35,94 +40,111 @@ const EditProductModal = ({ isModalOpen, onClose, onSave, product }) => {
     }
   };
 
+  const handleClose = () => {
+    onClose();
+  };
+  const handleAddFeature = () => {
+    if (feature.trim()) {
+      setFeatures([...features, feature.trim()]); // Add new feature to the features array
+      setFeature(""); // Clear the input field
+    }
+  };
+  const handleRemoveFeature = (index) => {
+    const updatedFeatures = [...features];
+    updatedFeatures.splice(index, 1); // Remove feature at the specified index
+    setFeatures(updatedFeatures); // Update the features state
+  };
   const handleSave = () => {
-    // Update the editedProduct with the selectedCategory
-    const updatedProduct = { ...editedProduct, category: selectedCategory };
+    const updatedProduct = {
+      ...editedProduct,
+      category: selectedCategory,
+      features: features, // Include the features array in the updated product object
+    };
     onSave(updatedProduct);
     onClose();
   };
 
-  const handleCategoryChange = (event) => {
-    setSelectedCategory(event.target.value);
-  };
-
   return (
-    <div
-      className={`modal ${isModalOpen ? "show" : ""}`}
-      style={{ display: isModalOpen ? "block" : "none" }}
-      tabIndex="-1"
-      role="dialog"
-    >
-      <div className="modal-dialog modal-dialog-centered" role="document">
-        <div className="modal-content">
-          <div className="modal-header bg-primary text-white">
-            <h5 className="modal-title">Edit Product</h5>
-            <button type="button" className="btn btn-info" onClick={onClose}>
-              <span>&times;</span>
-            </button>
-          </div>
-          <div className="modal-body">
-            <form>
-              <div className="mb-3">
-                <label htmlFor="name" className="form-label">
-                  Name:
-                </label>
-                <input
-                  type="text"
-                  className="form-control"
-                  id="name"
-                  name="name"
-                  value={editedProduct.name}
-                  onChange={handleInputChange}
-                />
-              </div>
-
-              <div className="mb-3">
-                <label htmlFor="description" className="form-label">
-                  Description:
-                </label>
-                <textarea
-                  className="form-control"
-                  id="description"
-                  name="description"
-                  value={editedProduct.description}
-                  onChange={handleInputChange}
-                ></textarea>
-              </div>
-
-              <div className="mb-3">
-                <label htmlFor="category" className="form-label">
-                  Category:
-                </label>
-                <select
-                  className="form-select"
-                  id="categoryFilter"
-                  value={selectedCategory}
-                  onChange={handleCategoryChange}
-                >
-                  <option value="" disabled>
-                    Select a Category
-                  </option>
-                  {categories.map((category) => (
-                    <option key={category._id} value={category.value}>
-                      {category.name}
-                    </option>
-                  ))}
-                </select>
-              </div>
-
-              <button
-                type="button"
-                className="btn btn-primary"
-                onClick={handleSave}
-              >
-                Save Changes
-              </button>
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
+    <Modal show={isModalOpen} onHide={handleClose} centered>
+      <Modal.Header closeButton className="bg-primary text-white">
+        <Modal.Title>Edit Product</Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
+        <Form>
+          <Form.Group controlId="name">
+            <Form.Label>Name:</Form.Label>
+            <Form.Control
+              type="text"
+              name="name"
+              value={editedProduct.name}
+              onChange={handleInputChange}
+            />
+          </Form.Group>
+          <Form.Group controlId="description">
+            <Form.Label>Description:</Form.Label>
+            <Form.Control
+              as="textarea"
+              name="description"
+              value={editedProduct.description}
+              onChange={handleInputChange}
+            />
+          </Form.Group>
+          <Form.Group className="mb-3">
+            <Form.Label style={{ color: "green" }}>Features</Form.Label>
+            <div>
+              {features.map((feature, index) => (
+                <div key={index} className="d-flex align-items-center mb-2">
+                  <p className="mb-0 me-2">{feature}</p>
+                  <Button
+                    variant="danger"
+                    size="sm"
+                    onClick={() => handleRemoveFeature(index)}
+                  >
+                    Remove
+                  </Button>
+                </div>
+              ))}
+            </div>
+            <InputGroup className="mb-3">
+              <Form.Control
+                type="text"
+                placeholder="Enter a feature"
+                value={feature}
+                onChange={(e) => setFeature(e.target.value)}
+              />
+              <Button variant="primary" onClick={handleAddFeature}>
+                Add Feature
+              </Button>
+            </InputGroup>
+          </Form.Group>
+          <Form.Group controlId="category">
+            <Form.Label>Category:</Form.Label>
+            <Form.Select
+              value={selectedCategory}
+              onChange={handleInputChange}
+              name="category"
+            >
+              <option value="" disabled>
+                Select a Category
+              </option>
+              {categories.map((category) => (
+                <option key={category._id} value={category.value}>
+                  {category.name}
+                </option>
+              ))}
+            </Form.Select>
+          </Form.Group>
+        </Form>
+      </Modal.Body>
+      <Modal.Footer>
+        <Button variant="secondary" onClick={handleClose}>
+          Close
+        </Button>
+        <Button variant="primary" onClick={handleSave}>
+          Save Changes
+        </Button>
+      </Modal.Footer>
+    </Modal>
   );
 };
 

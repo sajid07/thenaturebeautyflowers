@@ -233,21 +233,21 @@ const Category = () => {
 
     fetchCategories();
   }, []);
-  const containerStyle = {
-    backgroundSize: "cover",
-    backgroundRepeat: "no-repeat",
-    backgroundPosition: "center",
-    minHeight: "100vh",
-    position: "relative",
-    zIndex: 0,
-    filter: "blur(0px)",
-  };
+  // const containerStyle = {
+  //   backgroundSize: "cover",
+  //   backgroundRepeat: "no-repeat",
+  //   backgroundPosition: "center",
+  //   minHeight: "100vh",
+  //   position: "relative",
+  //   zIndex: 0,
+  //   filter: "blur(0px)",
+  // };
 
   return (
     <>
       <section id="services" className="services">
         <div className="container" data-aos="fade-up">
-          <div style={containerStyle} data-aos-delay="100">
+          <div data-aos-delay="100">
             <div className="container-xxl py-5">
               <div className="container">
                 <div

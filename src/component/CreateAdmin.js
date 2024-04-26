@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 const CreateAdmin = (props) => {
   const [credential, setCredential] = useState({ email: "", password: "" });
@@ -43,26 +43,10 @@ const CreateAdmin = (props) => {
   const onChange = (e) => {
     setCredential({ ...credential, [e.target.name]: e.target.value });
   };
-  const backgroundStyle = {
-    backgroundImage: `url(${"/img/banner/out.jpg"})`,
-    backgroundSize: "cover",
-    backgroundRepeat: "no-repeat",
-    backgroundPosition: "center",
-    minHeight: "100vh",
-    position: "fixed",
-    top: 0,
-    left: 0,
-    width: "100%",
-    height: "100%",
-    zIndex: -1,
-    filter: "blur(0px)",
-  };
 
   return (
     <>
-      <div style={backgroundStyle}></div>
-
-      <section className="vh-100 bg-image">
+      <section className="vh-100 bg-image cta1" id="cta">
         <div className="mask d-flex align-items-center h-100 gradient-custom-3">
           <div className="container h-100">
             <div className="row d-flex justify-content-center align-items-center h-100">
@@ -125,9 +109,9 @@ const CreateAdmin = (props) => {
 
                       <p className="text-center text-muted mt-5 mb-0">
                         Have already an account?{" "}
-                        <a href="#!" className="fw-bold text-body">
+                        <Link to="/Login" className="fw-bold text-body">
                           <u>Login here</u>
-                        </a>
+                        </Link>
                       </p>
                     </form>
                   </div>

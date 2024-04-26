@@ -80,14 +80,7 @@ const PoolItems = () => {
               </Form.Group>
               <div className="row g-4">
                 {loading ? (
-                  <div
-                    style={{
-                      display: "flex",
-                      justifyContent: "center",
-                      alignItems: "center",
-                      minHeight: "100vh",
-                    }}
-                  >
+                  <div className="spinner">
                     <Spinner animation="grow" variant="success" />
                     <Spinner animation="grow" variant="danger" />
                     <Spinner animation="grow" variant="warning" />

@@ -1,19 +1,55 @@
-import React, { useEffect } from "react";
+// AdminNavbar.js
+import React, { useEffect, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 const AdminNavbar = () => {
   const navigate = useNavigate();
+  const logoutTimeoutRef = useRef(null);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (!token) {
       navigate("/login");
+    } else {
+      // Start the logout timer
+      startLogoutTimer();
     }
+
+    // Function to handle user activity
+    const handleActivity = () => {
+      resetLogoutTimer();
+    };
+
+    // Event listeners for various user activities
+    document.addEventListener("mousemove", handleActivity);
+    document.addEventListener("keydown", handleActivity);
+
+    return () => {
+      // Cleanup function to remove event listeners
+      document.removeEventListener("mousemove", handleActivity);
+      document.removeEventListener("keydown", handleActivity);
+      clearTimeout(logoutTimeoutRef.current);
+    };
   }, [navigate]);
 
-  const handleLogout = () => {
+  const startLogoutTimer = () => {
+    logoutTimeoutRef.current = setTimeout(logout, 1 * 60 * 1000); // 10 minutes
+  };
+
+  const resetLogoutTimer = () => {
+    clearTimeout(logoutTimeoutRef.current);
+    startLogoutTimer();
+  };
+
+  const logout = () => {
     localStorage.removeItem("token");
     navigate("/login");
+  };
+
+  const handleLogoutClick = () => {
+    // Clear the logout timer and logout immediately
+    clearTimeout(logoutTimeoutRef.current);
+    logout();
   };
 
   return (
@@ -46,7 +82,7 @@ const AdminNavbar = () => {
             </li>
 
             <li className="nav-item">
-              <button className="btn btn-primary" onClick={handleLogout}>
+              <button className="btn btn-primary" onClick={handleLogoutClick}>
                 Logout
               </button>
             </li>

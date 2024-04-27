@@ -5,6 +5,8 @@ const jwt = require("jsonwebtoken"); // Import JWT
 const User = require("../models/User"); // Import your User model
 const { body, validationResult } = require("express-validator");
 var authmiddleware = require("../Middleware/authMiddleware");
+const { generateResetToken } = require("../utils/resetToken");
+const sendResetEmail = require("../email"); // Import the sendResetEmail function
 
 // Secret key for JWT (you should store this securely and not hardcode it)
 const JWT_SECRET = process.env.REACT_APP_AWS_SECRET_ACCESS_KEY;
@@ -122,5 +124,58 @@ router.post("/getuser", authmiddleware, async (req, res) => {
     res.status(500).send("Internal Server Error");
   }
 });
+//password request function
+router.post("/reset-password", async (req, res) => {
+  const { email } = req.body;
 
+  try {
+    // Find user by email
+    const user = await User.findOne({ email });
+    if (!user) {
+      return res.status(404).json({ error: "User not found" });
+    }
+
+    // Generate and save reset token for the user
+    const resetToken = generateResetToken();
+    user.resetToken = resetToken;
+    await user.save();
+
+    // Send email with reset token
+    await sendResetEmail(email, resetToken);
+
+    res.json({ message: "Reset token generated and emailed to user" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Server error" });
+  }
+});
+// Endpoint to handle password reset
+router.post("/reset-password-form", async (req, res) => {
+  const { resetToken, newPassword } = req.body;
+
+  try {
+    // Find user by token and verify token validity
+    const user = await User.findOne({
+      resetToken: resetToken,
+      // resetTokenExpiry: { $gt: Date.now() },
+    });
+    console.log("user to be changed", user);
+    if (!user) {
+      return res.status(400).json({ error: "Invalid or expired token" });
+    }
+    const salt = await bcrypt.genSalt(10);
+    const secPass = await bcrypt.hash(newPassword, salt);
+    // Update user's password
+    user.password = secPass;
+    user.resetToken = undefined;
+    // user.resetTokenExpiry = undefined;
+    await user.save();
+
+    // Send success response
+    return res.status(200).json({ message: "Password reset successfully" });
+  } catch (error) {
+    console.error("Error resetting password:", error);
+    return res.status(500).json({ error: "Internal server error" });
+  }
+});
 module.exports = router;

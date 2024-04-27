@@ -90,6 +90,11 @@ export const Login = (props) => {
                   name="password"
                   placeholder="Password"
                 />
+                <small className="form-text text-muted">
+                  <a href="/reset-password" style={{ color: "green" }}>
+                    Forgot Password?
+                  </a>
+                </small>
               </div>
               <div className="mb-3 form-check">
                 <input

@@ -35,6 +35,8 @@ import Footer from "./component/Footer";
 import CategoryManagement from "./component/Admin/CategoryManagement";
 import SideNavbar from "./component/Admin/SideNavbar";
 import AdminNavbar from "./component/Admin/AdminNavbar";
+import AdminPasswordResetRequest from "./component/Admin/AdminPasswordResetRequest";
+import PasswordResetForm from "./component/Admin/PasswordResetForm";
 
 function App() {
   AOS.init();
@@ -93,7 +95,22 @@ function App() {
               <Route path="/product/:slug" element={<ProductDetail />} />
               <Route exact path="/projects" element={<Projects />} />
               <Route exact path="/contact-us" element={<ContactUs />} />
+              <Route
+                exact
+                path="/reset-password"
+                element={<AdminPasswordResetRequest />}
+              />
+              <Route
+                exact
+                path="/reset-password-form"
+                element={<PasswordResetForm />}
+              />
             </Route>
+            <Route
+              exact
+              path="//reset-password-form"
+              element={<PasswordResetForm />}
+            />
 
             {/* Admin Routes without Footer */}
             <Route

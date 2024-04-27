@@ -33,7 +33,7 @@ const AdminNavbar = () => {
   }, [navigate]);
 
   const startLogoutTimer = () => {
-    logoutTimeoutRef.current = setTimeout(logout, 1 * 60 * 1000); // 10 minutes
+    logoutTimeoutRef.current = setTimeout(logout, 30 * 60 * 1000); // 30 minutes
   };
 
   const resetLogoutTimer = () => {

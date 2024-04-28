@@ -70,7 +70,11 @@ const PoolBanner = () => {
               message="Hello, I have a question!"
             />
 
-            <Button size="lg" onClick={handleDownload}>
+            <Button
+              variant="warning"
+              style={{ marginLeft: "10px" }}
+              onClick={handleDownload}
+            >
               Download Brochure
             </Button>
           </div>

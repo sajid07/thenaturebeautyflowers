@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Form, Button, Alert } from "react-bootstrap";
-import PasswordResetConfirmation from "./PasswordResetConfirmation ";
+import PasswordResetConfirmation from "../Admin/PasswordResetConfirmation ";
 
 const PasswordResetForm = () => {
   const [resetToken, setResetToken] = useState("");
@@ -33,7 +33,7 @@ const PasswordResetForm = () => {
 
     try {
       const response = await axios.post(
-        ` ${process.env.REACT_APP_BASE_URI}/api/auth/reset-password-form`,
+        `${process.env.REACT_APP_BASE_URI}/api/auth/reset-password-form`,
         {
           resetToken,
           newPassword,
@@ -57,7 +57,7 @@ const PasswordResetForm = () => {
       <div className="password-reset-container">
         <h2 className="mb-4">Password Reset</h2>
         <Form onSubmit={handleSubmit}>
-          <input type="hidden" value={resetToken} />
+          <input type="hidden" name="resetToken" value={resetToken} />
 
           <Form.Group controlId="newPassword">
             <Form.Label>New Password:</Form.Label>

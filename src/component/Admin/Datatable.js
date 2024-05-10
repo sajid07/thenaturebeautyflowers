@@ -159,17 +159,17 @@ const Datatable = ({
     setIsLoading(true);
 
     try {
-      // Call the itemEditFn with the original record
-      console.log("original row", row.original);
+      console.log("Editing item:", row.original);
 
-      // Update the record using itemEditFn
+      // Call the itemEditFn with the original record
+
       const updatedRow = await itemEditFn(row.original);
 
       if (!updatedRow) {
-        throw new Error("Updated row is undefined");
+        throw new Error(" Updated row is undefined");
       }
 
-      console.log("updated row", updatedRow);
+      console.log("Updated item:", updatedRow);
 
       // Update the datatable's state with the updated record
       setData(

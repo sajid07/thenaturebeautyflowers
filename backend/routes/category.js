@@ -94,7 +94,7 @@ router.put(
   "/category/:categoryId",
 
   awsS3DeleteMiddleware, // Delete old picture from S3 first
-  awsS3UploadMiddleware, // Middleware for deleting old picture from S3
+  awsS3UploadMiddleware, // Middleware for  uploading new picture  to  S3
   async (req, res) => {
     console.log("welcome to the backend first");
 

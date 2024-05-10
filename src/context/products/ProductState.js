@@ -30,6 +30,29 @@ const ProductState = (props) => {
       throw error;
     }
   };
+  const editCategoryWithNewData = async (categoryId, formData) => {
+    try {
+      const response = await fetch(
+        `${host}/api/category/category/${categoryId}`,
+        {
+          method: "PUT",
+          headers: {
+            "auth-token": localStorage.getItem("token"),
+          },
+          body: formData,
+        }
+      );
+
+      const data = await response.json(); // Parse the response as JSON
+
+      console.log("Category updated successfully:", data);
+      alert("Category updated successfully");
+    } catch (error) {
+      console.error("Error updating Category:", error);
+      // Handle error and provide user feedback
+      throw error;
+    }
+  };
 
   //add Project
   const addProject = async (product) => {
@@ -290,6 +313,7 @@ const ProductState = (props) => {
         deleteCategory,
         getCategories,
         getPaginatedCategories,
+        editCategoryWithNewData,
       }}
     >
       {props.children}

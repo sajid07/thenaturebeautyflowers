@@ -75,9 +75,9 @@ const deleteFilesFromS3 = async (fileKeys) => {
 
 // Upload picture and PDF file to S3
 const awsS3UploadMiddleware = async (req, res, next) => {
-  if (!req.is("multipart/form-data")) {
-    return next(new Error("Invalid Content Type"));
-  }
+  // if (!req.is("multipart/form-data")) {
+  //   return next(new Error("Invalid Content Type"));
+  // }
 
   const body = new FormData();
 

@@ -99,10 +99,7 @@ const CategoryList = ({ categoryAdded }) => {
   const handleSave = async (editedCategory) => {
     try {
       // Call the backend function to update category data
-      const response = await api.put(
-        `/api/category/category/${editedCategory._id}`,
-        editedCategory
-      );
+      const response = await api.put(`/api/category/category`, editedCategory);
       // Handle response from the backend if needed
       console.log("Category updated successfully:", response.data);
       // Close the modal after saving

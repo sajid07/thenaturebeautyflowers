@@ -68,6 +68,11 @@
   border-radius: 5px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   z-index: 9999;
+
+  img {
+    width: 40px;
+    margin: 0 5px;
+  }
 }
 
 .navbar-light .dropdown-item:hover:not(:active) {

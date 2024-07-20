@@ -26,33 +26,42 @@ const ProductDetail = () => {
         const contactsResponse = await api.get("/api/contacts/contacts");
         setContacts(contactsResponse.data);
 
-        console.log("Fetching product data...");
         const productResponse = await api.get(`/api/product/${slug}`);
-        console.log("Product Response:", productResponse.data);
-
-        // Check if the response data is empty
         if (!productResponse.data) {
           console.error("Product data is empty");
           setLoading(false);
           return;
         }
 
-        setProduct(productResponse.data);
+        const fetchedProduct = productResponse.data;
+
+        // Check if features is an array of strings
+        if (
+          fetchedProduct.features &&
+          typeof fetchedProduct.features[0] === "string" &&
+          fetchedProduct.features[0].startsWith("[") &&
+          fetchedProduct.features[0].endsWith("]")
+        ) {
+          try {
+            fetchedProduct.features = JSON.parse(fetchedProduct.features[0]);
+          } catch (e) {
+            console.error("Error parsing features:", e);
+          }
+        }
+
+        setProduct(fetchedProduct);
         setLoading(false);
-        console.log("Product set successfully!", productResponse.data);
       } catch (error) {
         console.error("Error fetching data:", error);
-
         if (error?.response?.status === 404) {
           setItemNotFound(true);
         }
-
         setLoading(false);
       }
     };
 
     fetchData();
-  }, []);
+  }, [slug]);
 
   return (
     <>
@@ -60,12 +69,12 @@ const ProductDetail = () => {
         <div className="d-flex justify-content-center align-items-center min-vh-100">
           <Spinner animation="grow" variant="secondary" />
           <Spinner animation="grow" variant="success" />
-          <Spinner animation="grow" variant="danger" />{" "}
+          <Spinner animation="grow" variant="danger" />
         </div>
       ) : itemNotFound ? (
         <NotFound />
       ) : (
-        <section className=" bg-image justify-content-center cta2 ">
+        <section className="bg-image justify-content-center cta2">
           <div className="mask d-flex align-items-center h-100 gradient-custom-3">
             <div className="container h-100">
               <div className="row d-flex justify-content-center align-items-center h-100">
@@ -75,7 +84,7 @@ const ProductDetail = () => {
                   </Card.Header>
                   <Card.Body>
                     <div className="row">
-                      <div className="col-md-6  align-items-center">
+                      <div className="col-md-6 align-items-center">
                         <Card.Img
                           src={product.picture}
                           alt={product.name}
@@ -94,13 +103,13 @@ const ProductDetail = () => {
                               dangerouslySetInnerHTML={{
                                 __html: product.description,
                               }}
-                            />{" "}
+                            />
                             <div className="col-md-6">
                               {product.features &&
                                 product.features.length > 0 && (
                                   <>
                                     <Card.Title>Features:</Card.Title>
-                                    <ListGroup as="ol" numbered>
+                                    <ListGroup as="ul">
                                       {product.features.map(
                                         (feature, index) => (
                                           <ListGroup.Item as="li" key={index}>
@@ -120,7 +129,7 @@ const ProductDetail = () => {
                             target="_blank"
                             type="button"
                             rel="noopener noreferrer"
-                            class="btn btn-info"
+                            className="btn btn-info"
                           >
                             View Brochure
                           </Button>
@@ -130,11 +139,8 @@ const ProductDetail = () => {
                           />
                         </div>
                       </div>
-
-                      {/* If there are no features, display a message */}
                     </div>
                   </Card.Body>
-
                   <Card.Footer className="text-center"></Card.Footer>
                 </Card>
               </div>

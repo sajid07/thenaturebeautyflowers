@@ -40,7 +40,10 @@ const PoolBanner = () => {
 
   const handleDownload = () => {
     // Replace 'path/to/your/pdf/file.pdf' with the actual path to your PDF file
-    const pdfPath = "/brochure/Brouchure.pdf";
+    // const pdfPath = "/brochure/Brouchure.pdf";
+    const pdfPath =
+      "https://thenaturebeautyflower.s3.ap-south-1.amazonaws.com/pool/Brochure/Brouchure.pdf";
+
     const link = document.createElement("a");
     link.href = pdfPath;
     link.download = "NBFlower|Brochure.pdf";

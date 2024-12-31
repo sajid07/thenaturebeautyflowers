@@ -40,7 +40,7 @@ const PoolBanner = () => {
 
   const handleDownload = () => {
     // Replace 'path/to/your/pdf/file.pdf' with the actual path to your PDF file
-    const pdfPath = "/brochure/nbflower-_-Brouchure.pdf";
+    const pdfPath = "/brochure/Brouchure.pdf";
     const link = document.createElement("a");
     link.href = pdfPath;
     link.download = "NBFlower|Brochure.pdf";

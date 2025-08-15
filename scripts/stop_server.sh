@@ -6,6 +6,9 @@ exec 2>&1
 
 SOURCE_DIR=~/thenaturebeautyflowers
 
+echo 'Ensure PM2 is installed and up to date'
+npm install pm2 -g && pm2 update
+
 echo 'Remove old Application Build artifacts...'
 sudo find $SOURCE_DIR -mindepth 1 -delete
 

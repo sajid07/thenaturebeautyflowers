@@ -1,85 +1,82 @@
 #!/bin/bash
 
-# Enable debug mode to see each command as it executes
-set -x
+# Production logging setup
+LOG_DIR="/var/log/codedeploy"
+LOG_FILE="$LOG_DIR/thenaturebeautyflowers-stop.log"
 
-# Redirect all output to log file
-exec 1>~/thenaturebeautyflowers-deploy.log
+# Ensure log directory exists
+mkdir -p "$LOG_DIR" 2>/dev/null
+
+# Redirect output to log file with timestamps
+exec > >(while IFS= read -r line; do echo "$(date '+%Y-%m-%d %H:%M:%S') $line"; done | tee -a "$LOG_FILE")
 exec 2>&1
 
-echo "=== DEBUGGING INFORMATION ==="
-echo "Script started at: $(date)"
-echo "Current user: $(whoami)"
-echo "Current working directory: $(pwd)"
-echo "Current PATH: $PATH"
-echo "Home directory: $HOME"
+echo "Starting application stop process..."
 
-# Check if basic commands exist
-echo "=== COMMAND AVAILABILITY CHECK ==="
-echo "bash location: $(which bash 2>/dev/null || echo 'not found')"
-echo "find location: $(which find 2>/dev/null || echo 'not found')"
-echo "sudo location: $(which sudo 2>/dev/null || echo 'not found')"
+# Configuration
+SOURCE_DIR="/home/ubuntu/thenaturebeautyflowers"
+APP_NAME="thenaturebeautyflowers-api"
 
-# Check NVM and Node.js environment
-echo "=== NODE.JS ENVIRONMENT CHECK ==="
-echo "NVM directory exists: $([ -d ~/.nvm ] && echo 'yes' || echo 'no')"
-echo "NVM script exists: $([ -f ~/.nvm/nvm.sh ] && echo 'yes' || echo 'no')"
-
-# Try to load NVM environment
-export NVM_DIR="$HOME/.nvm"
+# Load NVM environment
+export NVM_DIR="/home/ubuntu/.nvm"
 if [ -s "$NVM_DIR/nvm.sh" ]; then
-    echo "Loading NVM environment..."
-    \. "$NVM_DIR/nvm.sh"
-    echo "NVM loaded successfully"
+    source "$NVM_DIR/nvm.sh"
+    echo "NVM environment loaded"
 else
-    echo "NVM script not found at $NVM_DIR/nvm.sh"
+    echo "WARNING: NVM not found, using system Node.js"
 fi
 
-# Check Node.js and PM2 after loading NVM
-echo "Node version: $(node --version 2>/dev/null || echo 'Node not found')"
-echo "NPM version: $(npm --version 2>/dev/null || echo 'NPM not found')"
-echo "PM2 location: $(which pm2 2>/dev/null || echo 'PM2 not found in PATH')"
-
-# Check if PM2 exists at the known location
-PM2_FULL_PATH="/home/ubuntu/.nvm/versions/node/v20.11.1/bin/pm2"
-echo "PM2 at known path: $([ -f "$PM2_FULL_PATH" ] && echo 'exists' || echo 'not found')"
-
-SOURCE_DIR=~/thenaturebeautyflowers
-echo "Source directory: $SOURCE_DIR"
-echo "Source directory exists: $([ -d "$SOURCE_DIR" ] && echo 'yes' || echo 'no')"
-
-echo "=== STARTING ACTUAL SCRIPT OPERATIONS ==="
-
-echo 'Remove old Application Build artifacts...'
-if [ -d "$SOURCE_DIR" ]; then
-    echo "Attempting to clean $SOURCE_DIR"
-    sudo find $SOURCE_DIR -mindepth 1 -delete
-    if [ $? -eq 0 ]; then
-        echo "Successfully cleaned $SOURCE_DIR"
+# Function to safely stop PM2 processes
+stop_pm2_application() {
+    if command -v pm2 >/dev/null 2>&1; then
+        echo "Stopping PM2 application: $APP_NAME"
+        
+        # Check if the specific app is running
+        if pm2 list | grep -q "$APP_NAME"; then
+            pm2 stop "$APP_NAME" && echo "Successfully stopped $APP_NAME"
+            pm2 delete "$APP_NAME" && echo "Successfully deleted $APP_NAME"
+        else
+            echo "Application $APP_NAME not found in PM2 processes"
+        fi
+        
+        # Clean up logs for this specific app
+        pm2 flush "$APP_NAME" 2>/dev/null || echo "No logs to flush for $APP_NAME"
+        
     else
-        echo "Error cleaning $SOURCE_DIR (exit code: $?)"
+        echo "ERROR: PM2 not found in PATH"
+        return 1
     fi
+}
+
+# Function to clean up old artifacts
+cleanup_artifacts() {
+    if [ -d "$SOURCE_DIR" ]; then
+        echo "Cleaning up old artifacts in $SOURCE_DIR"
+        if find "$SOURCE_DIR" -mindepth 1 -delete 2>/dev/null; then
+            echo "Successfully cleaned $SOURCE_DIR"
+        else
+            echo "WARNING: Failed to clean some files in $SOURCE_DIR"
+        fi
+    else
+        echo "Source directory $SOURCE_DIR does not exist, skipping cleanup"
+    fi
+}
+
+# Main execution
+echo "Current user: $(whoami)"
+echo "Node.js version: $(node --version 2>/dev/null || echo 'Not available')"
+echo "PM2 version: $(pm2 --version 2>/dev/null || echo 'Not available')"
+
+# Stop the application
+if stop_pm2_application; then
+    echo "PM2 application stopped successfully"
 else
-    echo "Source directory $SOURCE_DIR does not exist, skipping cleanup"
+    echo "WARNING: PM2 stop failed, attempting manual cleanup"
+    # Fallback: kill processes by name
+    pkill -f "node.*$APP_NAME" && echo "Manually killed application processes" || echo "No matching processes found"
 fi
 
-echo 'Stop Running ExpressJS Backend Server Applications and remove logs if any...'
+# Clean up old artifacts
+cleanup_artifacts
 
-# Try different approaches to run PM2
-if [ -f "$PM2_FULL_PATH" ]; then
-    echo "Using PM2 at full path: $PM2_FULL_PATH"
-    $PM2_FULL_PATH stop all
-    $PM2_FULL_PATH delete all
-    $PM2_FULL_PATH flush thenaturebeautyflowers-api
-elif command -v pm2 >/dev/null 2>&1; then
-    echo "Using PM2 from PATH"
-    pm2 stop all
-    pm2 delete all
-    pm2 flush thenaturebeautyflowers-api
-else
-    echo "PM2 not found, attempting manual process cleanup"
-    pkill -f "node.*thenaturebeautyflowers" || echo "No matching Node.js processes found"
-fi
-
-echo "Script completed at: $(date)"
-echo "=== END OF SCRIPT ==="
+echo "Application stop process completed successfully"

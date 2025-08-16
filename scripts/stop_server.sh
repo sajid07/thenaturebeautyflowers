@@ -16,6 +16,8 @@ echo "Starting application stop process..."
 # Configuration
 SOURCE_DIR="/home/ubuntu/thenaturebeautyflowers"
 APP_NAME="thenaturebeautyflowers-api"
+UI_APP_NAME="thenaturebeautyflowers-ui"
+APPS=("$APP_NAME" "$UI_APP_NAME")
 
 # Load NVM environment
 export NVM_DIR="/home/ubuntu/.nvm"
@@ -29,18 +31,18 @@ fi
 # Function to safely stop PM2 processes
 stop_pm2_application() {
     if command -v pm2 >/dev/null 2>&1; then
-        echo "Stopping PM2 application: $APP_NAME"
+        echo "Stopping PM2 application: $1"
         
         # Check if the specific app is running
-        if pm2 list | grep -q "$APP_NAME"; then
-            pm2 stop "$APP_NAME" && echo "Successfully stopped $APP_NAME"
-            pm2 delete "$APP_NAME" && echo "Successfully deleted $APP_NAME"
+        if pm2 list | grep -q "$1"; then
+            pm2 stop "$1" && echo "Successfully stopped $1"
+            pm2 delete "$1" && echo "Successfully deleted $1"
         else
-            echo "Application $APP_NAME not found in PM2 processes"
+            echo "Application $1 not found in PM2 processes"
         fi
         
         # Clean up logs for this specific app
-        pm2 flush "$APP_NAME" 2>/dev/null || echo "No logs to flush for $APP_NAME"
+        pm2 flush "$1" 2>/dev/null || echo "No logs to flush for $1"
         
     else
         echo "ERROR: PM2 not found in PATH"
@@ -67,14 +69,17 @@ echo "Current user: $(whoami)"
 echo "Node.js version: $(node --version 2>/dev/null || echo 'Not available')"
 echo "PM2 version: $(pm2 --version 2>/dev/null || echo 'Not available')"
 
-# Stop the application
-if stop_pm2_application; then
-    echo "PM2 application stopped successfully"
-else
-    echo "WARNING: PM2 stop failed, attempting manual cleanup"
-    # Fallback: kill processes by name
-    pkill -f "node.*$APP_NAME" && echo "Manually killed application processes" || echo "No matching processes found"
-fi
+# Loop through each application in the APPS array
+for app in "${APPS[@]}"; do
+    # Stop the application
+    if stop_pm2_application "$app"; then
+        echo "PM2 application $app stopped successfully"
+    else
+        echo "WARNING: PM2 stop failed, attempting manual cleanup"
+        # Fallback: kill processes by name
+        pkill -f "node.*$app" && echo "Manually killed application processes" || echo "No matching processes found"
+    fi
+done
 
 # Clean up old artifacts
 cleanup_artifacts

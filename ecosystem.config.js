@@ -1,7 +1,7 @@
 module.exports = {
   apps : [
       {
-        "name": "react-app",
+        "name": "thenaturebeautyflowers-ui",
         "script": "npx serve",
         "args": "build -s", // Serve the build folder, -s for single-page application fallback
         "env": {

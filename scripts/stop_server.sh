@@ -28,6 +28,19 @@ else
     echo "WARNING: NVM not found, using system Node.js"
 fi
 
+# Function to handle errors
+handle_error() {
+    echo "ERROR: $1"
+    exit 1
+}
+
+# Function to check if directory exists
+check_directory() {
+    if [ ! -d "$1" ]; then
+        handle_error "Directory not found: $1"
+    fi
+}
+
 # Function to safely stop PM2 processes
 stop_pm2_application() {
     if command -v pm2 >/dev/null 2>&1; then
@@ -35,18 +48,17 @@ stop_pm2_application() {
         
         # Check if the specific app is running
         if pm2 list | grep -q "$1"; then
-            pm2 stop "$1" && echo "Successfully stopped $1"
-            pm2 delete "$1" && echo "Successfully deleted $1"
+            (pm2 stop ecosystem.config.js --only "$1" && echo "Successfully stopped $1") || handle_error "Failed to stop $1 application with PM2"
+            (pm2 delete ecosystem.config.js --only "$1" && echo "Successfully deleted $1") || handle_error "Failed to delete $1 application with PM2"
         else
             echo "Application $1 not found in PM2 processes"
         fi
         
         # Clean up logs for this specific app
-        pm2 flush "$1" 2>/dev/null || echo "No logs to flush for $1"
+        pm2 flush ecosystem.config.js --only "$1" 2>/dev/null || echo "No logs to flush for $1"
         
     else
-        echo "ERROR: PM2 not found in PATH"
-        return 1
+        handle_error "ERROR: PM2 not found in PATH"
     fi
 }
 
@@ -68,6 +80,12 @@ cleanup_artifacts() {
 echo "Current user: $(whoami)"
 echo "Node.js version: $(node --version 2>/dev/null || echo 'Not available')"
 echo "PM2 version: $(pm2 --version 2>/dev/null || echo 'Not available')"
+
+# Navigate to source directory
+# Verify the directory exists
+check_directory "$SOURCE_DIR"
+cd "$SOURCE_DIR" || handle_error "Failed to change to application directory"
+echo "Working directory: $(pwd)"
 
 # Loop through each application in the APPS array
 for app in "${APPS[@]}"; do

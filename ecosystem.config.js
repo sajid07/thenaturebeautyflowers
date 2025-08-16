@@ -15,7 +15,7 @@ module.exports = {
       },
       {
         "name": "thenaturebeautyflowers-ui",
-        "script": "npx serve",
+        "script": "npx",
         "args": "serve /home/ubuntu/thenaturebeautyflowers/build -s -l 3000 -H 0.0.0.0", // Serve the build folder, -s for single-page application fallback
         "watch": false,
         "merge_logs": true,

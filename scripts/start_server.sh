@@ -64,7 +64,7 @@ start_application() {
 
     # Start with PM2 in cluster mode
     pm2 start ecosystem.config.js \
-        --only "$1"
+        --only "$1" \
         --env production \
         || handle_error "Failed to start $1 application with PM2"
     

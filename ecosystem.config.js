@@ -1,17 +1,17 @@
 module.exports = {
   apps : [
       {
-          "name": "thenaturebeautyflowers-api",
-          "script": "backend/thenaturebeautyflowers-api",
-          "instances": "max",
-          "exec_mode": "cluster",
-          "watch": true,
-          "merge_logs": true,
-          "log_file": "../thenaturebeautyflowers-api.log",
-          "time": true,
-          "env": {
-            "NODE_ENV": "production"
-          }
+        "name": "thenaturebeautyflowers-api",
+        "script": "backend/thenaturebeautyflowers-api",
+        "instances": "max",
+        "exec_mode": "cluster",
+        "watch": true,
+        "merge_logs": true,
+        "log_file": "../thenaturebeautyflowers-api.log",
+        "time": true,
+        "env_production": {
+          "NODE_ENV": "production"
+        }
       },
       {
         "name": "thenaturebeautyflowers-ui",
@@ -21,7 +21,7 @@ module.exports = {
         "merge_logs": true,
         "time": true,
         "log_file": "../thenaturebeautyflowers.log",
-        "env": {
+        "env_production": {
           "NODE_ENV": "production"
         }
     }

@@ -17,7 +17,9 @@ echo "Starting application start process..."
 SOURCE_DIR="/home/ubuntu/thenaturebeautyflowers"
 BACKEND_DIR="$SOURCE_DIR/backend"
 APP_NAME="thenaturebeautyflowers-api"
+UI_APP_NAME="thenaturebeautyflowers-ui"
 PM2_LOG_FILE="/home/ubuntu/thenaturebeautyflowers-api.log"
+PM2_UI_LOG_FILE="/home/ubuntu/thenaturebeautyflowers.log"
 
 # Load NVM environment
 export NVM_DIR="/home/ubuntu/.nvm"
@@ -41,28 +43,51 @@ check_directory() {
     fi
 }
 
-# Function to start application with PM2
-start_application() {
+# Function to safely stop a PM2 Application
+stop_application() {
+    # Stop existing instance if running
+    if pm2 list | grep -q "$1"; then
+        echo "Stopping existing instance of $1"
+        pm2 stop "$1"
+        pm2 delete "$1"
+    fi
+}
+
+# Function to start backend application with PM2
+start_backend_application() {
     echo "Starting $APP_NAME with PM2..."
     
-    # Stop existing instance if running
-    if pm2 list | grep -q "$APP_NAME"; then
-        echo "Stopping existing instance of $APP_NAME"
-        pm2 stop "$APP_NAME"
-        pm2 delete "$APP_NAME"
-    fi
+    stop_application "$APP_NAME"
 
     # Start with PM2 in cluster mode
-    pm2 start $APP_NAME \
+    pm2 start "$APP_NAME" \
         --instances max \
         --watch \
         --log "$PM2_LOG_FILE" \
         --time \
         --merge-logs \
         --env production \
-        || handle_error "Failed to start application with PM2"
+        || handle_error "Failed to start $APP_NAME application with PM2"
     
-    echo "Application started successfully with PM2"
+    echo "Backend API Application started successfully with PM2"
+}
+
+# Function to start frontend application with PM2
+start_frontend_application() {
+    echo "Starting $UI_APP_NAME with PM2..."
+    
+    stop_application "$UI_APP_NAME"
+
+    # Start with PM2 in cluster mode
+    pm2 start "$UI_APP_NAME" \
+        --watch \
+        --log "$PM2_UI_LOG_FILE" \
+        --time \
+        --merge-logs \
+        --env production \
+        || handle_error "Failed to start $UI_APP_NAME application with PM2"
+    
+    echo "React Application started successfully with PM2"
 }
 
 # Function to save PM2 configuration
@@ -74,18 +99,18 @@ save_pm2_config() {
     pm2 startup ubuntu -u ubuntu --hp /home/ubuntu 2>/dev/null || echo "PM2 startup already configured"
 }
 
-# Function to verify application is running
+# Function to verify the specified application is running
 verify_application() {
-    echo "Verifying application status..."
+    echo "Verifying $1 application status..."
     sleep 5  # Give the app time to start
     
-    if pm2 list | grep -q "$APP_NAME.*online"; then
-        echo "✓ Application is running successfully"
-        pm2 show "$APP_NAME"
+    if pm2 list | grep -q "$1.*online"; then
+        echo "✓ Application $1 is running successfully"
+        pm2 show "$1"
     else
-        echo "✗ Application failed to start properly"
-        pm2 logs "$APP_NAME" --lines 20
-        handle_error "Application verification failed"
+        echo "✗ Application $1 failed to start properly"
+        pm2 logs "$1" --lines 20
+        handle_error "Application $1 verification failed"
     fi
 }
 
@@ -99,17 +124,30 @@ echo "PM2 version: $(pm2 --version 2>/dev/null || echo 'Not available')"
 check_directory "$SOURCE_DIR"
 check_directory "$BACKEND_DIR"
 
-# Navigate to backend directory
-cd "$BACKEND_DIR" || handle_error "Failed to change to backend directory"
+# Navigate to source directory
+cd "$SOURCE_DIR" || handle_error "Failed to change to application directory"
 echo "Working directory: $(pwd)"
 
-# Start the application
-start_application
+# Start the frontend application
+start_frontend_application
 
 # Save PM2 configuration
 save_pm2_config
 
-# Verify application is running
-verify_application
+# Verify frontend application is running
+verify_application "$UI_APP_NAME"
+
+# Navigate to backend directory
+cd "$BACKEND_DIR" || handle_error "Failed to change to backend directory"
+echo "Working directory: $(pwd)"
+
+# Start the backend application
+start_backend_application
+
+# Save PM2 configuration
+save_pm2_config
+
+# Verify backend application is running
+verify_application "$APP_NAME"
 
 echo "Application deployment completed successfully at $(date)"

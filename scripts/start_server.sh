@@ -18,8 +18,7 @@ SOURCE_DIR="/home/ubuntu/thenaturebeautyflowers"
 BACKEND_DIR="$SOURCE_DIR/backend"
 APP_NAME="thenaturebeautyflowers-api"
 UI_APP_NAME="thenaturebeautyflowers-ui"
-PM2_LOG_FILE="/home/ubuntu/thenaturebeautyflowers-api.log"
-PM2_UI_LOG_FILE="/home/ubuntu/thenaturebeautyflowers.log"
+APPS=("$APP_NAME" "$UI_APP_NAME")
 
 # Load NVM environment
 export NVM_DIR="/home/ubuntu/.nvm"
@@ -48,52 +47,34 @@ stop_application() {
     # Stop existing instance if running
     if pm2 list | grep -q "$1"; then
         echo "Stopping existing instance of $1"
-        pm2 stop "$1"
-        pm2 delete "$1"
+        pm2 stop ecosystem.config.js \
+            --only "$1" \
+            || handle_error "Failed to stop $1 application with PM2"
+        pm2 delete ecosystem.config.js \
+            --only "$1" \
+            || handle_error "Failed to delete $1 application with PM2"
     fi
 }
 
-# Function to start backend application with PM2
-start_backend_application() {
-    echo "Starting $APP_NAME with PM2..."
+# Function to start specified application with PM2
+start_application() {
+    echo "Starting application $1 with PM2..."
     
-    stop_application "$APP_NAME"
+    stop_application "$1"
 
     # Start with PM2 in cluster mode
-    pm2 start "$APP_NAME" \
-        --instances max \
-        --watch \
-        --log "$PM2_LOG_FILE" \
-        --time \
-        --merge-logs \
+    pm2 start ecosystem.config.js \
+        --only "$1"
         --env production \
-        || handle_error "Failed to start $APP_NAME application with PM2"
+        || handle_error "Failed to start $1 application with PM2"
     
-    echo "Backend API Application started successfully with PM2"
-}
-
-# Function to start frontend application with PM2
-start_frontend_application() {
-    echo "Starting $UI_APP_NAME with PM2..."
-    
-    stop_application "$UI_APP_NAME"
-
-    # Start with PM2 in cluster mode
-    pm2 start "$UI_APP_NAME" \
-        --watch \
-        --log "$PM2_UI_LOG_FILE" \
-        --time \
-        --merge-logs \
-        --env production \
-        || handle_error "Failed to start $UI_APP_NAME application with PM2"
-    
-    echo "React Application started successfully with PM2"
+    echo "Application $1 started successfully with PM2"
 }
 
 # Function to save PM2 configuration
 save_pm2_config() {
     echo "Saving PM2 configuration for auto-restart..."
-    pm2 save || echo "WARNING: Failed to save PM2 configuration"
+    pm2 save || handle_error "WARNING: Failed to save PM2 configuration"
     
     # Ensure PM2 startup script is configured
     pm2 startup ubuntu -u ubuntu --hp /home/ubuntu 2>/dev/null || echo "PM2 startup already configured"
@@ -106,10 +87,10 @@ verify_application() {
     
     if pm2 list | grep -q "$1.*online"; then
         echo "✓ Application $1 is running successfully"
-        pm2 show "$1"
+        pm2 show ecosystem.config.js --only "$1"
     else
         echo "✗ Application $1 failed to start properly"
-        pm2 logs "$1" --lines 20
+        pm2 logs ecosystem.config.js --only "$1" --lines 20
         handle_error "Application $1 verification failed"
     fi
 }
@@ -128,26 +109,16 @@ check_directory "$BACKEND_DIR"
 cd "$SOURCE_DIR" || handle_error "Failed to change to application directory"
 echo "Working directory: $(pwd)"
 
-# Start the frontend application
-start_frontend_application
-
-# Save PM2 configuration
-save_pm2_config
-
-# Verify frontend application is running
-verify_application "$UI_APP_NAME"
-
-# Navigate to backend directory
-cd "$BACKEND_DIR" || handle_error "Failed to change to backend directory"
-echo "Working directory: $(pwd)"
-
-# Start the backend application
-start_backend_application
-
-# Save PM2 configuration
-save_pm2_config
-
-# Verify backend application is running
-verify_application "$APP_NAME"
+# Loop through each application in the APPS array
+for app in "${APPS[@]}"; do
+    # Start the frontend application
+    start_application "$app"
+    
+    # Save PM2 configuration
+    save_pm2_config
+    
+    # Verify that the application is running
+    verify_application "$app"
+done
 
 echo "Application deployment completed successfully at $(date)"

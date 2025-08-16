@@ -12,7 +12,7 @@ module.exports = {
           "env": {
             "NODE_ENV": "production"
           }
-      }
+      },
       {
         "name": "thenaturebeautyflowers-ui",
         "script": "npx serve",

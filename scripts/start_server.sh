@@ -17,7 +17,7 @@ echo "Starting application start process..."
 SOURCE_DIR="/home/ubuntu/thenaturebeautyflowers"
 BACKEND_DIR="$SOURCE_DIR/backend"
 APP_NAME="thenaturebeautyflowers-api"
-UI_APP_NAME="react-app"
+UI_APP_NAME="thenaturebeautyflowers-ui"
 PM2_LOG_FILE="/home/ubuntu/thenaturebeautyflowers-api.log"
 PM2_UI_LOG_FILE="/home/ubuntu/thenaturebeautyflowers.log"
 
@@ -43,16 +43,21 @@ check_directory() {
     fi
 }
 
+# Function to safely stop a PM2 Application
+stop_application() {
+    # Stop existing instance if running
+    if pm2 list | grep -q "$1"; then
+        echo "Stopping existing instance of $1"
+        pm2 stop "$1"
+        pm2 delete "$1"
+    fi
+}
+
 # Function to start backend application with PM2
 start_backend_application() {
     echo "Starting $APP_NAME with PM2..."
     
-    # Stop existing instance if running
-    if pm2 list | grep -q "$APP_NAME"; then
-        echo "Stopping existing instance of $APP_NAME"
-        pm2 stop "$APP_NAME"
-        pm2 delete "$APP_NAME"
-    fi
+    stop_application "$APP_NAME"
 
     # Start with PM2 in cluster mode
     pm2 start $APP_NAME \
@@ -71,12 +76,7 @@ start_backend_application() {
 start_frontend_application() {
     echo "Starting $UI_APP_NAME with PM2..."
     
-    # Stop existing instance if running
-    if pm2 list | grep -q "$UI_APP_NAME"; then
-        echo "Stopping existing instance of $UI_APP_NAME"
-        pm2 stop "$UI_APP_NAME"
-        pm2 delete "$UI_APP_NAME"
-    fi
+    stop_application "$UI_APP_NAME"
 
     # Start with PM2 in cluster mode
     pm2 start $UI_APP_NAME \
@@ -99,36 +99,20 @@ save_pm2_config() {
     pm2 startup ubuntu -u ubuntu --hp /home/ubuntu 2>/dev/null || echo "PM2 startup already configured"
 }
 
-# Function to verify the backend application is running
-verify_backend_application() {
-    echo "Verifying $APP_NAME application status..."
+# Function to verify the specified application is running
+verify_application() {
+    echo "Verifying $1 application status..."
     sleep 5  # Give the app time to start
     
-    if pm2 list | grep -q "$APP_NAME.*online"; then
-        echo "✓ $APP_NAME Application is running successfully"
-        pm2 show "$APP_NAME"
+    if pm2 list | grep -q "$1.*online"; then
+        echo "✓ Application $1 is running successfully"
+        pm2 show "$1"
     else
-        echo "✗ $APP_NAME Application failed to start properly"
-        pm2 logs "$APP_NAME" --lines 20
-        handle_error "$APP_NAME Application verification failed"
+        echo "✗ Application $1 failed to start properly"
+        pm2 logs "$1" --lines 20
+        handle_error "Application $1 verification failed"
     fi
 }
-
-# Function to verify the frontend application is running
-verify_frontend_application() {
-    echo "Verifying $UI_APP_NAME application status..."
-    sleep 5  # Give the app time to start
-    
-    if pm2 list | grep -q "$UI_APP_NAME.*online"; then
-        echo "✓ $UI_APP_NAME Application is running successfully"
-        pm2 show "$UI_APP_NAME"
-    else
-        echo "✗ $UI_APP_NAME Application failed to start properly"
-        pm2 logs "$UI_APP_NAME" --lines 20
-        handle_error "$UI_APP_NAME Application verification failed"
-    fi
-}
-
 
 # Main execution
 echo "Current user: $(whoami)"
@@ -151,7 +135,7 @@ start_frontend_application
 save_pm2_config
 
 # Verify frontend application is running
-verify_frontend_application
+verify_application "$UI_APP_NAME"
 
 # Navigate to backend directory
 cd "$BACKEND_DIR" || handle_error "Failed to change to backend directory"
@@ -164,6 +148,6 @@ start_backend_application
 save_pm2_config
 
 # Verify backend application is running
-verify_backend_application
+verify_application "$APP_NAME"
 
 echo "Application deployment completed successfully at $(date)"

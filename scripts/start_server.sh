@@ -103,6 +103,10 @@ echo "PM2 version: $(pm2 --version 2>/dev/null || echo 'Not available')"
 check_directory "$SOURCE_DIR"
 check_directory "$BACKEND_DIR"
 
+# Navigate to source directory
+cd "$SOURCE_DIR" || handle_error "Failed to change to application directory"
+echo "Working directory: $(pwd)"
+
 # Loop through each application in the APPS array
 for app in "${APPS[@]}"; do
     # Start the frontend application

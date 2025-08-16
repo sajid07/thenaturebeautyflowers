@@ -47,10 +47,12 @@ stop_application() {
     # Stop existing instance if running
     if pm2 list | grep -q "$1"; then
         echo "Stopping existing instance of $1"
-        pm2 stop  ecosystem.config.js \
-            --only "$1"
-        pm2 delete  ecosystem.config.js \
-            --only "$1"
+        pm2 stop ecosystem.config.js \
+            --only "$1" \
+            || handle_error "Failed to stop $1 application with PM2"
+        pm2 delete ecosystem.config.js \
+            --only "$1" \
+            || handle_error "Failed to delete $1 application with PM2"
     fi
 }
 
@@ -85,10 +87,10 @@ verify_application() {
     
     if pm2 list | grep -q "$1.*online"; then
         echo "✓ Application $1 is running successfully"
-        pm2 show "$1"
+        pm2 show ecosystem.config.js --only "$1"
     else
         echo "✗ Application $1 failed to start properly"
-        pm2 logs "$1" --lines 20
+        pm2 logs ecosystem.config.js --only "$1" --lines 20
         handle_error "Application $1 verification failed"
     fi
 }

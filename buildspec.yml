@@ -29,3 +29,4 @@ artifacts:
     - scripts/start_server.sh
     - scripts/stop_server.sh
     - appspec.yml
+    - ecosystem.config.js

@@ -60,7 +60,7 @@ start_backend_application() {
     stop_application "$APP_NAME"
 
     # Start with PM2 in cluster mode
-    pm2 start $APP_NAME \
+    pm2 start "$APP_NAME" \
         --instances max \
         --watch \
         --log "$PM2_LOG_FILE" \
@@ -79,7 +79,7 @@ start_frontend_application() {
     stop_application "$UI_APP_NAME"
 
     # Start with PM2 in cluster mode
-    pm2 start $UI_APP_NAME \
+    pm2 start "$UI_APP_NAME" \
         --watch \
         --log "$PM2_UI_LOG_FILE" \
         --time \

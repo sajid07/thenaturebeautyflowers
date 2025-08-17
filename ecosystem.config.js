@@ -2,14 +2,13 @@ module.exports = {
   apps: [
     {
       "name": "thenaturebeautyflowers-api",
-      "script": "/home/ubuntu/thenaturebeautyflowers/backend/thenaturebeautyflowers-api",
+      "script": "/home/ubuntu/thenaturebeautyflowers/scripts/wrapper-start-api.sh",
       "instances": "max",
       "exec_mode": "cluster",
-      "watch": false, // Binary files don't need file watching
+      "watch": true,
       "merge_logs": true,
       "log_file": "../thenaturebeautyflowers-api.log",
       "time": true,
-      "interpreter": "none", // This tells PM2 to execute the binary directly
       "env_production": {
         "NODE_ENV": "production"
       }

@@ -2,7 +2,7 @@ module.exports = {
   apps: [
     {
       "name": "thenaturebeautyflowers-api",
-      "script": "/home/ubuntu/thenaturebeautyflowers/scripts/wrapper-start-api.sh",
+      "script": "/home/ubuntu/thenaturebeautyflowers/backend/build.cjs",
       "instances": "max",
       "exec_mode": "cluster",
       "watch": true,

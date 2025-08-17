@@ -15,8 +15,8 @@ module.exports = {
     },
     {
       "name": "thenaturebeautyflowers-ui",
-      "script": "serve",
-      "args": ["/home/ubuntu/thenaturebeautyflowers/build", "-s", "-p", "3000", "--host", "0.0.0.0"],
+      "script": "npx",
+      "args": ["serve", "/home/ubuntu/thenaturebeautyflowers/build", "-s", "-l 3000", "-n", "-u", "-S"],
       "watch": false,
       "merge_logs": true,
       "time": true,

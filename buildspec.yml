@@ -25,9 +25,8 @@ phases:
 artifacts:
   files:
     - build/**/*
-    - backend/thenaturebeautyflowers-api
+    - backend/build.cjs
     - scripts/start_server.sh
     - scripts/stop_server.sh
-    - scripts/wrapper-start-api.sh
     - appspec.yml
     - ecosystem.config.js

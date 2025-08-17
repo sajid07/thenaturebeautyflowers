@@ -19,6 +19,3 @@ cd backend
 
 echo 'Output CommonJS bundle...'
 npm run build
-
-echo 'Generate binary executable file from ExpressJS Backend Application...'
-npx @yao-pkg/pkg --output thenaturebeautyflowers-api build.cjs

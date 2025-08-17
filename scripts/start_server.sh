@@ -19,6 +19,7 @@ BACKEND_DIR="$SOURCE_DIR/backend"
 APP_NAME="thenaturebeautyflowers-api"
 UI_APP_NAME="thenaturebeautyflowers-ui"
 APPS=("$APP_NAME" "$UI_APP_NAME")
+nvm_node_bin_path=$(which node)
 
 # Load NVM environment
 export NVM_DIR="/home/ubuntu/.nvm"
@@ -77,7 +78,7 @@ save_pm2_config() {
     pm2 save || handle_error "WARNING: Failed to save PM2 configuration"
     
     # Ensure PM2 startup script is configured
-    pm2 startup ubuntu -u ubuntu --hp /home/ubuntu 2>/dev/null || echo "PM2 startup already configured"
+    sudo env PATH=$PATH:$nvm_node_bin_path pm2 startup ubuntu -u ubuntu --hp /home/ubuntu 2>/dev/null || echo "PM2 startup already configured"
 }
 
 # Function to verify the specified application is running

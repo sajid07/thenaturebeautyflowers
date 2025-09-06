@@ -39,7 +39,6 @@ const connectToMongo = require("./db");
 const express = require("express");
 const cors = require("cors");
 
-// Connect to MongoDB Atlas
 connectToMongo();
 
 const app = express();
@@ -47,25 +46,26 @@ const port = process.env.PORT || 5000;
 
 // CORS setup
 const allowedOrigins = [
-  "https://www.thenaturebeautyflowers.com",
-  "https://thenaturebeautyflowers.com",
-  "http://localhost:3000", // for local testing
+  "https://www.thenaturebeautyflowers.com", // deployed frontend
+  "https://thenaturebeautyflowers.com", // deployed frontend without www
+  "https://thenaturebeautyflowers.onrender.com", // backend URL if using Render
+  "http://localhost:3000", // local frontend
 ];
 
 app.use(
   cors({
     origin: function (origin, callback) {
-      if (!origin) return callback(null, true); // allow non-browser requests
+      if (!origin) return callback(null, true); // allow non-browser requests like Postman
       if (allowedOrigins.indexOf(origin) === -1) {
-        const msg =
-          "The CORS policy for this site does not allow access from the specified Origin.";
-        return callback(new Error(msg), false);
+        return callback(new Error("CORS not allowed for this origin"), false);
       }
       return callback(null, true);
     },
     credentials: true,
   })
 );
+
+app.options("*", cors()); // handle preflight requests
 
 app.use(express.json());
 

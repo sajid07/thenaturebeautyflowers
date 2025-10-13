@@ -13,18 +13,28 @@ connectToMongo();
 const app = express();
 const port = process.env.PORT || 5000;
 
-// CORS setup
+// Force redirect non-www to www
+app.use((req, res, next) => {
+  if (req.headers.host === "thenaturebeautyflowers.com") {
+    return res.redirect(
+      301,
+      "https://www.thenaturebeautyflowers.com" + req.url
+    );
+  }
+  next();
+});
+
+// Allowed origins for CORS
 const allowedOrigins = [
   "https://www.thenaturebeautyflowers.com",
-  "https://thenaturebeautyflowers.com",
-  "https://thenaturebeautyflowers.onrender.com",
   "http://localhost:3000",
 ];
 
+// Apply CORS middleware
 app.use(
   cors({
     origin: function (origin, callback) {
-      if (!origin) return callback(null, true);
+      if (!origin) return callback(null, true); // Allow Postman etc.
       if (allowedOrigins.includes(origin)) {
         callback(null, true);
       } else {
@@ -38,6 +48,7 @@ app.use(
   })
 );
 
+// Handle preflight (OPTIONS) requests globally
 app.options("*", (req, res) => {
   res.header("Access-Control-Allow-Origin", req.headers.origin);
   res.header("Access-Control-Allow-Methods", "GET,POST,PUT,DELETE,OPTIONS");
@@ -48,7 +59,7 @@ app.options("*", (req, res) => {
   res.sendStatus(200);
 });
 
-// Body parser
+// Parse JSON bodies
 app.use(express.json());
 
 // Routes

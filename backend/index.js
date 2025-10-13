@@ -40,7 +40,7 @@ app.use(
 );
 
 // Handle preflight for all routes
-app.options("*", cors());
+// app.options("*", cors());
 
 // Body parser middleware
 app.use(express.json());

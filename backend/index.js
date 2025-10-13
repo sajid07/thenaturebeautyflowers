@@ -15,34 +15,40 @@ const port = process.env.PORT || 5000;
 
 // CORS setup
 const allowedOrigins = [
-  "https://thenaturebeautyflowers.com",
   "https://www.thenaturebeautyflowers.com",
+  "https://thenaturebeautyflowers.com",
   "https://thenaturebeautyflowers.onrender.com",
   "http://localhost:3000",
-  "http://localhost:5000",
 ];
 
 app.use(
   cors({
-    origin: (origin, callback) => {
+    origin: function (origin, callback) {
       if (!origin) return callback(null, true);
       if (allowedOrigins.includes(origin)) {
-        return callback(null, true);
+        callback(null, true);
+      } else {
+        console.log("Blocked by CORS:", origin);
+        callback(new Error("Not allowed by CORS"));
       }
-      console.log("❌ Blocked by CORS:", origin);
-      return callback(new Error("Not allowed by CORS"));
     },
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization", "auth-token"],
     credentials: true,
-    optionsSuccessStatus: 200,
   })
 );
 
-// Preflight requests handle
-app.options("*", cors());
+app.options("*", (req, res) => {
+  res.header("Access-Control-Allow-Origin", req.headers.origin);
+  res.header("Access-Control-Allow-Methods", "GET,POST,PUT,DELETE,OPTIONS");
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Content-Type, Authorization, auth-token"
+  );
+  res.sendStatus(200);
+});
 
-// Body parser middleware
+// Body parser
 app.use(express.json());
 
 // Routes
@@ -56,5 +62,5 @@ app.use("/api/socialLink", require("./routes/socialLink"));
 
 // Start server
 app.listen(port, () => {
-  console.log(`✅ Server running at http://localhost:${port}`);
+  console.log(`Server running at port ${port}`);
 });

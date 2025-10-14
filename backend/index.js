@@ -27,6 +27,7 @@ app.use((req, res, next) => {
 // Allowed origins for CORS
 const allowedOrigins = [
   "https://www.thenaturebeautyflowers.com",
+  "https://thenaturebeautyflowers.com",
   "http://localhost:3000",
 ];
 

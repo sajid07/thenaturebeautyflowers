@@ -13,17 +13,6 @@ connectToMongo();
 const app = express();
 const port = process.env.PORT || 5000;
 
-// Force redirect non-www to www
-app.use((req, res, next) => {
-  if (req.headers.host === "thenaturebeautyflowers.com") {
-    return res.redirect(
-      301,
-      "https://www.thenaturebeautyflowers.com" + req.url
-    );
-  }
-  next();
-});
-
 // Allowed origins for CORS
 const allowedOrigins = [
   "https://www.thenaturebeautyflowers.com",
